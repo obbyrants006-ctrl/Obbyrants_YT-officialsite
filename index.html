@@ -5,16 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Obby Rants 30</title>
   <style>
+    /* Global Reset & Styling */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
     html {
       scroll-behavior: smooth;
     }
 
     body {
-      font-family: Arial, sans-serif;
-      background-color: #121212;
-      color: #ffffff;
-      margin: 0;
-      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #080c14;
+      color: #f8fafc;
+      line-height: 1.6;
     }
 
     /* Navigation Bar */
@@ -22,17 +28,20 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background-color: #1e1e1e;
+      background-color: #0f172a;
       padding: 1rem 2rem;
       position: sticky;
       top: 0;
       z-index: 1000;
+      border-bottom: 2px solid #00f0ff;
+      box-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
     }
 
     .logo {
       font-size: 1.5rem;
-      font-weight: bold;
-      color: #ff3333;
+      font-weight: 800;
+      color: #ff2a5f;
+      text-shadow: 0 0 10px rgba(255, 42, 95, 0.7);
       cursor: pointer;
     }
 
@@ -40,102 +49,156 @@
       list-style: none;
       display: flex;
       gap: 1.2rem;
-      margin: 0;
-      padding: 0;
       align-items: center;
     }
 
     .nav-links a {
-      color: #cccccc;
+      color: #94a3b8;
       text-decoration: none;
-      font-weight: 500;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: all 0.2s ease;
       cursor: pointer;
     }
 
     .nav-links a:hover,
     .nav-links a.active {
-      color: #ffffff;
+      color: #00f0ff;
+      text-shadow: 0 0 8px rgba(0, 240, 255, 0.8);
     }
 
+    /* Layout Container */
     .container {
-      max-width: 900px;
+      max-width: 950px;
       margin: 2rem auto;
       padding: 0 1rem;
     }
 
-    /* TAB DISPLAY LOGIC */
+    /* Tab Display Logic */
     .tab-content {
-      display: none; /* Hides all tabs by default */
+      display: none;
+      animation: fadeIn 0.3s ease-in-out;
     }
 
     .tab-content.active {
-      display: block; /* Shows only active tab */
+      display: block;
     }
 
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Neon Dark Cards */
     .card {
-      background: #1e1e1e;
+      background-color: #0f172a;
       padding: 2rem;
-      border-radius: 8px;
+      border-radius: 12px;
       margin-bottom: 2rem;
-      border: 1px solid #333;
+      border: 1px solid #1e293b;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    }
+
+    .card-neon-blue {
+      border: 1px solid #00f0ff;
+      box-shadow: 0 0 15px rgba(0, 240, 255, 0.2);
+    }
+
+    .card-neon-red {
+      border: 1px solid #ff2a5f;
+      box-shadow: 0 0 15px rgba(255, 42, 95, 0.2);
+    }
+
+    h1, h2, h3 {
+      color: #ffffff;
+      margin-bottom: 1rem;
+    }
+
+    .text-neon-blue {
+      color: #00f0ff;
+      text-shadow: 0 0 8px rgba(0, 240, 255, 0.6);
+    }
+
+    .text-neon-red {
+      color: #ff2a5f;
+      text-shadow: 0 0 8px rgba(255, 42, 95, 0.6);
     }
 
     /* Buttons */
     .btn {
-      background-color: #ff3333;
+      background: linear-gradient(135deg, #ff2a5f, #b91c1c);
       color: white;
       border: none;
-      padding: 0.6rem 1.2rem;
-      border-radius: 5px;
+      padding: 0.7rem 1.4rem;
+      border-radius: 6px;
       cursor: pointer;
       font-weight: bold;
+      transition: all 0.2s ease;
+      box-shadow: 0 0 10px rgba(255, 42, 95, 0.4);
     }
 
     .btn:hover {
-      background-color: #cc0000;
+      box-shadow: 0 0 18px rgba(255, 42, 95, 0.8);
+      transform: translateY(-1px);
     }
 
     .btn-blue {
-      background-color: #0088ff;
+      background: linear-gradient(135deg, #00f0ff, #0284c7);
+      color: #080c14;
+      box-shadow: 0 0 10px rgba(0, 240, 255, 0.4);
     }
 
     .btn-blue:hover {
-      background-color: #0066cc;
+      box-shadow: 0 0 18px rgba(0, 240, 255, 0.8);
     }
 
     .btn-back {
-      background-color: #333333;
-      color: #ffffff;
+      background-color: #1e293b;
+      color: #00f0ff;
+      border: 1px solid #00f0ff;
       margin-bottom: 1.5rem;
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
+      box-shadow: none;
     }
 
     .btn-back:hover {
-      background-color: #444444;
+      background-color: #00f0ff;
+      color: #080c14;
+      box-shadow: 0 0 12px rgba(0, 240, 255, 0.6);
     }
 
-    /* Admin Panel Styling */
-    .admin-card {
-      border: 1px solid #ff3333;
-      background-color: #1a0d0d;
-    }
-
+    /* Form Fields */
     .input-field {
       width: 100%;
       padding: 0.8rem;
-      margin: 0.5rem 0 1rem 0;
-      background: #2a2a2a;
-      border: 1px solid #444;
+      margin: 0.5rem 0 1.2rem 0;
+      background: #080c14;
+      border: 1px solid #00f0ff;
       color: #fff;
-      border-radius: 4px;
-      box-sizing: border-box;
+      border-radius: 6px;
+      box-shadow: inset 0 0 8px rgba(0, 240, 255, 0.1);
     }
 
     textarea.input-field {
       height: 100px;
       resize: vertical;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    .stat-card {
+      background: #080c14;
+      border: 1px solid #1e293b;
+      padding: 1.5rem;
+      border-radius: 8px;
+      text-align: center;
     }
   </style>
 </head>
@@ -145,21 +208,13 @@
   <nav class="navbar">
     <div class="logo" onclick="switchTab('subscribers')">OR30 Obby Rants 30</div>
     <ul class="nav-links">
-      <!-- Homepage Button -->
       <li><a class="nav-tab" onclick="switchTab('subscribers')">🏠 Home</a></li>
-      
-      <!-- Category Tabs -->
       <li><a class="nav-tab" onclick="switchTab('analytics')">Analytics</a></li>
       <li><a class="nav-tab" onclick="switchTab('songs')">🎵 Song Recs</a></li>
-      
-      <!-- Scroll down to sections on the Home view -->
       <li><a onclick="navigateToHomeSection('about-section')">About Us</a></li>
       <li><a onclick="navigateToHomeSection('readme-section')">README</a></li>
-      
       <li><a class="nav-tab" onclick="switchTab('announcements')">Announcements</a></li>
       <li><a class="nav-tab" onclick="switchTab('fanzone')">Fan Zone</a></li>
-
-      <!-- Admin Login Button -->
       <li><button id="admin-btn" class="btn btn-blue" onclick="toggleAdmin()">Admin Login</button></li>
     </ul>
   </nav>
@@ -169,46 +224,53 @@
     <!-- ADMIN CONTROL PANEL TAB -->
     <div id="admin-panel" class="tab-content">
       <button class="btn btn-back" onclick="switchTab('subscribers')">← Back to Home</button>
-      <div class="card admin-card">
-        <h2>🛠️ Admin Master Control Panel</h2>
-        <p>Manage channel statistics, descriptions, and site content below.</p>
+      <div class="card card-neon-red">
+        <h2 class="text-neon-red">🛠️ Admin Master Control Panel</h2>
+        <p>Edit site content, customize text, and control channel stats.</p>
         
-        <h3>Edit About & README Text</h3>
+        <hr style="border-color: #334155; margin: 1.5rem 0;">
+
+        <h3>Edit About & README Content</h3>
         <label>About Channel Text:</label>
         <textarea id="edit-about" class="input-field">Welcome to Obby Rants (@Obbyrants30)! This channel is focused on Roblox gameplay, obby speedruns, commentary, and community engagement.</textarea>
         
         <label>README Text:</label>
         <textarea id="edit-readme" class="input-field">Official README & Guidelines for the channel.</textarea>
         
-        <button class="btn" onclick="saveText()">Save Text Updates</button>
+        <button class="btn btn-blue" onclick="saveText()">Save Text Updates</button>
 
-        <hr style="border-color: #333; margin: 2rem 0;">
+        <hr style="border-color: #334155; margin: 1.5rem 0;">
 
         <h3>Update Metrics</h3>
         <label>Subscribers Count:</label>
         <input type="number" id="edit-subs" class="input-field" value="0">
 
-        <button class="btn" onclick="saveMetrics()">Update Metrics</button>
-        <button class="btn btn-blue" onclick="resetAll()">Reset Everything to 0</button>
+        <button class="btn btn-blue" onclick="saveMetrics()">Update Metrics</button>
+        <button class="btn" onclick="resetAll()">Reset Everything to 0</button>
+
+        <hr style="border-color: #334155; margin: 1.5rem 0;">
+
+        <h3>Security</h3>
+        <button class="btn btn-blue" onclick="changePassword()">Change Admin Password</button>
       </div>
     </div>
 
     <!-- 1. HOMEPAGE / SUBSCRIBERS TAB -->
     <div id="subscribers" class="tab-content active">
-      <div class="card">
-        <h1>Welcome to Obby Rants 30! 🎮🔥</h1>
-        <p>Active Subscribers: <strong id="subs-display">0</strong></p>
+      <div class="card card-neon-blue">
+        <h1>Welcome to <span class="text-neon-red">Obby Rants 30!</span> 🎮🔥</h1>
+        <p style="font-size: 1.2rem;">Active Subscribers: <strong id="subs-display" class="text-neon-blue">0</strong></p>
       </div>
 
       <!-- About Us Section -->
       <div id="about-section" class="card">
-        <h2>ℹ️ About Obby Rants (@Obbyrants30)</h2>
+        <h2 class="text-neon-blue">ℹ️ About Obby Rants (@Obbyrants30)</h2>
         <p id="about-display">Welcome to Obby Rants (@Obbyrants30)! This channel is focused on Roblox gameplay, obby speedruns, commentary, and community engagement.</p>
       </div>
 
       <!-- README Section -->
       <div id="readme-section" class="card">
-        <h2>📜 Official README Box</h2>
+        <h2 class="text-neon-blue">📜 Official README Box</h2>
         <p id="readme-display">Official README & Guidelines for the channel.</p>
       </div>
     </div>
@@ -216,17 +278,26 @@
     <!-- 2. ANALYTICS TAB -->
     <div id="analytics" class="tab-content">
       <button class="btn btn-back" onclick="switchTab('subscribers')">← Back to Home</button>
-      <div class="card">
-        <h2>📊 Overall Channel Analytics</h2>
-        <p>Uploaded Videos: 0</p>
+      <div class="card card-neon-blue">
+        <h2 class="text-neon-blue">📊 Overall Channel Analytics</h2>
+        <div class="stats-grid">
+          <div class="stat-card">
+            <p>Uploaded Videos</p>
+            <h3 class="text-neon-blue">0</h3>
+          </div>
+          <div class="stat-card">
+            <p>Total Channel Views</p>
+            <h3 class="text-neon-blue">0</h3>
+          </div>
+        </div>
       </div>
     </div>
 
     <!-- 3. SONGS TAB -->
     <div id="songs" class="tab-content">
       <button class="btn btn-back" onclick="switchTab('subscribers')">← Back to Home</button>
-      <div class="card">
-        <h2>🎵 Song Recommendations</h2>
+      <div class="card card-neon-blue">
+        <h2 class="text-neon-blue">🎵 Song Recommendations</h2>
         <p>Recommended tracks & background tunes picked by Obby Rants!</p>
       </div>
     </div>
@@ -234,8 +305,8 @@
     <!-- 4. ANNOUNCEMENTS TAB -->
     <div id="announcements" class="tab-content">
       <button class="btn btn-back" onclick="switchTab('subscribers')">← Back to Home</button>
-      <div class="card">
-        <h2>📢 Channel Announcements</h2>
+      <div class="card card-neon-red">
+        <h2 class="text-neon-red">📢 Channel Announcements</h2>
         <p>No announcements posted yet.</p>
       </div>
     </div>
@@ -243,11 +314,11 @@
     <!-- 5. FAN ZONE TAB -->
     <div id="fanzone" class="tab-content">
       <button class="btn btn-back" onclick="switchTab('subscribers')">← Back to Home</button>
-      <div class="card">
-        <h2>🔥 Fan Zone</h2>
+      <div class="card card-neon-blue">
+        <h2 class="text-neon-blue">🔥 Fan Zone</h2>
         <p>Click to boost channel hype points!</p>
-        <button class="btn" onclick="boostHype()">Boost Hype (+10)</button>
-        <p style="margin-top: 1rem;">Hype Points: <span id="hype-count">0</span></p>
+        <button class="btn btn-blue" style="margin-top: 1rem;" onclick="boostHype()">Boost Hype (+10)</button>
+        <p style="margin-top: 1rem; font-size: 1.2rem;">Hype Points: <span id="hype-count" class="text-neon-blue">0</span></p>
       </div>
     </div>
 
@@ -257,7 +328,9 @@
     let hype = 0;
     let isAdmin = false;
 
-    // Switches between separate tabs
+    // Password setup logic
+    let adminPassword = localStorage.getItem('obby_admin_pass') || null;
+
     function switchTab(tabId) {
       const tabs = document.querySelectorAll('.tab-content');
       tabs.forEach(tab => tab.classList.remove('active'));
@@ -270,7 +343,6 @@
       window.scrollTo(0, 0);
     }
 
-    // Navigates to About/Readme on Home view and scrolls down
     function navigateToHomeSection(sectionId) {
       switchTab('subscribers');
       setTimeout(() => {
@@ -286,16 +358,32 @@
       document.getElementById('hype-count').innerText = hype;
     }
 
-    // Admin Authentication & Toggle
+    // Admin Toggle & Authentication
     function toggleAdmin() {
       if (!isAdmin) {
-        let pin = prompt("Enter Admin Password:");
-        if (pin === "0106") {
-          isAdmin = true;
-          document.getElementById('admin-btn').innerText = "Logout Admin";
-          switchTab('admin-panel');
-        } else if (pin !== null) {
-          alert("Incorrect password!");
+        // If no password exists yet, force user to create one
+        if (!adminPassword) {
+          let newPass = prompt("Create your new Admin Password:");
+          if (newPass && newPass.trim() !== "") {
+            adminPassword = newPass.trim();
+            localStorage.setItem('obby_admin_pass', adminPassword);
+            alert("Password set successfully! Logging you in...");
+            isAdmin = true;
+            document.getElementById('admin-btn').innerText = "Logout Admin";
+            switchTab('admin-panel');
+          } else {
+            alert("Password creation canceled.");
+          }
+        } else {
+          // Verify existing password
+          let entered = prompt("Enter Admin Password:");
+          if (entered === adminPassword) {
+            isAdmin = true;
+            document.getElementById('admin-btn').innerText = "Logout Admin";
+            switchTab('admin-panel');
+          } else if (entered !== null) {
+            alert("Incorrect password!");
+          }
         }
       } else {
         isAdmin = false;
@@ -304,11 +392,25 @@
       }
     }
 
-    // Admin Controls
+    function changePassword() {
+      let current = prompt("Enter current password:");
+      if (current === adminPassword) {
+        let updated = prompt("Enter new password:");
+        if (updated && updated.trim() !== "") {
+          adminPassword = updated.trim();
+          localStorage.setItem('obby_admin_pass', adminPassword);
+          alert("Password updated successfully!");
+        }
+      } else {
+        alert("Incorrect current password.");
+      }
+    }
+
+    // Admin Actions
     function saveText() {
       document.getElementById('about-display').innerText = document.getElementById('edit-about').value;
       document.getElementById('readme-display').innerText = document.getElementById('edit-readme').value;
-      alert("About and README content updated!");
+      alert("Text updated!");
     }
 
     function saveMetrics() {
@@ -321,7 +423,7 @@
       document.getElementById('subs-display').innerText = 0;
       hype = 0;
       document.getElementById('hype-count').innerText = 0;
-      alert("Reset all metrics to 0!");
+      alert("Reset metrics to 0!");
     }
   </script>
 
