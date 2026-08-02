@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Obby Rants (@obbyrants30) - Official Channel Hub</title>
-  <!-- Google Fonts: Fredoka for playful Roblox vibe & Poppins for clear readability -->
+  <!-- Google Fonts: Fredoka & Poppins -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
@@ -49,6 +49,8 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      flex-wrap: wrap;
+      gap: 15px;
     }
 
     .logo-container {
@@ -77,6 +79,7 @@
       display: flex;
       gap: 15px;
       align-items: center;
+      flex-wrap: wrap;
     }
 
     .nav-link {
@@ -135,13 +138,13 @@
     .hero h1 {
       font-size: 3rem;
       color: var(--text-main);
-      margin-bottom: 10px;
+      margin-bottom: 15px;
     }
 
     .hero p {
       font-size: 1.1rem;
       color: var(--text-sub);
-      max-width: 750px;
+      max-width: 850px;
       margin: 0 auto 25px auto;
     }
 
@@ -154,7 +157,7 @@
 
     /* Main Container */
     .container {
-      max-width: 1000px;
+      max-width: 1050px;
       margin: 0 auto;
       padding: 2rem 1.5rem;
     }
@@ -169,7 +172,7 @@
       padding-left: 10px;
     }
 
-    /* Card Layouts */
+    /* Card & Box Layouts */
     .grid-container {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -211,15 +214,31 @@
       font-size: 0.95rem;
     }
 
-    .delete-btn {
-      background: #e74c3c;
-      color: white;
-      border: none;
-      padding: 4px 8px;
-      border-radius: 4px;
-      cursor: pointer;
-      font-size: 0.8rem;
-      margin-top: 10px;
+    /* Featured Content Boxes */
+    .content-box {
+      background: var(--roblox-card);
+      border-radius: 12px;
+      padding: 2rem;
+      border: 1px solid #32353B;
+      margin-bottom: 3rem;
+    }
+
+    .content-box h3 {
+      color: var(--roblox-gold);
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .readme-terminal {
+      background: #111213;
+      border: 1px solid #333;
+      border-radius: 8px;
+      padding: 1.2rem;
+      font-family: monospace;
+      color: #00FF66;
+      font-size: 0.95rem;
+      white-space: pre-wrap;
+      overflow-x: auto;
     }
 
     /* Admin Panel Styling */
@@ -235,6 +254,27 @@
     .admin-panel h2 {
       color: var(--roblox-red);
       margin-bottom: 1rem;
+    }
+
+    .admin-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+      margin-bottom: 1.5rem;
+    }
+
+    .stat-box {
+      background: var(--roblox-card);
+      padding: 1rem;
+      border-radius: 8px;
+      text-align: center;
+      border: 1px solid #444;
+    }
+
+    .stat-number {
+      font-size: 1.8rem;
+      color: var(--roblox-gold);
+      font-weight: 700;
     }
 
     .form-group {
@@ -267,6 +307,17 @@
       min-height: 80px;
     }
 
+    .delete-btn {
+      background: #e74c3c;
+      color: white;
+      border: none;
+      padding: 4px 8px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.8rem;
+      margin-top: 10px;
+    }
+
     /* Footer */
     footer {
       text-align: center;
@@ -292,16 +343,20 @@
       <div class="logo-text">Obby Rants 30</div>
     </div>
     <nav>
+      <a href="#about" class="nav-link">About Us</a>
+      <a href="#readme" class="nav-link">README</a>
       <a href="#announcements" class="nav-link">Announcements</a>
-      <a href="#special-days" class="nav-link">Special Days</a>
+      <a href="#special-days" class="nav-link">Events</a>
       <button id="adminLoginBtn" class="btn-roblox btn-blue" onclick="toggleAdminLogin()">Admin Login</button>
     </nav>
   </header>
 
-  <!-- Hero Section -->
+  <!-- Extended Hero Section -->
   <section class="hero">
-    <h1>Welcome to Obby Rants 30! 🎮</h1>
-    <p>Welcome to <b>Obby Rants</b>—the ultimate destination for fast-paced Roblox gameplay, honest commentary, and epic community moments! Whether I’m conquering impossible obby stages, dropping funny, unfiltered rants on trending topics, sharing my latest video uploads, or hosting special community events, there’s always something exciting happening here. Use this website as your main hub to catch schedule updates, milestone celebrations, and fresh channel announcements. Hit that subscribe button on YouTube, jump into the action, and welcome to the team!</p>
+    <h1>Welcome to Obby Rants 30! 🎮🔥</h1>
+    <p>
+      Welcome to the ultimate headquarters for **Obby Rants (@obbyrants30)**! This website is your all-in-one platform built specifically for fast-paced Roblox obby gameplay, unfiltered commentary, fresh channel announcements, and community events. Whether I’m speedrunning impossible rage-inducing stages, dropping funny rants on trending gaming topics, posting video upload notices, or hosting special community streams—this site keeps you synced with everything happening on the channel. Explore the hub below, hit that subscribe button on YouTube, and welcome to the team!
+    </p>
     <div class="hero-buttons">
       <a href="https://youtube.com/@obbyrants30" target="_blank" class="btn-roblox">Subscribe @obbyrants30</a>
       <a href="https://roblox.com/share?code=c52e49aa93ccb841bf4ae7fb0a044796&type=Profile&s" target="_blank" class="btn-roblox btn-blue">My Roblox Profile</a>
@@ -310,15 +365,43 @@
 
   <div class="container">
 
-    <!-- Admin Panel (Shown after correct password) -->
+    <!-- Admin Panel (Expanded with Analytics & Video Comments) -->
     <div id="adminPanel" class="admin-panel">
-      <h2>🛠️ Admin Customization Panel</h2>
-      <p style="margin-bottom: 15px; color: var(--text-sub);">Logged in as Admin. Add new updates or delete existing ones below.</p>
+      <h2>🛠️ Admin Master Control Panel</h2>
+      <p style="margin-bottom: 15px; color: var(--text-sub);">Welcome back, Admin! Manage your channel analytics, view/reply to video comments, and post updates below.</p>
       
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
-        <!-- Add Announcement Form -->
+      <!-- Analytics Overview Grid -->
+      <h3 style="color:var(--roblox-gold); margin-bottom:10px;">📊 Channel Overall Analytics</h3>
+      <div class="admin-stats-grid">
+        <div class="stat-box">
+          <div style="font-size:0.9rem; color:var(--text-sub);">Total Subscribers</div>
+          <div id="adminSubCount" class="stat-number">1,250</div>
+        </div>
+        <div class="stat-box">
+          <div style="font-size:0.9rem; color:var(--text-sub);">Total Channel Views</div>
+          <div id="adminViewCount" class="stat-number">45,800</div>
+        </div>
+        <div class="stat-box">
+          <div style="font-size:0.9rem; color:var(--text-sub);">Total Videos Uploaded</div>
+          <div id="adminVideoCount" class="stat-number">38</div>
+        </div>
+      </div>
+
+      <!-- Quick Analytics Editor -->
+      <div style="background:var(--roblox-card); padding:1rem; border-radius:8px; margin-bottom:1.5rem;">
+        <h4 style="margin-bottom:10px; color:var(--roblox-accent);">Update Analytics Numbers</h4>
+        <div style="display:flex; gap:10px; flex-wrap:wrap;">
+          <input type="text" id="editSubs" class="form-control" style="flex:1;" placeholder="New Sub Count (e.g. 1.5K)" />
+          <input type="text" id="editViews" class="form-control" style="flex:1;" placeholder="New Total Views (e.g. 50K)" />
+          <input type="text" id="editVideos" class="form-control" style="flex:1;" placeholder="Total Videos" />
+          <button class="btn-roblox" onclick="updateAnalytics()">Save Analytics</button>
+        </div>
+      </div>
+
+      <!-- Add Announcement & Special Day Forms -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-bottom: 1.5rem;">
         <div>
-          <h3>Add New Announcement</h3>
+          <h3>📢 Add New Announcement</h3>
           <div class="form-group">
             <label>Title</label>
             <input type="text" id="annTitle" class="form-control" placeholder="e.g. New Video Dropping Today!" />
@@ -330,12 +413,11 @@
           <button class="btn-roblox" onclick="addAnnouncement()">Post Announcement</button>
         </div>
 
-        <!-- Add Special Day Form -->
         <div>
-          <h3>Add Special Day / Event</h3>
+          <h3>⭐ Add Special Day / Event</h3>
           <div class="form-group">
             <label>Event Name</label>
-            <input type="text" id="eventTitle" class="form-control" placeholder="e.g. Channel Milestone Stream" />
+            <input type="text" id="eventTitle" class="form-control" placeholder="e.g. Milestone Stream" />
           </div>
           <div class="form-group">
             <label>Date</label>
@@ -349,11 +431,61 @@
         </div>
       </div>
 
-      <div style="margin-top: 20px; border-top: 1px solid #444; padding-top: 10px;">
+      <!-- Latest Video & Comments Manager -->
+      <h3 style="color:var(--roblox-accent); margin-bottom:10px;">💬 Latest Video Comments & Feedback</h3>
+      <div style="background:var(--roblox-card); padding:1rem; border-radius:8px; margin-bottom:1.5rem;">
+        <div class="form-group">
+          <label>Add Fan Comment / Video Feedback to Admin Log:</label>
+          <input type="text" id="commentUser" class="form-control" style="margin-bottom:5px;" placeholder="Username (e.g. RobloxGamer99)" />
+          <textarea id="commentText" class="form-control" placeholder="Write comment content..."></textarea>
+        </div>
+        <button class="btn-roblox btn-blue" onclick="addAdminComment()">Add Comment Log</button>
+        
+        <div id="adminCommentsList" style="margin-top:15px;">
+          <!-- Comments render dynamically -->
+        </div>
+      </div>
+
+      <div style="border-top: 1px solid #444; padding-top: 10px;">
         <button class="btn-roblox" style="background:#555; box-shadow:none;" onclick="changePassword()">Change Password</button>
         <button class="btn-roblox" style="background:#e74c3c; box-shadow:none;" onclick="logoutAdmin()">Logout</button>
       </div>
     </div>
+
+    <!-- About Channel Box -->
+    <section id="about">
+      <div class="content-box">
+        <h3>ℹ️ About Obby Rants (@obbyrants30)</h3>
+        <p style="color:var(--text-sub); margin-bottom:15px;">
+          <strong>Obby Rants</strong> was created with one goal in mind: delivering high-energy Roblox gameplay combined with genuine, entertaining rants. From beating brutal mega obbies to breaking down gaming trends, every upload is focused on fun, progression, and community interaction.
+        </p>
+        <p style="color:var(--text-sub);">
+          🎯 <strong>Channel Goals:</strong> Host regular subscriber play sessions, hit major community milestones, and keep creating top-tier Roblox content!
+        </p>
+      </div>
+    </section>
+
+    <!-- README Box -->
+    <section id="readme">
+      <div class="content-box">
+        <h3>📜 Official Website README Box</h3>
+        <div class="readme-terminal">
+# OBBY RANTS OFFICIAL WEBSITE (REPOSITORY DOCUMENTATION)
+-------------------------------------------------------
+Channel Handle : @obbyrants30
+Project Name   : Obbyrants_YT-officialsite
+Hosting Engine : GitHub Pages
+Tech Stack     : HTML5, CSS3 (Roblox Theme), Vanilla JS
+
+FEATURES:
+[+] Live Admin Panel with Password Protection
+[+] Channel Overall Analytics Tracker
+[+] Interactive Latest Video Comments Viewer
+[+] Real-time Announcement & Special Days Scheduler
+[+] Full Mobile & Desktop Responsive Interface
+        </div>
+      </div>
+    </section>
 
     <!-- Channel Announcements Section -->
     <section id="announcements">
@@ -387,7 +519,14 @@
     // State management
     let isAdmin = false;
 
-    // Load initial data from LocalStorage or default templates
+    // Analytics Data
+    let analytics = JSON.parse(localStorage.getItem('obby_analytics')) || {
+      subs: "1,250",
+      views: "45,800",
+      videos: "38"
+    };
+
+    // Announcements Data
     let announcements = JSON.parse(localStorage.getItem('obby_announcements')) || [
       {
         id: 1,
@@ -397,6 +536,7 @@
       }
     ];
 
+    // Special Days Data
     let specialDays = JSON.parse(localStorage.getItem('obby_special_days')) || [
       {
         id: 1,
@@ -404,6 +544,12 @@
         date: "2026-08-10",
         body: "Join the live channel event where we play community created Roblox obbies together!"
       }
+    ];
+
+    // Video Comments Data
+    let comments = JSON.parse(localStorage.getItem('obby_comments')) || [
+      { id: 1, user: "RobloxFan_99", text: "Loved the latest obby rant video! The stage 50 jump was insane!" },
+      { id: 2, user: "SpeedrunnerX", text: "Can't wait for the milestone live stream!" }
     ];
 
     // Initial Render
@@ -418,20 +564,16 @@
 
       let storedPass = localStorage.getItem('obby_admin_pass');
 
-      // First time setup
       if (!storedPass) {
-        let newPass = prompt("Welcome! Please set up your Admin Password for the first time:");
+        let newPass = prompt("Welcome! Set up your Admin Password for the first time:");
         if (newPass && newPass.trim() !== "") {
           localStorage.setItem('obby_admin_pass', newPass.trim());
-          alert("Password successfully set! Now login with your new password.");
-        } else {
-          alert("Password setup cancelled.");
+          alert("Password set! Now login with your new password.");
         }
         return;
       }
 
-      // Login prompt
-      let inputPass = prompt("Enter your Admin Password to make changes:");
+      let inputPass = prompt("Enter your Admin Password:");
       if (inputPass === storedPass) {
         isAdmin = true;
         document.getElementById('adminPanel').style.display = 'block';
@@ -464,7 +606,44 @@
       }
     }
 
-    // Add & Remove Functions
+    // Analytics Update
+    function updateAnalytics() {
+      const subs = document.getElementById('editSubs').value.trim();
+      const views = document.getElementById('editViews').value.trim();
+      const videos = document.getElementById('editVideos').value.trim();
+
+      if (subs) analytics.subs = subs;
+      if (views) analytics.views = views;
+      if (videos) analytics.videos = videos;
+
+      localStorage.setItem('obby_analytics', JSON.stringify(analytics));
+      renderData();
+      alert("Analytics updated!");
+    }
+
+    // Add Admin Comment
+    function addAdminComment() {
+      const user = document.getElementById('commentUser').value.trim();
+      const text = document.getElementById('commentText').value.trim();
+      if (!user || !text) return alert("Please enter username and comment!");
+
+      comments.unshift({ id: Date.now(), user, text });
+      localStorage.setItem('obby_comments', JSON.stringify(comments));
+      renderData();
+
+      document.getElementById('commentUser').value = '';
+      document.getElementById('commentText').value = '';
+    }
+
+    function deleteComment(id) {
+      if (confirm("Delete this comment?")) {
+        comments = comments.filter(c => c.id !== id);
+        localStorage.setItem('obby_comments', JSON.stringify(comments));
+        renderData();
+      }
+    }
+
+    // Add & Remove Announcements/Events
     function addAnnouncement() {
       const title = document.getElementById('annTitle').value.trim();
       const body = document.getElementById('annBody').value.trim();
@@ -511,6 +690,23 @@
     }
 
     function renderData() {
+      // Render Stats
+      document.getElementById('adminSubCount').innerText = analytics.subs;
+      document.getElementById('adminViewCount').innerText = analytics.views;
+      document.getElementById('adminVideoCount').innerText = analytics.videos;
+
+      // Render Admin Comments
+      const commContainer = document.getElementById('adminCommentsList');
+      commContainer.innerHTML = comments.map(c => `
+        <div style="background:#191B1D; padding:8px 12px; border-radius:6px; margin-bottom:8px; display:flex; justify-between; align-items:center;">
+          <div>
+            <strong style="color:var(--roblox-accent);">${escapeHtml(c.user)}:</strong> 
+            <span style="color:var(--text-sub);">${escapeHtml(c.text)}</span>
+          </div>
+          ${isAdmin ? `<button class="delete-btn" style="margin-top:0;" onclick="deleteComment(${c.id})">Delete</button>` : ''}
+        </div>
+      `).join('');
+
       // Render Announcements
       const annContainer = document.getElementById('announcementsList');
       if (announcements.length === 0) {
@@ -546,7 +742,6 @@
       }
     }
 
-    // Helper function to prevent HTML injection
     function escapeHtml(str) {
       return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
     }
