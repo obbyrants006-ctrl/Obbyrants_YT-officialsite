@@ -4,7 +4,23 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Obby Rants - Official Channel Hub</title>
+  
+  <!-- Google Fonts: Fredoka & Poppins -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  
   <style>
+    :root {
+      --roblox-red: #E2231A;
+      --roblox-dark: #191B1D;
+      --roblox-card: #232527;
+      --roblox-accent: #00A2FF;
+      --roblox-gold: #FFB800;
+      --text-main: #FFFFFF;
+      --text-sub: #B8B9BF;
+    }
+
     * {
       box-sizing: border-box;
       margin: 0;
@@ -12,37 +28,58 @@
     }
 
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #060911;
-      color: #f8fafc;
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--roblox-dark);
+      color: var(--text-main);
       line-height: 1.6;
     }
 
-    /* Navigation Header */
+    h1, h2, h3, .logo-text, .btn-roblox, .nav-btn {
+      font-family: 'Fredoka', cursive, sans-serif;
+      letter-spacing: 0.5px;
+    }
+
+    /* Header & Navigation */
     header {
-      background-color: #0b1120;
-      padding: 1rem 2rem;
+      background: var(--roblox-card);
+      border-bottom: 4px solid var(--roblox-red);
       position: sticky;
       top: 0;
       z-index: 1000;
-      border-bottom: 2px solid #00f0ff;
+      padding: 1rem 2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      box-shadow: 0 0 15px rgba(0, 240, 255, 0.2);
+      flex-wrap: wrap;
+      gap: 10px;
     }
 
-    .logo {
-      font-size: 1.5rem;
-      font-weight: 800;
-      color: #ff2a5f;
-      text-shadow: 0 0 10px rgba(255, 42, 95, 0.8);
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 12px;
       cursor: pointer;
+    }
+
+    .logo-badge {
+      background: var(--roblox-red);
+      color: white;
+      font-size: 1.5rem;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 8px;
+      transform: rotate(-3deg);
+    }
+
+    .logo-text {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--text-main);
     }
 
     nav {
       display: flex;
-      gap: 0.8rem;
+      gap: 0.5rem;
       align-items: center;
       flex-wrap: wrap;
     }
@@ -50,7 +87,7 @@
     .nav-btn {
       background: transparent;
       border: 1px solid transparent;
-      color: #94a3b8;
+      color: var(--text-sub);
       padding: 0.5rem 0.9rem;
       border-radius: 6px;
       font-weight: 600;
@@ -58,241 +95,307 @@
       transition: all 0.2s ease;
     }
 
-    /* Distinct Neon Hover & Active States Per Tab */
-    .nav-btn[data-tab="subs"]:hover, .nav-btn[data-tab="subs"].active {
-      color: #00f0ff; border-color: #00f0ff; box-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
-    }
-    .nav-btn[data-tab="music"]:hover, .nav-btn[data-tab="music"].active {
-      color: #a855f7; border-color: #a855f7; box-shadow: 0 0 10px rgba(168, 85, 247, 0.5);
-    }
-    .nav-btn[data-tab="analytics"]:hover, .nav-btn[data-tab="analytics"].active {
-      color: #ff2a5f; border-color: #ff2a5f; box-shadow: 0 0 10px rgba(255, 42, 95, 0.5);
-    }
-    .nav-btn[data-tab="views"]:hover, .nav-btn[data-tab="views"].active {
-      color: #10b981; border-color: #10b981; box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
-    }
-    .nav-btn[data-tab="hangout"]:hover, .nav-btn[data-tab="hangout"].active {
-      color: #f59e0b; border-color: #f59e0b; box-shadow: 0 0 10px rgba(245, 158, 11, 0.5);
-    }
-    .nav-btn[data-tab="comments"]:hover, .nav-btn[data-tab="comments"].active {
-      color: #ec4899; border-color: #ec4899; box-shadow: 0 0 10px rgba(236, 72, 153, 0.5);
-    }
+    /* Tab Hover & Active Styling */
+    .nav-btn[data-tab="subs"]:hover, .nav-btn[data-tab="subs"].active { color: #00f0ff; border-color: #00f0ff; }
+    .nav-btn[data-tab="announcements"]:hover, .nav-btn[data-tab="announcements"].active { color: #ff2a5f; border-color: #ff2a5f; }
+    .nav-btn[data-tab="events"]:hover, .nav-btn[data-tab="events"].active { color: #FFB800; border-color: #FFB800; }
+    .nav-btn[data-tab="music"]:hover, .nav-btn[data-tab="music"].active { color: #a855f7; border-color: #a855f7; }
+    .nav-btn[data-tab="views"]:hover, .nav-btn[data-tab="views"].active { color: #10b981; border-color: #10b981; }
+    .nav-btn[data-tab="hangout"]:hover, .nav-btn[data-tab="hangout"].active { color: #f59e0b; border-color: #f59e0b; }
+    .nav-btn[data-tab="comments"]:hover, .nav-btn[data-tab="comments"].active { color: #ec4899; border-color: #ec4899; }
 
-    /* Layout Containers */
-    .container {
-      max-width: 900px;
-      margin: 2rem auto;
-      padding: 0 1rem;
-    }
-
-    .tab-content {
-      display: none;
-    }
-
-    .tab-content.active {
-      display: block;
-    }
-
-    /* Card Themes */
-    .card {
-      background-color: #0b1120;
-      border-radius: 10px;
-      padding: 1.5rem;
-      margin-bottom: 1.5rem;
-      border: 1px solid #1e293b;
-    }
-
-    .theme-cyan { border-color: #00f0ff; box-shadow: 0 0 12px rgba(0, 240, 255, 0.2); }
-    .theme-purple { border-color: #a855f7; box-shadow: 0 0 12px rgba(168, 85, 247, 0.2); }
-    .theme-red { border-color: #ff2a5f; box-shadow: 0 0 12px rgba(255, 42, 95, 0.2); }
-    .theme-green { border-color: #10b981; box-shadow: 0 0 12px rgba(16, 185, 129, 0.2); }
-    .theme-yellow { border-color: #f59e0b; box-shadow: 0 0 12px rgba(245, 158, 11, 0.2); }
-    .theme-pink { border-color: #ec4899; box-shadow: 0 0 12px rgba(236, 72, 153, 0.2); }
-
-    .text-cyan { color: #00f0ff; text-shadow: 0 0 8px rgba(0, 240, 255, 0.6); }
-    .text-purple { color: #a855f7; text-shadow: 0 0 8px rgba(168, 85, 247, 0.6); }
-    .text-red { color: #ff2a5f; text-shadow: 0 0 8px rgba(255, 42, 95, 0.6); }
-    .text-green { color: #10b981; text-shadow: 0 0 8px rgba(16, 185, 129, 0.6); }
-    .text-yellow { color: #f59e0b; text-shadow: 0 0 8px rgba(245, 158, 11, 0.6); }
-    .text-pink { color: #ec4899; text-shadow: 0 0 8px rgba(236, 72, 153, 0.6); }
-
-    /* Action Buttons */
-    .btn {
-      background: #1e293b;
+    /* Roblox Style Buttons */
+    .btn-roblox {
+      background: var(--roblox-red);
       color: white;
       border: none;
-      padding: 0.6rem 1.2rem;
-      border-radius: 6px;
-      font-weight: bold;
+      padding: 8px 16px;
+      font-size: 0.95rem;
+      border-radius: 8px;
       cursor: pointer;
-      transition: all 0.2s;
+      text-decoration: none;
+      display: inline-block;
+      font-weight: 600;
+      box-shadow: 0 4px 0 #9E130C;
+      transition: all 0.1s ease;
     }
 
-    .btn-red { background: linear-gradient(135deg, #ff2a5f, #9f1239); }
-    .btn-purple { background: linear-gradient(135deg, #a855f7, #6b21a8); }
-    .btn-cyan { background: linear-gradient(135deg, #00f0ff, #0284c7); color: #060911; }
-    .btn-yellow { background: linear-gradient(135deg, #f59e0b, #b45309); color: #060911; }
-    .btn-pink { background: linear-gradient(135deg, #ec4899, #be185d); }
+    .btn-roblox:hover { transform: translateY(-2px); box-shadow: 0 6px 0 #9E130C; }
+    .btn-roblox:active { transform: translateY(2px); box-shadow: 0 2px 0 #9E130C; }
+
+    .btn-blue { background: var(--roblox-accent); box-shadow: 0 4px 0 #0076BA; }
+    .btn-blue:hover { box-shadow: 0 6px 0 #0076BA; }
+    .btn-purple { background: #a855f7; box-shadow: 0 4px 0 #6b21a8; }
+    .btn-pink { background: #ec4899; box-shadow: 0 4px 0 #be185d; }
+    .btn-green { background: #10b981; box-shadow: 0 4px 0 #047857; }
 
     .btn-back {
-      background: #060911;
+      background: #191B1D;
       border: 1px solid #334155;
-      color: #94a3b8;
+      color: var(--text-sub);
       margin-bottom: 1.2rem;
     }
-    .btn-back:hover {
-      border-color: #00f0ff;
-      color: #00f0ff;
-      box-shadow: 0 0 8px rgba(0, 240, 255, 0.4);
+    .btn-back:hover { border-color: #00f0ff; color: #00f0ff; }
+
+    /* Hero Section */
+    .hero {
+      text-align: center;
+      padding: 3rem 1.5rem;
+      background: linear-gradient(180deg, #232527 0%, #191B1D 100%);
+      border-bottom: 2px solid #2C2F33;
     }
 
-    .btn:hover { opacity: 0.9; transform: translateY(-1px); }
+    .hero h1 { font-size: 2.8rem; margin-bottom: 10px; }
+    .hero p { font-size: 1.1rem; color: var(--text-sub); max-width: 600px; margin: 0 auto 20px auto; }
 
-    /* Form Inputs */
-    .form-control {
-      width: 100%;
-      padding: 0.7rem;
-      margin: 0.4rem 0 1rem 0;
-      background: #060911;
-      border: 1px solid #334155;
-      color: white;
-      border-radius: 6px;
+    .hero-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
     }
 
-    textarea.form-control {
-      resize: vertical;
-      min-height: 80px;
+    /* Container & Tabs */
+    .container {
+      max-width: 950px;
+      margin: 2rem auto;
+      padding: 0 1.5rem;
     }
 
-    /* List Cards */
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+
+    /* Cards Layout */
+    .card {
+      background: var(--roblox-card);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      border: 1px solid #32353B;
+    }
+
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
     .item-card {
-      background: #060911;
-      border: 1px solid #334155;
+      background: #191B1D;
+      border: 1px solid #32353B;
       padding: 1rem;
       border-radius: 8px;
       margin-top: 0.8rem;
     }
+
+    /* Admin Panel */
+    .admin-panel {
+      background: #2D1B1E;
+      border: 2px dashed var(--roblox-red);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      display: none;
+    }
+
+    /* Forms */
+    .form-group { margin-bottom: 1rem; }
+    .form-group label { display: block; margin-bottom: 5px; font-weight: 600; }
+    .form-control {
+      width: 100%;
+      padding: 10px;
+      background: #191B1D;
+      border: 1px solid #444;
+      border-radius: 6px;
+      color: white;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    textarea.form-control { resize: vertical; min-height: 80px; }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      background: var(--roblox-card);
+      border-top: 1px solid #2C2F33;
+      color: var(--text-sub);
+      font-size: 0.9rem;
+      margin-top: 3rem;
+    }
+
+    footer a { color: var(--roblox-accent); text-decoration: none; }
   </style>
 </head>
 <body>
 
   <!-- Header Section -->
   <header>
-    <div class="logo" onclick="switchTab('subs')">OR30 Hub</div>
+    <div class="logo-container" onclick="switchTab('subs')">
+      <div class="logo-badge">OR</div>
+      <div class="logo-text">Obby Rants</div>
+    </div>
     <nav>
       <button class="nav-btn active" data-tab="subs" onclick="switchTab('subs')">🏠 Subs</button>
+      <button class="nav-btn" data-tab="announcements" onclick="switchTab('announcements')">📢 News</button>
+      <button class="nav-btn" data-tab="events" onclick="switchTab('events')">⭐ Events</button>
       <button class="nav-btn" data-tab="music" onclick="switchTab('music')">🎵 Music</button>
-      <button class="nav-btn" data-tab="analytics" onclick="switchTab('analytics')">📊 Analytics</button>
       <button class="nav-btn" data-tab="views" onclick="switchTab('views')">👁️ Views</button>
       <button class="nav-btn" data-tab="hangout" onclick="switchTab('hangout')">🎮 Hangout</button>
       <button class="nav-btn" data-tab="comments" onclick="switchTab('comments')">💬 Comments</button>
-      <button id="adminBtn" class="btn btn-red" onclick="toggleAdmin()">Admin Login</button>
+      <button id="adminBtn" class="btn-roblox" onclick="toggleAdmin()">Admin Login</button>
     </nav>
   </header>
 
+  <!-- Hero Banner -->
+  <section class="hero">
+    <h1>Welcome to Obby Rants! 🎮</h1>
+    <p>The official home for YouTube rants, Roblox adventures, community announcements, and special events!</p>
+    <div class="hero-buttons">
+      <a href="https://youtube.com/@obbyrants" target="_blank" class="btn-roblox">Subscribe on YouTube</a>
+      <a href="https://roblox.com/share?code=c52e49aa93ccb841bf4ae7fb0a044796&type=Profile&s" target="_blank" class="btn-roblox btn-blue">My Roblox Profile</a>
+    </div>
+  </section>
+
   <div class="container">
 
-    <!-- ADMIN PANEL -->
-    <div id="adminPanel" class="card theme-red" style="display:none;">
-      <button class="btn btn-back" onclick="switchTab('subs')">← Back to Home</button>
-      <h2 class="text-red">🛠️ Admin Control Panel</h2>
-      <p id="adminStatusText">Logged in as Owner.</p>
+    <!-- DEVICE-LOCKED ADMIN PANEL -->
+    <div id="adminPanel" class="admin-panel">
+      <button class="btn-roblox btn-back" onclick="switchTab('subs')">← Back to Home</button>
+      <h2 style="color: var(--roblox-red);">🛠️ Admin Control Center</h2>
+      <p style="margin-bottom: 15px; color: var(--text-sub);">Logged in as Registered Device Owner.</p>
       
-      <hr style="border-color:#334155; margin:1rem 0;">
+      <div class="grid-container">
+        <!-- Add Announcement -->
+        <div>
+          <h3>Post Announcement</h3>
+          <div class="form-group">
+            <input type="text" id="annTitle" class="form-control" placeholder="Announcement Title" />
+          </div>
+          <div class="form-group">
+            <textarea id="annBody" class="form-control" placeholder="Write announcement details..."></textarea>
+          </div>
+          <button class="btn-roblox" onclick="addAnnouncement()">Post Announcement</button>
+        </div>
 
-      <h3>Add Music Recommendation</h3>
-      <input type="text" id="newSongTitle" class="form-control" placeholder="Song Title" />
-      <input type="text" id="newSongArtist" class="form-control" placeholder="Artist Name" />
-      <button class="btn btn-purple" onclick="addSong()">Add Song to Vote List</button>
+        <!-- Add Special Event -->
+        <div>
+          <h3>Add Special Event</h3>
+          <div class="form-group">
+            <input type="text" id="eventTitle" class="form-control" placeholder="Event Name" />
+          </div>
+          <div class="form-group">
+            <input type="date" id="eventDate" class="form-control" />
+          </div>
+          <div class="form-group">
+            <textarea id="eventBody" class="form-control" placeholder="Event schedule or details..."></textarea>
+          </div>
+          <button class="btn-roblox btn-blue" onclick="addSpecialDay()">Add Event</button>
+        </div>
 
-      <hr style="border-color:#334155; margin:1rem 0;">
+        <!-- Add Song & Update Metrics -->
+        <div>
+          <h3>Add Music & Metrics</h3>
+          <div class="form-group">
+            <input type="text" id="newSongTitle" class="form-control" placeholder="Song Title" />
+            <input type="text" id="newSongArtist" class="form-control" placeholder="Artist Name" style="margin-top: 5px;" />
+          </div>
+          <button class="btn-roblox btn-purple" onclick="addSong()" style="margin-bottom: 15px;">Add Song</button>
 
-      <h3>Update Channel Metrics</h3>
-      <label>Subscribers Count:</label>
-      <input type="number" id="editSubs" class="form-control" />
-      <label>Total Channel Views:</label>
-      <input type="number" id="editViews" class="form-control" />
-      <button class="btn btn-cyan" onclick="saveMetrics()">Update Metrics</button>
-      
-      <hr style="border-color:#334155; margin:1rem 0;">
-      <button class="btn btn-red" onclick="togglePublicAccessPreview()">Toggle Public Premium Access Preview</button>
-    </div>
-
-    <!-- 1. SUBS TAB (Cyan) -->
-    <div id="subs" class="tab-content active">
-      <div class="card theme-cyan">
-        <h1 class="text-cyan">Subscribers Counter</h1>
-        <p style="font-size: 2rem; font-weight: bold;" id="displaySubs">0</p>
-        <p>Current active subscribers supporting Obby Rants!</p>
-      </div>
-    </div>
-
-    <!-- 2. MUSIC TAB (Purple) -->
-    <div id="music" class="tab-content">
-      <button class="btn btn-back" onclick="switchTab('subs')">← Back to Home</button>
-      <div class="card theme-purple">
-        <h1 class="text-purple">🎵 Music & Song Recommendations</h1>
-        <p>Vote for your favorite tracks below!</p>
-        <div id="songListContainer"></div>
-      </div>
-    </div>
-
-    <!-- 3. ANALYTICS TAB (Red) -->
-    <div id="analytics" class="tab-content">
-      <button class="btn btn-back" onclick="switchTab('subs')">← Back to Home</button>
-      <div class="card theme-red">
-        <h1 class="text-red">📊 Performance Analytics</h1>
-        <p>Channel health & engagement stats.</p>
-        <div style="margin-top: 1rem;">
-          <h3>Channel Status: <span class="text-red">Active 🔥</span></h3>
+          <div class="form-group">
+            <label>Subscribers Count:</label>
+            <input type="number" id="editSubs" class="form-control" />
+            <label style="margin-top:5px;">Total Channel Views:</label>
+            <input type="number" id="editViews" class="form-control" />
+          </div>
+          <button class="btn-roblox btn-green" onclick="saveMetrics()">Update Counters</button>
         </div>
       </div>
     </div>
 
-    <!-- 4. VIEWS TAB (Green) -->
-    <div id="views" class="tab-content">
-      <button class="btn btn-back" onclick="switchTab('subs')">← Back to Home</button>
-      <div class="card theme-green">
-        <h1 class="text-green">👁️ Total Channel Views</h1>
-        <p style="font-size: 2rem; font-weight: bold;" id="displayViews">0</p>
-        <p>Total recorded views across videos!</p>
+    <!-- 1. SUBS TAB -->
+    <div id="subs" class="tab-content active">
+      <div class="card" style="border-color: #00f0ff; text-align: center;">
+        <h1 style="color: #00f0ff;">Subscribers Counter</h1>
+        <p style="font-size: 3.5rem; font-weight: bold; font-family: 'Fredoka', cursive;" id="displaySubs">246</p>
+        <p style="color: var(--text-sub);">Active subscribers supporting Obby Rants!</p>
       </div>
     </div>
 
-    <!-- 5. HANGOUT PAGE TAB (Yellow/Orange) -->
+    <!-- 2. ANNOUNCEMENTS TAB -->
+    <div id="announcements" class="tab-content">
+      <button class="btn-roblox btn-back" onclick="switchTab('subs')">← Back to Home</button>
+      <div class="card">
+        <h1 style="color: var(--roblox-red);">📢 Channel Announcements</h1>
+        <div id="announcementsList" class="grid-container" style="margin-top: 1rem;"></div>
+      </div>
+    </div>
+
+    <!-- 3. EVENTS TAB -->
+    <div id="events" class="tab-content">
+      <button class="btn-roblox btn-back" onclick="switchTab('subs')">← Back to Home</button>
+      <div class="card">
+        <h1 style="color: var(--roblox-gold);">⭐ Special Days & Events</h1>
+        <div id="specialDaysList" class="grid-container" style="margin-top: 1rem;"></div>
+      </div>
+    </div>
+
+    <!-- 4. MUSIC TAB -->
+    <div id="music" class="tab-content">
+      <button class="btn-roblox btn-back" onclick="switchTab('subs')">← Back to Home</button>
+      <div class="card">
+        <h1 style="color: #a855f7;">🎵 Music & Recommendations</h1>
+        <p style="color: var(--text-sub);">Vote for your favorite tracks below!</p>
+        <div id="songListContainer" style="margin-top:1rem;"></div>
+      </div>
+    </div>
+
+    <!-- 5. VIEWS TAB -->
+    <div id="views" class="tab-content">
+      <button class="btn-roblox btn-back" onclick="switchTab('subs')">← Back to Home</button>
+      <div class="card" style="border-color: #10b981; text-align: center;">
+        <h1 style="color: #10b981;">👁️ Total Channel Views</h1>
+        <p style="font-size: 3.5rem; font-weight: bold; font-family: 'Fredoka', cursive;" id="displayViews">1000</p>
+        <p style="color: var(--text-sub);">Total views across all uploaded videos!</p>
+      </div>
+    </div>
+
+    <!-- 6. HANGOUT TAB -->
     <div id="hangout" class="tab-content">
-      <button class="btn btn-back" onclick="switchTab('subs')">← Back to Home</button>
-      <div class="card theme-yellow">
-        <h1 class="text-yellow">🎮 Community Hangout Zone</h1>
-        <p>Welcome to the fan lounge! Recommend games for the next video or chill with the community.</p>
+      <button class="btn-roblox btn-back" onclick="switchTab('subs')">← Back to Home</button>
+      <div class="card">
+        <h1 style="color: #f59e0b;">🎮 Community Hangout Zone</h1>
+        <p style="color: var(--text-sub);">Welcome to the fan lounge! Chill with the community or check current goals.</p>
 
         <div class="item-card" style="border-color:#f59e0b; margin-top:1.5rem;">
-          <h3 class="text-yellow">🎯 Current Channel Goal</h3>
-          <p>Reaching the next subscriber milestone & making game rants!</p>
+          <h3 style="color:#f59e0b;">🎯 Current Goal</h3>
+          <p>Reaching the next subscriber milestone & posting hilarious rants!</p>
         </div>
 
         <div class="item-card" style="border-color:#f59e0b;">
-          <h3 class="text-yellow">🕹️ Favorite Games Played</h3>
+          <h3 style="color:#f59e0b;">🕹️ Featured Games</h3>
           <p>Minecraft, GTA V, Roblox Obbies, Valorant & CS2!</p>
         </div>
       </div>
     </div>
 
-    <!-- 6. COMMENT SECTION TAB (Pink) -->
+    <!-- 7. COMMENTS TAB -->
     <div id="comments" class="tab-content">
-      <button class="btn btn-back" onclick="switchTab('subs')">← Back to Home</button>
-      <div class="card theme-pink">
-        <h1 class="text-pink">💬 Public Comment Section</h1>
-        <p>Leave a comment or message for Obby Rants!</p>
+      <button class="btn-roblox btn-back" onclick="switchTab('subs')">← Back to Home</button>
+      <div class="card">
+        <h1 style="color: #ec4899;">💬 Public Comment Section</h1>
+        <p style="color: var(--text-sub);">Leave a comment or message for Obby Rants!</p>
 
         <div style="margin-top: 1.5rem;">
-          <label>Your Username / Name:</label>
-          <input type="text" id="commentUser" class="form-control" placeholder="e.g. Gamer123" />
-
-          <label>Comment Message:</label>
-          <textarea id="commentText" class="form-control" placeholder="Type your comment here..."></textarea>
-
-          <button class="btn btn-pink" onclick="postComment()">Post Comment 🚀</button>
+          <div class="form-group">
+            <label>Your Name / Username:</label>
+            <input type="text" id="commentUser" class="form-control" placeholder="e.g. Gamer123" />
+          </div>
+          <div class="form-group">
+            <label>Comment Message:</label>
+            <textarea id="commentText" class="form-control" placeholder="Type your message here..."></textarea>
+          </div>
+          <button class="btn-roblox btn-pink" onclick="postComment()">Post Comment 🚀</button>
         </div>
 
         <hr style="border-color:#334155; margin:1.5rem 0;">
@@ -304,18 +407,37 @@
 
   </div>
 
+  <!-- Footer -->
+  <footer>
+    <p>© 2026 Obby Rants | Made for YouTube & Roblox Community</p>
+    <p style="margin-top: 5px;">
+      <a href="https://youtube.com/@obbyrants" target="_blank">YouTube</a> • 
+      <a href="https://roblox.com/share?code=c52e49aa93ccb841bf4ae7fb0a044796&type=Profile&s" target="_blank">Roblox Profile</a>
+    </p>
+  </footer>
+
   <script>
+    // SECURITY SETTINGS
+    const SECRET_DEVICE_KEY = "obby_owner_secret_9988"; 
+    const ADMIN_PASSWORD = "mySuperSecretPassword123";
+
     // State Management
     let isAdmin = false;
-    let isOwnerDevice = localStorage.getItem('or30_owner_device') === 'true';
-    let adminPass = localStorage.getItem('or30_admin_pass') || null;
-    let publicPreviewEnabled = localStorage.getItem('or30_public_preview') === 'true';
+    let subs = parseInt(localStorage.getItem('or30_subs')) || 246;
+    let views = parseInt(localStorage.getItem('or30_views')) || 1000;
 
-    let subs = parseInt(localStorage.getItem('or30_subs')) || 0;
-    let views = parseInt(localStorage.getItem('or30_views')) || 0;
+    let announcements = JSON.parse(localStorage.getItem('obby_announcements')) || [
+      { id: 1, title: "Welcome to the Official Hub!", date: "2026-08-02", body: "Check back here regularly for channel updates, music voting, and event schedules!" }
+    ];
+
+    let specialDays = JSON.parse(localStorage.getItem('obby_special_days')) || [
+      { id: 1, title: "Weekly Stream & Roblox Obby Marathon", date: "2026-08-10", body: "Join the live stream where we play community created Roblox obbies together!" }
+    ];
+
     let songs = JSON.parse(localStorage.getItem('or30_songs')) || [
       { id: 1, title: "Life is a Highway", artist: "Rascal Flatts", votes: 5 }
     ];
+
     let comments = JSON.parse(localStorage.getItem('or30_comments')) || [
       { id: 1, user: "RobloxFan", text: "Love the channel rants! Keep it up!", date: "2026-08-02" }
     ];
@@ -326,8 +448,7 @@
       document.getElementById('displayViews').innerText = views;
       document.getElementById('editSubs').value = subs;
       document.getElementById('editViews').value = views;
-      renderSongs();
-      renderComments();
+      renderAllData();
     });
 
     // Navigation Switching
@@ -335,66 +456,58 @@
       document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
       document.querySelectorAll('.nav-btn').forEach(el => el.classList.remove('active'));
 
-      document.getElementById(tabId).classList.add('active');
+      const activeTab = document.getElementById(tabId);
+      if (activeTab) activeTab.classList.add('active');
+
       const activeNavBtn = document.querySelector(`.nav-btn[data-tab="${tabId}"]`);
       if (activeNavBtn) activeNavBtn.classList.add('active');
 
       window.scrollTo(0, 0);
     }
 
-    // Device-Locked Admin Security
+    // STRICT DEVICE-LOCKED ADMIN SYSTEM
+    function registerThisDevice() {
+      let keyInput = prompt("Enter Master Device Key to pair this device:");
+      if (keyInput === SECRET_DEVICE_KEY) {
+        localStorage.setItem('or30_registered_owner', SECRET_DEVICE_KEY);
+        alert("✅ Success! Device paired as Owner.");
+      } else if (keyInput !== null) {
+        alert("❌ Incorrect Master Key!");
+      }
+    }
+
     function toggleAdmin() {
       if (isAdmin) {
         isAdmin = false;
         document.getElementById('adminPanel').style.display = 'none';
         document.getElementById('adminBtn').innerText = 'Admin Login';
-        renderSongs();
-        renderComments();
+        renderAllData();
         return;
       }
 
-      if (!adminPass) {
-        let newPass = prompt("First Setup: Create your Admin Password:");
-        if (newPass && newPass.trim() !== "") {
-          adminPass = newPass.trim();
-          localStorage.setItem('or30_admin_pass', adminPass);
-          localStorage.setItem('or30_owner_device', 'true');
-          isOwnerDevice = true;
-          alert("Device registered as Owner! Logged in.");
-          loginAdminSuccess();
-        }
+      let savedToken = localStorage.getItem('or30_registered_owner');
+
+      if (savedToken !== SECRET_DEVICE_KEY) {
+        let choice = confirm("Access Denied: This device is not registered as the Owner device.\n\nAre you the Owner trying to register this device?");
+        if (choice) registerThisDevice();
         return;
       }
 
-      if (!isOwnerDevice && !publicPreviewEnabled) {
-        alert("Access Denied: Admin panel is restricted to the registered owner device.");
-        return;
-      }
-
-      let entered = prompt("Enter Admin Password:");
-      if (entered === adminPass) {
-        loginAdminSuccess();
-      } else if (entered !== null) {
+      let enteredPass = prompt("Device Verified. Enter Admin Password:");
+      if (enteredPass === ADMIN_PASSWORD) {
+        isAdmin = true;
+        document.getElementById('adminPanel').style.display = 'block';
+        document.getElementById('adminBtn').innerText = 'Logout Admin';
+        renderAllData();
+        alert("Welcome back, Owner!");
+      } else if (enteredPass !== null) {
         alert("Incorrect password!");
       }
     }
 
-    function loginAdminSuccess() {
-      isAdmin = true;
-      document.getElementById('adminPanel').style.display = 'block';
-      document.getElementById('adminBtn').innerText = 'Logout Admin';
-      renderSongs();
-      renderComments();
-    }
-
-    function togglePublicAccessPreview() {
-      publicPreviewEnabled = !publicPreviewEnabled;
-      localStorage.setItem('or30_public_preview', publicPreviewEnabled);
-      alert("Public Admin Preview Mode is now " + (publicPreviewEnabled ? "ENABLED" : "DISABLED"));
-    }
-
+    // Update Counter Metrics
     function saveMetrics() {
-      subs = parseInt(document.getElementById('editSubs').value) || 0;
+      subs = parseInt(document.getElementById('editSubs').value) || 246;
       views = parseInt(document.getElementById('editViews').value) || 0;
 
       localStorage.setItem('or30_subs', subs);
@@ -406,6 +519,45 @@
       alert("Metrics updated!");
     }
 
+    // Announcements Logic
+    function addAnnouncement() {
+      const title = document.getElementById('annTitle').value.trim();
+      const body = document.getElementById('annBody').value.trim();
+      if (!title || !body) return alert("Please fill in both fields!");
+
+      const today = new Date().toISOString().split('T')[0];
+      announcements.unshift({ id: Date.now(), title, date: today, body });
+      saveAndRender();
+
+      document.getElementById('annTitle').value = '';
+      document.getElementById('annBody').value = '';
+    }
+
+    function deleteAnnouncement(id) {
+      announcements = announcements.filter(item => item.id !== id);
+      saveAndRender();
+    }
+
+    // Events Logic
+    function addSpecialDay() {
+      const title = document.getElementById('eventTitle').value.trim();
+      const date = document.getElementById('eventDate').value;
+      const body = document.getElementById('eventBody').value.trim();
+      if (!title || !date || !body) return alert("Please fill in all fields!");
+
+      specialDays.unshift({ id: Date.now(), title, date, body });
+      saveAndRender();
+
+      document.getElementById('eventTitle').value = '';
+      document.getElementById('eventDate').value = '';
+      document.getElementById('eventBody').value = '';
+    }
+
+    function deleteSpecialDay(id) {
+      specialDays = specialDays.filter(item => item.id !== id);
+      saveAndRender();
+    }
+
     // Music Voting Logic
     function addSong() {
       let title = document.getElementById('newSongTitle').value.trim();
@@ -413,7 +565,7 @@
       if (!title) return alert("Please enter a title!");
 
       songs.push({ id: Date.now(), title, artist, votes: 0 });
-      saveAndRenderSongs();
+      saveAndRender();
 
       document.getElementById('newSongTitle').value = '';
       document.getElementById('newSongArtist').value = '';
@@ -423,56 +575,24 @@
       let song = songs.find(s => s.id === id);
       if (song) {
         song.votes += 1;
-        saveAndRenderSongs();
+        saveAndRender();
       }
     }
 
     function deleteSong(id) {
       songs = songs.filter(s => s.id !== id);
-      saveAndRenderSongs();
+      saveAndRender();
     }
 
-    function saveAndRenderSongs() {
-      songs.sort((a, b) => b.votes - a.votes);
-      localStorage.setItem('or30_songs', JSON.stringify(songs));
-      renderSongs();
-    }
-
-    function renderSongs() {
-      const container = document.getElementById('songListContainer');
-      if (songs.length === 0) {
-        container.innerHTML = "<p>No songs added yet.</p>";
-        return;
-      }
-
-      container.innerHTML = songs.map(s => `
-        <div class="item-card" style="display:flex; justify-content:space-between; align-items:center; border-color:#a855f7;">
-          <div>
-            <strong class="text-purple">${escapeHtml(s.title)}</strong>
-            ${s.artist ? `<span style="color:#94a3b8"> - ${escapeHtml(s.artist)}</span>` : ''}
-            <br>
-            <span style="font-size:0.85rem; color:#a855f7;">Votes: ${s.votes}</span>
-          </div>
-          <div>
-            <button class="btn btn-purple" onclick="voteSong(${s.id})">👍 Vote</button>
-            ${isAdmin ? `<button class="btn btn-red" style="padding:0.3rem 0.6rem; margin-left:5px;" onclick="deleteSong(${s.id})">Delete</button>` : ''}
-          </div>
-        </div>
-      `).join('');
-    }
-
-    // Comment System Logic
+    // Comment Logic
     function postComment() {
       let user = document.getElementById('commentUser').value.trim();
       let text = document.getElementById('commentText').value.trim();
-
-      if (!user || !text) return alert("Please fill in both your name and comment message!");
+      if (!user || !text) return alert("Please fill in both fields!");
 
       const today = new Date().toISOString().split('T')[0];
       comments.unshift({ id: Date.now(), user, text, date: today });
-
-      localStorage.setItem('or30_comments', JSON.stringify(comments));
-      renderComments();
+      saveAndRender();
 
       document.getElementById('commentUser').value = '';
       document.getElementById('commentText').value = '';
@@ -480,27 +600,89 @@
 
     function deleteComment(id) {
       comments = comments.filter(c => c.id !== id);
-      localStorage.setItem('or30_comments', JSON.stringify(comments));
-      renderComments();
+      saveAndRender();
     }
 
-    function renderComments() {
-      const container = document.getElementById('commentListContainer');
-      if (comments.length === 0) {
-        container.innerHTML = "<p>No comments posted yet. Be the first!</p>";
-        return;
+    function saveAndRender() {
+      songs.sort((a, b) => b.votes - a.votes);
+      localStorage.setItem('obby_announcements', JSON.stringify(announcements));
+      localStorage.setItem('obby_special_days', JSON.stringify(specialDays));
+      localStorage.setItem('or30_songs', JSON.stringify(songs));
+      localStorage.setItem('or30_comments', JSON.stringify(comments));
+      renderAllData();
+    }
+
+    function renderAllData() {
+      // Render Announcements
+      const annContainer = document.getElementById('announcementsList');
+      if (announcements.length === 0) {
+        annContainer.innerHTML = `<p style="color:var(--text-sub)">No announcements posted yet.</p>`;
+      } else {
+        annContainer.innerHTML = announcements.map(item => `
+          <div class="item-card" style="border-color: var(--roblox-red);">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:5px;">
+              <strong style="color: var(--roblox-red); font-size: 1.1rem;">${escapeHtml(item.title)}</strong>
+              <span style="font-size:0.8rem; color:var(--text-sub);">${item.date}</span>
+            </div>
+            <p style="color:var(--text-sub);">${escapeHtml(item.body)}</p>
+            ${isAdmin ? `<button class="btn-roblox" style="padding:2px 8px; font-size:0.8rem; margin-top:8px;" onclick="deleteAnnouncement(${item.id})">Delete</button>` : ''}
+          </div>
+        `).join('');
       }
 
-      container.innerHTML = comments.map(c => `
-        <div class="item-card" style="border-color:#ec4899;">
-          <div style="display:flex; justify-content:space-between; margin-bottom:5px;">
-            <strong class="text-pink">${escapeHtml(c.user)}</strong>
-            <span style="font-size:0.8rem; color:#94a3b8;">${c.date}</span>
+      // Render Events
+      const daysContainer = document.getElementById('specialDaysList');
+      if (specialDays.length === 0) {
+        daysContainer.innerHTML = `<p style="color:var(--text-sub)">No special days scheduled.</p>`;
+      } else {
+        daysContainer.innerHTML = specialDays.map(item => `
+          <div class="item-card" style="border-color: var(--roblox-gold);">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:5px;">
+              <strong style="color: var(--roblox-gold); font-size: 1.1rem;">${escapeHtml(item.title)}</strong>
+              <span style="font-size:0.8rem; color:var(--roblox-gold);">🗓️ ${item.date}</span>
+            </div>
+            <p style="color:var(--text-sub);">${escapeHtml(item.body)}</p>
+            ${isAdmin ? `<button class="btn-roblox" style="padding:2px 8px; font-size:0.8rem; margin-top:8px;" onclick="deleteSpecialDay(${item.id})">Delete</button>` : ''}
           </div>
-          <p style="color:#f8fafc;">${escapeHtml(c.text)}</p>
-          ${isAdmin ? `<button class="btn btn-red" style="padding:0.2rem 0.5rem; font-size:0.8rem; margin-top:8px;" onclick="deleteComment(${c.id})">Delete Comment</button>` : ''}
-        </div>
-      `).join('');
+        `).join('');
+      }
+
+      // Render Songs
+      const songContainer = document.getElementById('songListContainer');
+      if (songs.length === 0) {
+        songContainer.innerHTML = "<p style='color:var(--text-sub);'>No songs added yet.</p>";
+      } else {
+        songContainer.innerHTML = songs.map(s => `
+          <div class="item-card" style="display:flex; justify-content:space-between; align-items:center; border-color:#a855f7;">
+            <div>
+              <strong style="color:#a855f7;">${escapeHtml(s.title)}</strong>
+              ${s.artist ? `<span style="color:var(--text-sub)"> - ${escapeHtml(s.artist)}</span>` : ''}
+              <br><span style="font-size:0.85rem; color:#a855f7;">Votes: ${s.votes}</span>
+            </div>
+            <div>
+              <button class="btn-roblox btn-purple" onclick="voteSong(${s.id})">👍 Vote</button>
+              ${isAdmin ? `<button class="btn-roblox" style="padding:4px 8px; margin-left:5px;" onclick="deleteSong(${s.id})">Delete</button>` : ''}
+            </div>
+          </div>
+        `).join('');
+      }
+
+      // Render Comments
+      const commentContainer = document.getElementById('commentListContainer');
+      if (comments.length === 0) {
+        commentContainer.innerHTML = "<p style='color:var(--text-sub);'>No comments posted yet.</p>";
+      } else {
+        commentContainer.innerHTML = comments.map(c => `
+          <div class="item-card" style="border-color:#ec4899;">
+            <div style="display:flex; justify-content:space-between; margin-bottom:5px;">
+              <strong style="color:#ec4899;">${escapeHtml(c.user)}</strong>
+              <span style="font-size:0.8rem; color:var(--text-sub);">${c.date}</span>
+            </div>
+            <p style="color:white;">${escapeHtml(c.text)}</p>
+            ${isAdmin ? `<button class="btn-roblox" style="padding:2px 8px; font-size:0.8rem; margin-top:8px;" onclick="deleteComment(${c.id})">Delete</button>` : ''}
+          </div>
+        `).join('');
+      }
     }
 
     function escapeHtml(str) {
