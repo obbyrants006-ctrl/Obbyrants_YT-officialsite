@@ -275,17 +275,31 @@
       margin-bottom: 1rem;
     }
 
-    /* README BOX WITH BRIGHT WHITE TEXT */
+    /* Bright White Editable README Box */
     .readme-box {
       background: #111214;
       border: 2px solid #3A3D42;
       border-radius: 10px;
       padding: 1.5rem;
-      color: #FFFFFF !important; /* Pure Bright White Text */
+      color: #FFFFFF !important;
       font-family: 'Poppins', sans-serif;
       font-size: 1rem;
       line-height: 1.8;
       white-space: pre-wrap;
+    }
+
+    /* Song Card Styling */
+    .song-card {
+      background: #1D2127;
+      border-left: 4px solid var(--roblox-accent);
+      padding: 1rem;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
     }
 
     /* Interactive Fun Section */
@@ -348,7 +362,7 @@
 
     textarea.form-control {
       resize: vertical;
-      min-height: 100px;
+      min-height: 120px;
     }
 
     .delete-btn {
@@ -359,7 +373,6 @@
       border-radius: 4px;
       cursor: pointer;
       font-size: 0.8rem;
-      margin-top: 10px;
     }
 
     /* Footer */
@@ -389,6 +402,7 @@
     <nav>
       <a href="#subscribers" class="nav-link">Subscribers</a>
       <a href="#analytics" class="nav-link">Analytics</a>
+      <a href="#songs" class="nav-link">🎵 Song Recs</a>
       <a href="#about" class="nav-link">About Us</a>
       <a href="#readme" class="nav-link">README</a>
       <a href="#announcements" class="nav-link">Announcements</a>
@@ -401,7 +415,7 @@
   <section class="hero">
     <h1>Welcome to Obby Rants 30! 🎮🔥</h1>
     <p>
-      Welcome to the official hub of <strong>Obby Rants (@Obbyrants30)</strong>! This is your front-row seat to all our Roblox speedruns, rage-inducing obbies, honest gaming commentary, fresh video updates, and live channel events.
+      Welcome to the official hub of <strong>Obby Rants (@Obbyrants30)</strong>! Your main spot for Roblox obby runs, commentary, video updates, and channel milestones.
     </p>
     <div class="hero-buttons">
       <a href="https://www.youtube.com/@Obbyrants30" target="_blank" class="btn-roblox">Subscribe @Obbyrants30</a>
@@ -414,7 +428,7 @@
     <!-- Admin Panel -->
     <div id="adminPanel" class="admin-panel">
       <h2>🛠️ Admin Master Control Panel</h2>
-      <p style="margin-bottom: 15px; color: var(--text-sub);">Log in as admin to update any text box below!</p>
+      <p style="margin-bottom: 15px; color: var(--text-sub);">Only admins can edit analytics, song recommendations, About Us, and the README section from here!</p>
 
       <!-- Edit About Us & README -->
       <h3 style="color:var(--roblox-accent); margin-bottom:10px;">✏️ Edit About Us & README Content</h3>
@@ -424,7 +438,7 @@
           <textarea id="editAboutText" class="form-control"></textarea>
         </div>
         <div class="form-group">
-          <label>README Box Text (Appears in White Font Below):</label>
+          <label>README Documentation Text (Appears in Bright White Text Below):</label>
           <textarea id="editReadmeText" class="form-control"></textarea>
         </div>
         <button class="btn-roblox btn-blue" onclick="updateCustomText()">Save About & README Text</button>
@@ -433,29 +447,49 @@
       <!-- Edit Analytics -->
       <h3 style="color:var(--roblox-gold); margin-bottom:10px;">📊 Update Channel Analytics</h3>
       <div style="background:var(--roblox-card); padding:1rem; border-radius:8px; margin-bottom:1.5rem;">
-        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:10px;">
+        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap:10px;">
           <div>
-            <label style="font-size:0.85rem;">Subscribers Count:</label>
-            <input type="text" id="editSubs" class="form-control" placeholder="e.g. 250" />
+            <label style="font-size:0.85rem;">Subscribers:</label>
+            <input type="text" id="editSubs" class="form-control" value="0" />
           </div>
           <div>
             <label style="font-size:0.85rem;">Total Views:</label>
-            <input type="text" id="editViews" class="form-control" placeholder="e.g. 12,500" />
+            <input type="text" id="editViews" class="form-control" value="0" />
           </div>
           <div>
             <label style="font-size:0.85rem;">Total Likes:</label>
-            <input type="text" id="editLikes" class="form-control" placeholder="e.g. 1,800" />
+            <input type="text" id="editLikes" class="form-control" value="0" />
           </div>
           <div>
             <label style="font-size:0.85rem;">Videos Count:</label>
-            <input type="text" id="editVideos" class="form-control" placeholder="e.g. 15" />
+            <input type="text" id="editVideos" class="form-control" value="0" />
           </div>
           <div>
-            <label style="font-size:0.85rem;">Total Comments:</label>
-            <input type="text" id="editComments" class="form-control" placeholder="e.g. 450" />
+            <label style="font-size:0.85rem;">Comments:</label>
+            <input type="text" id="editComments" class="form-control" value="0" />
           </div>
         </div>
         <button class="btn-roblox" style="margin-top:10px;" onclick="updateAnalytics()">Save Analytics</button>
+      </div>
+
+      <!-- Add Song Recommendation Form -->
+      <h3 style="color:var(--roblox-accent); margin-bottom:10px;">🎵 Add Song Recommendation</h3>
+      <div style="background:var(--roblox-card); padding:1rem; border-radius:8px; margin-bottom:1.5rem;">
+        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:10px;">
+          <div>
+            <label style="font-size:0.85rem;">Song Title:</label>
+            <input type="text" id="songTitle" class="form-control" placeholder="e.g. Life Is A Highway" />
+          </div>
+          <div>
+            <label style="font-size:0.85rem;">Artist / Band:</label>
+            <input type="text" id="songArtist" class="form-control" placeholder="e.g. Rascal Flatts" />
+          </div>
+          <div>
+            <label style="font-size:0.85rem;">Link / Notes (Optional):</label>
+            <input type="text" id="songLink" class="form-control" placeholder="e.g. YouTube Link or Notes" />
+          </div>
+        </div>
+        <button class="btn-roblox btn-blue" style="margin-top:10px;" onclick="addSong()">Add Song to List</button>
       </div>
 
       <!-- Add Announcement & Special Day Forms -->
@@ -532,23 +566,30 @@
       </div>
     </section>
 
+    <!-- NEW: SONG RECOMMENDATIONS TAB -->
+    <section id="songs">
+      <div class="content-box">
+        <h3>🎵 Song Recommendations</h3>
+        <p style="color: var(--text-sub); margin-bottom: 15px;">Recommended tracks & background tunes picked by Obby Rants!</p>
+        <div id="songsList">
+          <!-- Rendered dynamically -->
+        </div>
+      </div>
+    </section>
+
     <!-- EDITABLE ABOUT SECTION -->
     <section id="about">
       <div class="content-box">
         <h3>ℹ️ About Obby Rants (@Obbyrants30)</h3>
-        <p id="aboutContentDisplay" style="color:#FFFFFF; font-size:1.05rem; line-height:1.8;">
-          Loading channel description...
-        </p>
+        <p id="aboutContentDisplay" style="color:#FFFFFF; font-size:1.05rem; line-height:1.8;"></p>
       </div>
     </section>
 
-    <!-- EDITABLE README SECTION (BRIGHT WHITE TEXT) -->
+    <!-- EDITABLE README SECTION (ONLY ADMIN CAN EDIT) -->
     <section id="readme">
       <div class="content-box">
         <h3>📜 Official README Box</h3>
-        <div id="readmeContentDisplay" class="readme-box">
-Loading README content...
-        </div>
+        <div id="readmeContentDisplay" class="readme-box"></div>
       </div>
     </section>
 
@@ -605,53 +646,37 @@ Loading README content...
   <script>
     let isAdmin = false;
 
-    // Analytics Data
-    let analytics = JSON.parse(localStorage.getItem('obby_analytics_v3')) || {
-      subs: "150",
-      views: "5,400",
-      likes: "850",
-      videos: "12",
-      comments: "180"
+    // Analytics Reset to Zero
+    let analytics = JSON.parse(localStorage.getItem('obby_analytics_v5')) || {
+      subs: "0",
+      views: "0",
+      likes: "0",
+      videos: "0",
+      comments: "0"
     };
 
-    // Custom Editable About & README Data
-    let customText = JSON.parse(localStorage.getItem('obby_custom_text_v3')) || {
-      about: "Welcome to Obby Rants! Our channel is dedicated to bringing you high-energy Roblox obby completions, commentary on gaming news, rage moments, and community gameplay. We focus on non-stop entertainment and engaging with our viewers!",
-      readme: "# OBBY RANTS OFFICIAL WEBSITE\nOfficial Channel  : @Obbyrants30\nYouTube URL      : https://www.youtube.com/@Obbyrants30\nRoblox Profile   : Active\nHost Platform    : GitHub Pages\n\nOVERVIEW:\nThis platform hosts channel news, upcoming stream events, real-time analytics, and fan feedback. Admin panel controls allow full customization of content."
+    // README and About Text Kept Intact
+    let customText = JSON.parse(localStorage.getItem('obby_custom_text_v5')) || {
+      about: "Welcome to Obby Rants (@Obbyrants30)! This channel is focused on Roblox gameplay, obby speedruns, commentary, and community engagement. Use the Admin Panel above to customize this description text anytime!",
+      readme: "# OBBY RANTS OFFICIAL WEBSITE README\nChannel Handle : @Obbyrants30\nOfficial Link  : https://www.youtube.com/@Obbyrants30\n\nADMIN EDITING:\nThis README box can only be modified by logging into the Admin Control Panel. You can write custom notes, updates, or channel rules here."
     };
 
-    // Announcements
-    let announcements = JSON.parse(localStorage.getItem('obby_announcements_v3')) || [
-      {
-        id: 1,
-        title: "Welcome to @Obbyrants30 Official Hub!",
-        date: "2026-08-02",
-        body: "Stay tuned here for fresh announcements, stream dates, and video drop updates!"
-      }
+    // Song Recommendations Data
+    let songRecs = JSON.parse(localStorage.getItem('obby_song_recs_v5')) || [
+      { id: 1, title: "Sample Song Title", artist: "Artist Name", link: "https://youtube.com" }
     ];
 
-    // Special Days
-    let specialDays = JSON.parse(localStorage.getItem('obby_special_days_v3')) || [
-      {
-        id: 1,
-        title: "Community Obby Challenge Stream",
-        date: "2026-08-15",
-        body: "Join our live Roblox stream where we conquer fan-made obbies together!"
-      }
-    ];
-
-    // Fan Messages & Hype Counter
-    let hypePoints = parseInt(localStorage.getItem('obby_hype_points')) || 120;
-    let fanComments = JSON.parse(localStorage.getItem('obby_fan_comments')) || [
-      { id: 1, name: "RobloxPro_01", msg: "Love your videos @Obbyrants30! Keep grinding!" }
-    ];
+    let announcements = JSON.parse(localStorage.getItem('obby_announcements_v5')) || [];
+    let specialDays = JSON.parse(localStorage.getItem('obby_special_days_v5')) || [];
+    let hypePoints = parseInt(localStorage.getItem('obby_hype_points_v5')) || 0;
+    let fanComments = JSON.parse(localStorage.getItem('obby_fan_comments_v5')) || [];
 
     // Initial Load & Render
     renderData();
 
     function boostHype() {
       hypePoints += 1;
-      localStorage.setItem('obby_hype_points', hypePoints);
+      localStorage.setItem('obby_hype_points_v5', hypePoints);
       document.getElementById('hypeCount').innerText = hypePoints;
     }
 
@@ -661,13 +686,13 @@ Loading README content...
       if (!name || !msg) return alert("Please enter your name and message!");
 
       fanComments.unshift({ id: Date.now(), name, msg });
-      localStorage.setItem('obby_fan_comments', JSON.stringify(fanComments));
+      localStorage.setItem('obby_fan_comments_v5', JSON.stringify(fanComments));
       document.getElementById('fanName').value = '';
       document.getElementById('fanMsg').value = '';
       renderData();
     }
 
-    // Admin Auth
+    // Admin Authentication
     function toggleAdminLogin() {
       if (isAdmin) {
         logoutAdmin();
@@ -692,7 +717,7 @@ Loading README content...
         document.getElementById('adminLoginBtn').innerText = 'Logout Admin';
         populateAdminInputs();
         renderData();
-        alert("Logged in successfully!");
+        alert("Logged into Admin Panel!");
       } else if (inputPass !== null) {
         alert("Incorrect password!");
       }
@@ -731,15 +756,15 @@ Loading README content...
     }
 
     function updateAnalytics() {
-      analytics.subs = document.getElementById('editSubs').value.trim() || analytics.subs;
-      analytics.views = document.getElementById('editViews').value.trim() || analytics.views;
-      analytics.likes = document.getElementById('editLikes').value.trim() || analytics.likes;
-      analytics.videos = document.getElementById('editVideos').value.trim() || analytics.videos;
-      analytics.comments = document.getElementById('editComments').value.trim() || analytics.comments;
+      analytics.subs = document.getElementById('editSubs').value.trim() || "0";
+      analytics.views = document.getElementById('editViews').value.trim() || "0";
+      analytics.likes = document.getElementById('editLikes').value.trim() || "0";
+      analytics.videos = document.getElementById('editVideos').value.trim() || "0";
+      analytics.comments = document.getElementById('editComments').value.trim() || "0";
 
-      localStorage.setItem('obby_analytics_v3', JSON.stringify(analytics));
+      localStorage.setItem('obby_analytics_v5', JSON.stringify(analytics));
       renderData();
-      alert("Analytics saved!");
+      alert("Analytics updated successfully!");
     }
 
     function updateCustomText() {
@@ -749,9 +774,26 @@ Loading README content...
       if (newAbout) customText.about = newAbout;
       if (newReadme) customText.readme = newReadme;
 
-      localStorage.setItem('obby_custom_text_v3', JSON.stringify(customText));
+      localStorage.setItem('obby_custom_text_v5', JSON.stringify(customText));
       renderData();
       alert("About Us & README text updated successfully!");
+    }
+
+    function addSong() {
+      const title = document.getElementById('songTitle').value.trim();
+      const artist = document.getElementById('songArtist').value.trim();
+      const link = document.getElementById('songLink').value.trim();
+
+      if (!title || !artist) return alert("Please enter both song title and artist!");
+
+      songRecs.unshift({ id: Date.now(), title, artist, link });
+      localStorage.setItem('obby_song_recs_v5', JSON.stringify(songRecs));
+
+      document.getElementById('songTitle').value = '';
+      document.getElementById('songArtist').value = '';
+      document.getElementById('songLink').value = '';
+      renderData();
+      alert("Song added successfully!");
     }
 
     function addAnnouncement() {
@@ -761,7 +803,7 @@ Loading README content...
 
       const today = new Date().toISOString().split('T')[0];
       announcements.unshift({ id: Date.now(), title, date: today, body });
-      localStorage.setItem('obby_announcements_v3', JSON.stringify(announcements));
+      localStorage.setItem('obby_announcements_v5', JSON.stringify(announcements));
       
       document.getElementById('annTitle').value = '';
       document.getElementById('annBody').value = '';
@@ -775,7 +817,7 @@ Loading README content...
       if (!title || !date || !body) return alert("Fill out all fields!");
 
       specialDays.unshift({ id: Date.now(), title, date, body });
-      localStorage.setItem('obby_special_days_v3', JSON.stringify(specialDays));
+      localStorage.setItem('obby_special_days_v5', JSON.stringify(specialDays));
 
       document.getElementById('eventTitle').value = '';
       document.getElementById('eventDate').value = '';
@@ -789,16 +831,18 @@ Loading README content...
         if (type === 'announcement') announcements = announcements.filter(i => i.id !== id);
         if (type === 'special') specialDays = specialDays.filter(i => i.id !== id);
         if (type === 'fan') fanComments = fanComments.filter(i => i.id !== id);
+        if (type === 'song') songRecs = songRecs.filter(i => i.id !== id);
 
-        localStorage.setItem('obby_announcements_v3', JSON.stringify(announcements));
-        localStorage.setItem('obby_special_days_v3', JSON.stringify(specialDays));
-        localStorage.setItem('obby_fan_comments', JSON.stringify(fanComments));
+        localStorage.setItem('obby_announcements_v5', JSON.stringify(announcements));
+        localStorage.setItem('obby_special_days_v5', JSON.stringify(specialDays));
+        localStorage.setItem('obby_fan_comments_v5', JSON.stringify(fanComments));
+        localStorage.setItem('obby_song_recs_v5', JSON.stringify(songRecs));
         renderData();
       }
     }
 
     function renderData() {
-      // Analytics Display
+      // Public Display Analytics
       document.getElementById('displaySubCount').innerText = analytics.subs;
       document.getElementById('displayViews').innerText = analytics.views;
       document.getElementById('displayLikes').innerText = analytics.likes;
@@ -809,44 +853,75 @@ Loading README content...
       document.getElementById('aboutContentDisplay').innerText = customText.about;
       document.getElementById('readmeContentDisplay').innerText = customText.readme;
 
-      // Hype Points
+      // Song Recommendations Display
+      const songsContainer = document.getElementById('songsList');
+      if (songRecs.length === 0) {
+        songsContainer.innerHTML = `<p style="color:var(--text-sub)">No song recommendations added yet.</p>`;
+      } else {
+        songsContainer.innerHTML = songRecs.map(s => `
+          <div class="song-card">
+            <div>
+              <strong style="color:var(--roblox-gold); font-size:1.1rem;">🎵 ${escapeHtml(s.title)}</strong> 
+              <span style="color:var(--text-sub);">— ${escapeHtml(s.artist)}</span>
+              ${s.link ? `<br><a href="${escapeHtml(s.link)}" target="_blank" style="color:var(--roblox-accent); font-size:0.85rem;">🔗 Listen / View Link</a>` : ''}
+            </div>
+            ${isAdmin ? `<button class="delete-btn" onclick="deleteItem('song', ${s.id})">Delete</button>` : ''}
+          </div>
+        `).join('');
+      }
+
+      // Hype Counter
       document.getElementById('hypeCount').innerText = hypePoints;
 
       // Fan Comments
       const fanContainer = document.getElementById('fanCommentsList');
-      fanContainer.innerHTML = fanComments.map(c => `
-        <div style="background:#191B1D; padding:10px 15px; border-radius:8px; margin-bottom:10px; border:1px solid #333;">
-          <strong style="color:var(--roblox-accent);">${escapeHtml(c.name)}:</strong> 
-          <span style="color:var(--text-sub); margin-left:8px;">${escapeHtml(c.msg)}</span>
-          ${isAdmin ? `<br><button class="delete-btn" onclick="deleteItem('fan', ${c.id})">Delete Message</button>` : ''}
-        </div>
-      `).join('');
+      if (fanComments.length === 0) {
+        fanContainer.innerHTML = `<p style="color:var(--text-sub)">No fan messages yet. Be the first to leave one!</p>`;
+      } else {
+        fanContainer.innerHTML = fanComments.map(c => `
+          <div style="background:#191B1D; padding:10px 15px; border-radius:8px; margin-bottom:10px; border:1px solid #333; display:flex; justify-content:space-between; align-items:center;">
+            <div>
+              <strong style="color:var(--roblox-accent);">${escapeHtml(c.name)}:</strong> 
+              <span style="color:var(--text-sub); margin-left:8px;">${escapeHtml(c.msg)}</span>
+            </div>
+            ${isAdmin ? `<button class="delete-btn" onclick="deleteItem('fan', ${c.id})">Delete</button>` : ''}
+          </div>
+        `).join('');
+      }
 
       // Announcements
       const annContainer = document.getElementById('announcementsList');
-      annContainer.innerHTML = announcements.map(item => `
-        <div class="card">
-          <div class="card-header">
-            <div class="card-title">${escapeHtml(item.title)}</div>
-            <div class="card-date">${item.date}</div>
+      if (announcements.length === 0) {
+        annContainer.innerHTML = `<p style="color:var(--text-sub)">No announcements posted yet.</p>`;
+      } else {
+        annContainer.innerHTML = announcements.map(item => `
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">${escapeHtml(item.title)}</div>
+              <div class="card-date">${item.date}</div>
+            </div>
+            <div class="card-body">${escapeHtml(item.body)}</div>
+            ${isAdmin ? `<button class="delete-btn" style="margin-top:10px;" onclick="deleteItem('announcement', ${item.id})">Delete</button>` : ''}
           </div>
-          <div class="card-body">${escapeHtml(item.body)}</div>
-          ${isAdmin ? `<button class="delete-btn" onclick="deleteItem('announcement', ${item.id})">Delete</button>` : ''}
-        </div>
-      `).join('');
+        `).join('');
+      }
 
       // Special Days
       const daysContainer = document.getElementById('specialDaysList');
-      daysContainer.innerHTML = specialDays.map(item => `
-        <div class="card">
-          <div class="card-header">
-            <div class="card-title">${escapeHtml(item.title)}</div>
-            <div class="card-date">🗓️ ${item.date}</div>
+      if (specialDays.length === 0) {
+        daysContainer.innerHTML = `<p style="color:var(--text-sub)">No special events scheduled.</p>`;
+      } else {
+        daysContainer.innerHTML = specialDays.map(item => `
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">${escapeHtml(item.title)}</div>
+              <div class="card-date">🗓️ ${item.date}</div>
+            </div>
+            <div class="card-body">${escapeHtml(item.body)}</div>
+            ${isAdmin ? `<button class="delete-btn" style="margin-top:10px;" onclick="deleteItem('special', ${item.id})">Delete</button>` : ''}
           </div>
-          <div class="card-body">${escapeHtml(item.body)}</div>
-          ${isAdmin ? `<button class="delete-btn" onclick="deleteItem('special', ${item.id})">Delete</button>` : ''}
-        </div>
-      `).join('');
+        `).join('');
+      }
     }
 
     function escapeHtml(str) {
