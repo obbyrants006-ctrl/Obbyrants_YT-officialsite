@@ -1,557 +1,638 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Obby Rants 30</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Obby Rants - Official Channel Hub</title>
+  <!-- Google Fonts: Fredoka for playful Roblox vibe & Poppins for clear readability -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  
   <style>
+    :root {
+      --roblox-red: #E2231A;
+      --roblox-dark: #191B1D;
+      --roblox-card: #232527;
+      --roblox-accent: #00A2FF;
+      --roblox-gold: #FFB800;
+      --text-main: #FFFFFF;
+      --text-sub: #B8B9BF;
+    }
+
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
 
-    html {
-      scroll-behavior: smooth;
-    }
-
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #080c14;
-      color: #f8fafc;
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--roblox-dark);
+      color: var(--text-main);
       line-height: 1.6;
     }
 
-    /* Navigation Bar */
-    .navbar {
+    h1, h2, h3, .logo-text, .btn-roblox {
+      font-family: 'Fredoka', cursive, sans-serif;
+      letter-spacing: 0.5px;
+    }
+
+    /* Header & Navigation */
+    header {
+      background: var(--roblox-card);
+      border-bottom: 4px solid var(--roblox-red);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 1rem 2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background-color: #0f172a;
-      padding: 1rem 2rem;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      border-bottom: 2px solid #00f0ff;
-      box-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
     }
 
-    .logo {
-      font-size: 1.5rem;
-      font-weight: 800;
-      color: #ff2a5f;
-      text-shadow: 0 0 10px rgba(255, 42, 95, 0.7);
-      cursor: pointer;
-    }
-
-    .nav-links {
-      list-style: none;
+    .logo-container {
       display: flex;
-      gap: 1.2rem;
       align-items: center;
+      gap: 12px;
     }
 
-    .nav-links a {
-      color: #94a3b8;
+    .logo-badge {
+      background: var(--roblox-red);
+      color: white;
+      font-size: 1.5rem;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 8px;
+      transform: rotate(-3deg);
+    }
+
+    .logo-text {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    nav {
+      display: flex;
+      gap: 15px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .nav-link {
+      color: var(--text-sub);
       text-decoration: none;
       font-weight: 600;
-      font-size: 0.95rem;
-      transition: all 0.2s ease;
-      cursor: pointer;
+      transition: 0.2s;
     }
 
-    .nav-links a:hover,
-    .nav-links a.active {
-      color: #00f0ff;
-      text-shadow: 0 0 8px rgba(0, 240, 255, 0.8);
-    }
-
-    .container {
-      max-width: 950px;
-      margin: 2rem auto;
-      padding: 0 1rem;
-    }
-
-    /* Tab Display Logic */
-    .tab-content {
-      display: none;
-      animation: fadeIn 0.3s ease-in-out;
-    }
-
-    .tab-content.active {
-      display: block;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(6px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* Neon Dark Cards */
-    .card {
-      background-color: #0f172a;
-      padding: 2rem;
-      border-radius: 12px;
-      margin-bottom: 2rem;
-      border: 1px solid #1e293b;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-    }
-
-    .card-neon-blue {
-      border: 1px solid #00f0ff;
-      box-shadow: 0 0 15px rgba(0, 240, 255, 0.2);
-    }
-
-    .card-neon-red {
-      border: 1px solid #ff2a5f;
-      box-shadow: 0 0 15px rgba(255, 42, 95, 0.2);
-    }
-
-    h1, h2, h3 {
-      color: #ffffff;
-      margin-bottom: 1rem;
-    }
-
-    .text-neon-blue {
-      color: #00f0ff;
-      text-shadow: 0 0 8px rgba(0, 240, 255, 0.6);
-    }
-
-    .text-neon-red {
-      color: #ff2a5f;
-      text-shadow: 0 0 8px rgba(255, 42, 95, 0.6);
+    .nav-link:hover {
+      color: var(--roblox-accent);
     }
 
     /* Buttons */
-    .btn {
-      background: linear-gradient(135deg, #ff2a5f, #b91c1c);
+    .btn-roblox {
+      background: var(--roblox-red);
       color: white;
       border: none;
-      padding: 0.7rem 1.4rem;
-      border-radius: 6px;
+      padding: 10px 20px;
+      font-size: 1rem;
+      border-radius: 8px;
       cursor: pointer;
-      font-weight: bold;
-      transition: all 0.2s ease;
-      box-shadow: 0 0 10px rgba(255, 42, 95, 0.4);
+      text-decoration: none;
+      display: inline-block;
+      font-weight: 600;
+      box-shadow: 0 4px 0 #9E130C;
+      transition: all 0.1s ease;
     }
 
-    .btn:hover {
-      box-shadow: 0 0 18px rgba(255, 42, 95, 0.8);
-      transform: translateY(-1px);
+    .btn-roblox:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 0 #9E130C;
+    }
+
+    .btn-roblox:active {
+      transform: translateY(2px);
+      box-shadow: 0 2px 0 #9E130C;
     }
 
     .btn-blue {
-      background: linear-gradient(135deg, #00f0ff, #0284c7);
-      color: #080c14;
-      box-shadow: 0 0 10px rgba(0, 240, 255, 0.4);
+      background: var(--roblox-accent);
+      box-shadow: 0 4px 0 #0076BA;
     }
-
     .btn-blue:hover {
-      box-shadow: 0 0 18px rgba(0, 240, 255, 0.8);
+      box-shadow: 0 6px 0 #0076BA;
     }
 
-    .btn-back {
-      background-color: #1e293b;
-      color: #00f0ff;
-      border: 1px solid #00f0ff;
-      margin-bottom: 1.5rem;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      box-shadow: none;
-    }
-
-    .btn-back:hover {
-      background-color: #00f0ff;
-      color: #080c14;
-      box-shadow: 0 0 12px rgba(0, 240, 255, 0.6);
-    }
-
-    /* Form Fields */
-    .input-field {
-      width: 100%;
-      padding: 0.8rem;
-      margin: 0.5rem 0 1.2rem 0;
-      background: #080c14;
-      border: 1px solid #00f0ff;
-      color: #fff;
-      border-radius: 6px;
-      box-shadow: inset 0 0 8px rgba(0, 240, 255, 0.1);
-    }
-
-    textarea.input-field {
-      height: 100px;
-      resize: vertical;
-    }
-
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1.5rem;
-      margin-top: 1rem;
-    }
-
-    .stat-card {
-      background: #080c14;
-      border: 1px solid #1e293b;
-      padding: 1.5rem;
-      border-radius: 8px;
+    /* Hero Section */
+    .hero {
       text-align: center;
+      padding: 4rem 1.5rem;
+      background: linear-gradient(180deg, #232527 0%, #191B1D 100%);
+      border-bottom: 2px solid #2C2F33;
     }
 
-    .song-item {
-      background: #080c14;
-      border: 1px solid #00f0ff;
-      padding: 1rem;
-      border-radius: 8px;
-      margin-top: 1rem;
+    .hero h1 {
+      font-size: 3rem;
+      color: var(--text-main);
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      color: var(--text-sub);
+      max-width: 600px;
+      margin: 0 auto 20px auto;
+    }
+
+    .hero-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    /* Main Container */
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-left: 5px solid var(--roblox-red);
+      padding-left: 10px;
+    }
+
+    /* Card Layouts */
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      margin-bottom: 3rem;
+    }
+
+    .card {
+      background: var(--roblox-card);
+      border-radius: 12px;
+      padding: 1.5rem;
+      border: 1px solid #32353B;
+      position: relative;
+    }
+
+    .card-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      box-shadow: 0 0 8px rgba(0, 240, 255, 0.15);
+      margin-bottom: 10px;
     }
 
-    .song-item a {
-      color: #00f0ff;
+    .card-title {
+      font-size: 1.3rem;
+      color: var(--roblox-accent);
+    }
+
+    .card-date {
+      font-size: 0.85rem;
+      color: var(--roblox-gold);
+      background: rgba(255, 184, 0, 0.1);
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-weight: 600;
+    }
+
+    .card-body {
+      color: var(--text-sub);
+      font-size: 0.95rem;
+    }
+
+    .delete-btn {
+      background: #e74c3c;
+      color: white;
+      border: none;
+      padding: 4px 8px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.8rem;
+      margin-top: 10px;
+    }
+
+    /* Admin Panel Styling */
+    .admin-panel {
+      background: #2D1B1E;
+      border: 2px dashed var(--roblox-red);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 3rem;
+      display: none; /* Hidden until logged in */
+    }
+
+    .admin-panel h2 {
+      color: var(--roblox-red);
+      margin-bottom: 1rem;
+    }
+
+    .form-group {
+      margin-bottom: 1rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 600;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 10px;
+      background: #191B1D;
+      border: 1px solid #444;
+      border-radius: 6px;
+      color: white;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: var(--roblox-accent);
+    }
+
+    textarea.form-control {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      background: var(--roblox-card);
+      border-top: 1px solid #2C2F33;
+      color: var(--text-sub);
+      font-size: 0.9rem;
+    }
+
+    footer a {
+      color: var(--roblox-accent);
       text-decoration: none;
     }
   </style>
 </head>
 <body>
 
-  <!-- Navigation Bar -->
-  <nav class="navbar">
-    <div class="logo" onclick="switchTab('subscribers')">OR30 Obby Rants 30</div>
-    <ul class="nav-links">
-      <li><a class="nav-tab" onclick="switchTab('subscribers')">🏠 Home</a></li>
-      <li><a class="nav-tab" onclick="switchTab('analytics')">Analytics</a></li>
-      <li><a class="nav-tab" onclick="switchTab('songs')">🎵 Song Recs</a></li>
-      <li><a onclick="navigateToHomeSection('about-section')">About Us</a></li>
-      <li><a onclick="navigateToHomeSection('readme-section')">README</a></li>
-      <li><a class="nav-tab" onclick="switchTab('announcements')">Announcements</a></li>
-      <li><a class="nav-tab" onclick="switchTab('fanzone')">Fan Zone</a></li>
-      <li><button id="admin-btn" class="btn btn-blue" onclick="toggleAdmin()">Admin Login</button></li>
-    </ul>
-  </nav>
+  <!-- Header -->
+  <header>
+    <div class="logo-container">
+      <div class="logo-badge">OR</div>
+      <div class="logo-text">Obby Rants</div>
+    </div>
+    <nav>
+      <a href="#announcements" class="nav-link">Announcements</a>
+      <a href="#special-days" class="nav-link">Special Days</a>
+      <a href="#songs" class="nav-link">🎵 Song Recs</a>
+      <button id="adminLoginBtn" class="btn-roblox btn-blue" onclick="toggleAdminLogin()">Admin Login</button>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>Welcome to Obby Rants! 🎮</h1>
+    <p>The official home for YouTube rants, Roblox adventures, community announcements, and special event schedules!</p>
+    <div class="hero-buttons">
+      <a href="https://youtube.com/@obbyrants" target="_blank" class="btn-roblox">Subscribe on YouTube</a>
+      <a href="https://roblox.com/share?code=c52e49aa93ccb841bf4ae7fb0a044796&type=Profile&s" target="_blank" class="btn-roblox btn-blue">My Roblox Profile</a>
+    </div>
+  </section>
 
   <div class="container">
 
-    <!-- ADMIN CONTROL PANEL TAB -->
-    <div id="admin-panel" class="tab-content">
-      <button class="btn btn-back" onclick="switchTab('subscribers')">← Back to Home</button>
-      <div class="card card-neon-red">
-        <h2 class="text-neon-red">🛠️ Admin Master Control Panel</h2>
-        <p>Edit site content, customize text, add song recs, and control channel stats.</p>
-        
-        <hr style="border-color: #334155; margin: 1.5rem 0;">
-
-        <h3>Edit About & README Content</h3>
-        <label>About Channel Text:</label>
-        <textarea id="edit-about" class="input-field"></textarea>
-        
-        <label>README Text:</label>
-        <textarea id="edit-readme" class="input-field"></textarea>
-        
-        <button class="btn btn-blue" onclick="saveText()">Save Text Updates</button>
-
-        <hr style="border-color: #334155; margin: 1.5rem 0;">
-
-        <h3>🎵 Customize Song Recommendations</h3>
-        <label>Song Title:</label>
-        <input type="text" id="song-title" class="input-field" placeholder="e.g. Life is a Highway">
-        
-        <label>Artist / Band:</label>
-        <input type="text" id="song-artist" class="input-field" placeholder="e.g. Rascal Flatts">
-        
-        <label>Link / Notes (Optional):</label>
-        <input type="text" id="song-link" class="input-field" placeholder="https://youtube.com/...">
-
-        <button class="btn btn-blue" onclick="addSong()">Add Song Recommendation</button>
-
-        <hr style="border-color: #334155; margin: 1.5rem 0;">
-
-        <h3>Update Metrics</h3>
-        <label>Subscribers Count:</label>
-        <input type="number" id="edit-subs" class="input-field" value="0">
-
-        <button class="btn btn-blue" onclick="saveMetrics()">Update Metrics</button>
-        <button class="btn" onclick="resetAll()">Reset Everything to 0</button>
-
-        <hr style="border-color: #334155; margin: 1.5rem 0;">
-
-        <h3>Security</h3>
-        <button class="btn btn-blue" onclick="changePassword()">Change Admin Password</button>
-      </div>
-    </div>
-
-    <!-- 1. HOMEPAGE / SUBSCRIBERS TAB -->
-    <div id="subscribers" class="tab-content active">
-      <div class="card card-neon-blue">
-        <h1>Welcome to <span class="text-neon-red">Obby Rants 30!</span> 🎮🔥</h1>
-        <p style="font-size: 1.2rem;">Active Subscribers: <strong id="subs-display" class="text-neon-blue">0</strong></p>
-      </div>
-
-      <!-- About Us Section -->
-      <div id="about-section" class="card">
-        <h2 class="text-neon-blue">ℹ️ About Obby Rants (@Obbyrants30)</h2>
-        <p id="about-display"></p>
-      </div>
-
-      <!-- README Section -->
-      <div id="readme-section" class="card">
-        <h2 class="text-neon-blue">📜 Official README Box</h2>
-        <p id="readme-display"></p>
-      </div>
-    </div>
-
-    <!-- 2. ANALYTICS TAB -->
-    <div id="analytics" class="tab-content">
-      <button class="btn btn-back" onclick="switchTab('subscribers')">← Back to Home</button>
-      <div class="card card-neon-blue">
-        <h2 class="text-neon-blue">📊 Overall Channel Analytics</h2>
-        <div class="stats-grid">
-          <div class="stat-card">
-            <p>Uploaded Videos</p>
-            <h3 class="text-neon-blue">0</h3>
+    <!-- Admin Panel (Shown after correct password) -->
+    <div id="adminPanel" class="admin-panel">
+      <h2>🛠️ Admin Customization Panel</h2>
+      <p style="margin-bottom: 15px; color: var(--text-sub);">Logged in as Admin. Manage announcements, special events, and song recommendations below.</p>
+      
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
+        <!-- Add Announcement Form -->
+        <div>
+          <h3>Add New Announcement</h3>
+          <div class="form-group">
+            <label>Title</label>
+            <input type="text" id="annTitle" class="form-control" placeholder="e.g. New Video Dropping Today!" />
           </div>
-          <div class="stat-card">
-            <p>Total Channel Views</p>
-            <h3 class="text-neon-blue">0</h3>
+          <div class="form-group">
+            <label>Message</label>
+            <textarea id="annBody" class="form-control" placeholder="Write your announcement details here..."></textarea>
           </div>
+          <button class="btn-roblox" onclick="addAnnouncement()">Post Announcement</button>
+        </div>
+
+        <!-- Add Special Day Form -->
+        <div>
+          <h3>Add Special Day / Event</h3>
+          <div class="form-group">
+            <label>Event Name</label>
+            <input type="text" id="eventTitle" class="form-control" placeholder="e.g. 1K Subscribers Live Stream" />
+          </div>
+          <div class="form-group">
+            <label>Date</label>
+            <input type="date" id="eventDate" class="form-control" />
+          </div>
+          <div class="form-group">
+            <label>Description</label>
+            <textarea id="eventBody" class="form-control" placeholder="Event details or stream schedule..."></textarea>
+          </div>
+          <button class="btn-roblox btn-blue" onclick="addSpecialDay()">Add Special Day</button>
+        </div>
+
+        <!-- Add Song Recommendation Form -->
+        <div>
+          <h3>Add Song Recommendation</h3>
+          <div class="form-group">
+            <label>Song Title</label>
+            <input type="text" id="songTitle" class="form-control" placeholder="e.g. Life is a Highway" />
+          </div>
+          <div class="form-group">
+            <label>Artist / Band</label>
+            <input type="text" id="songArtist" class="form-control" placeholder="e.g. Rascal Flatts" />
+          </div>
+          <div class="form-group">
+            <label>Link / URL (Optional)</label>
+            <input type="text" id="songLink" class="form-control" placeholder="https://youtube.com/..." />
+          </div>
+          <button class="btn-roblox btn-blue" onclick="addSong()">Add Song Rec</button>
         </div>
       </div>
-    </div>
 
-    <!-- 3. SONGS TAB -->
-    <div id="songs" class="tab-content">
-      <button class="btn btn-back" onclick="switchTab('subscribers')">← Back to Home</button>
-      <div class="card card-neon-blue">
-        <h2 class="text-neon-blue">🎵 Song Recommendations</h2>
-        <p>Recommended tracks & background tunes picked by Obby Rants!</p>
-        <div id="song-list">
-          <p style="color: #94a3b8; margin-top: 1rem;">No song recommendations added yet.</p>
-        </div>
+      <div style="margin-top: 20px; border-top: 1px solid #444; padding-top: 10px;">
+        <button class="btn-roblox" style="background:#555; box-shadow:none;" onclick="changePassword()">Change Password</button>
+        <button class="btn-roblox" style="background:#e74c3c; box-shadow:none;" onclick="logoutAdmin()">Logout</button>
       </div>
     </div>
 
-    <!-- 4. ANNOUNCEMENTS TAB -->
-    <div id="announcements" class="tab-content">
-      <button class="btn btn-back" onclick="switchTab('subscribers')">← Back to Home</button>
-      <div class="card card-neon-red">
-        <h2 class="text-neon-red">📢 Channel Announcements</h2>
-        <p>No announcements posted yet.</p>
+    <!-- Channel Announcements Section -->
+    <section id="announcements">
+      <h2 class="section-title">📢 Channel Announcements</h2>
+      <div id="announcementsList" class="grid-container">
+        <!-- Announcements render dynamically -->
       </div>
-    </div>
+    </section>
 
-    <!-- 5. FAN ZONE TAB -->
-    <div id="fanzone" class="tab-content">
-      <button class="btn btn-back" onclick="switchTab('subscribers')">← Back to Home</button>
-      <div class="card card-neon-blue">
-        <h2 class="text-neon-blue">🔥 Fan Zone</h2>
-        <p>Click to boost channel hype points!</p>
-        <button class="btn btn-blue" style="margin-top: 1rem;" onclick="boostHype()">Boost Hype (+10)</button>
-        <p style="margin-top: 1rem; font-size: 1.2rem;">Hype Points: <span id="hype-count" class="text-neon-blue">0</span></p>
+    <!-- Special Days & Events Section -->
+    <section id="special-days">
+      <h2 class="section-title">⭐ Special Days & Events</h2>
+      <div id="specialDaysList" class="grid-container">
+        <!-- Special days render dynamically -->
       </div>
-    </div>
+    </section>
+
+    <!-- Song Recommendations Section -->
+    <section id="songs">
+      <h2 class="section-title">🎵 Song Recommendations</h2>
+      <div id="songsList" class="grid-container">
+        <!-- Songs render dynamically -->
+      </div>
+    </section>
 
   </div>
 
+  <!-- Footer -->
+  <footer>
+    <p>© 2026 Obby Rants | Made for the YouTube & Roblox Community</p>
+    <p style="margin-top: 5px;">
+      <a href="https://youtube.com/@obbyrants" target="_blank">YouTube</a> • 
+      <a href="https://roblox.com/share?code=c52e49aa93ccb841bf4ae7fb0a044796&type=Profile&s" target="_blank">Roblox Profile</a>
+    </p>
+  </footer>
+
+  <!-- JavaScript Logic -->
   <script>
-    let hype = parseInt(localStorage.getItem('obby_hype')) || 0;
+    // State management
     let isAdmin = false;
 
-    // DEVICE LOCKING SYSTEM FOR OWNER ONLY
+    // DEVICE LOCKING SYSTEM (Only Owner Device Allowed)
     let isOwnerDevice = localStorage.getItem('obby_owner_device') === 'true';
-    let adminPassword = localStorage.getItem('obby_admin_pass') || null;
 
-    // Saved content defaults
-    const defaultAbout = "Welcome to Obby Rants (@Obbyrants30)! This channel is focused on Roblox gameplay, obby speedruns, commentary, and community engagement.";
-    const defaultReadme = "Official README & Guidelines for the channel.";
+    // Load initial data from LocalStorage or default templates
+    let announcements = JSON.parse(localStorage.getItem('obby_announcements')) || [
+      {
+        id: 1,
+        title: "Welcome to the Official Website!",
+        date: "2026-08-02",
+        body: "Check back here regularly for news on upcoming rants, streams, and special channel events!"
+      }
+    ];
 
-    let savedAbout = localStorage.getItem('obby_about') || defaultAbout;
-    let savedReadme = localStorage.getItem('obby_readme') || defaultReadme;
-    let savedSubs = localStorage.getItem('obby_subs') || "0";
+    let specialDays = JSON.parse(localStorage.getItem('obby_special_days')) || [
+      {
+        id: 1,
+        title: "Weekly Stream & Roblox Obby Marathon",
+        date: "2026-08-10",
+        body: "Join the live channel event where we play community created Roblox obbies together!"
+      }
+    ];
+
     let songs = JSON.parse(localStorage.getItem('obby_songs')) || [];
 
-    // Initialize UI on load
-    document.addEventListener("DOMContentLoaded", () => {
-      document.getElementById('about-display').innerText = savedAbout;
-      document.getElementById('readme-display').innerText = savedReadme;
-      document.getElementById('edit-about').value = savedAbout;
-      document.getElementById('edit-readme').value = savedReadme;
+    // Initial Render
+    renderData();
 
-      document.getElementById('subs-display').innerText = savedSubs;
-      document.getElementById('edit-subs').value = savedSubs;
-
-      document.getElementById('hype-count').innerText = hype;
-
-      renderSongs();
-    });
-
-    function switchTab(tabId) {
-      const tabs = document.querySelectorAll('.tab-content');
-      tabs.forEach(tab => tab.classList.remove('active'));
-
-      const targetTab = document.getElementById(tabId);
-      if (targetTab) {
-        targetTab.classList.add('active');
+    // Password & Login System
+    function toggleAdminLogin() {
+      if (isAdmin) {
+        logoutAdmin();
+        return;
       }
 
-      window.scrollTo(0, 0);
-    }
+      let storedPass = localStorage.getItem('obby_admin_pass');
 
-    function navigateToHomeSection(sectionId) {
-      switchTab('subscribers');
-      setTimeout(() => {
-        const section = document.getElementById(sectionId);
-        if (section) {
-          section.scrollIntoView({ behavior: 'smooth' });
+      // First time setup on device
+      if (!storedPass) {
+        let newPass = prompt("First Time Setup: Create your Admin Password:");
+        if (newPass && newPass.trim() !== "") {
+          localStorage.setItem('obby_admin_pass', newPass.trim());
+          localStorage.setItem('obby_owner_device', 'true');
+          isOwnerDevice = true;
+          alert("Password set successfully! This browser/device is now registered as the Admin device.");
+          loginAdmin();
+        } else {
+          alert("Setup cancelled.");
         }
-      }, 50);
-    }
-
-    function boostHype() {
-      hype += 10;
-      document.getElementById('hype-count').innerText = hype;
-      localStorage.setItem('obby_hype', hype);
-    }
-
-    // Strictly locked Admin Login function
-    function toggleAdmin() {
-      if (!isAdmin) {
-        // If password hasn't been set up yet on any device
-        if (!adminPassword) {
-          let newPass = prompt("First Time Setup: Create your Admin Password:");
-          if (newPass && newPass.trim() !== "") {
-            adminPassword = newPass.trim();
-            localStorage.setItem('obby_admin_pass', adminPassword);
-            localStorage.setItem('obby_owner_device', 'true');
-            isOwnerDevice = true;
-            alert("Password set successfully! This device is now registered as the Admin device.");
-            isAdmin = true;
-            document.getElementById('admin-btn').innerText = "Logout Admin";
-            switchTab('admin-panel');
-          }
-          return;
-        }
-
-        // If another person tries to access from their device/browser
-        if (!isOwnerDevice) {
-          alert("Access Denied: Admin privileges are not authorized on this device.");
-          return;
-        }
-
-        // Prompt owner for password
-        let entered = prompt("Enter Admin Password:");
-        if (entered === adminPassword) {
-          isAdmin = true;
-          document.getElementById('admin-btn').innerText = "Logout Admin";
-          switchTab('admin-panel');
-        } else if (entered !== null) {
-          alert("Incorrect password!");
-        }
-      } else {
-        isAdmin = false;
-        document.getElementById('admin-btn').innerText = "Admin Login";
-        switchTab('subscribers');
+        return;
       }
+
+      // Block any non-owner device trying to log in
+      if (!isOwnerDevice) {
+        alert("Access Denied: Admin privileges are disabled on this device.");
+        return;
+      }
+
+      // Login prompt for owner device
+      let inputPass = prompt("Enter your Admin Password:");
+      if (inputPass === storedPass) {
+        loginAdmin();
+      } else if (inputPass !== null) {
+        alert("Incorrect password!");
+      }
+    }
+
+    function loginAdmin() {
+      isAdmin = true;
+      document.getElementById('adminPanel').style.display = 'block';
+      document.getElementById('adminLoginBtn').innerText = 'Logout Admin';
+      renderData();
+      alert("Logged in successfully!");
+    }
+
+    function logoutAdmin() {
+      isAdmin = false;
+      document.getElementById('adminPanel').style.display = 'none';
+      document.getElementById('adminLoginBtn').innerText = 'Admin Login';
+      renderData();
     }
 
     function changePassword() {
-      let current = prompt("Enter current password:");
-      if (current === adminPassword) {
-        let updated = prompt("Enter new password:");
-        if (updated && updated.trim() !== "") {
-          adminPassword = updated.trim();
-          localStorage.setItem('obby_admin_pass', adminPassword);
+      let storedPass = localStorage.getItem('obby_admin_pass');
+      let currentPass = prompt("Enter current password:");
+      if (currentPass === storedPass) {
+        let newPass = prompt("Enter new password:");
+        if (newPass && newPass.trim() !== "") {
+          localStorage.setItem('obby_admin_pass', newPass.trim());
           alert("Password updated successfully!");
         }
       } else {
-        alert("Incorrect current password.");
+        alert("Incorrect password.");
       }
     }
 
-    // Admin Content Editors
-    function saveText() {
-      let aboutVal = document.getElementById('edit-about').value;
-      let readmeVal = document.getElementById('edit-readme').value;
+    // Add & Remove Functions
+    function addAnnouncement() {
+      const title = document.getElementById('annTitle').value.trim();
+      const body = document.getElementById('annBody').value.trim();
+      if (!title || !body) return alert("Please fill in both fields!");
 
-      document.getElementById('about-display').innerText = aboutVal;
-      document.getElementById('readme-display').innerText = readmeVal;
+      const today = new Date().toISOString().split('T')[0];
+      announcements.unshift({ id: Date.now(), title, date: today, body });
+      saveAndRender();
 
-      localStorage.setItem('obby_about', aboutVal);
-      localStorage.setItem('obby_readme', readmeVal);
-
-      alert("About and README saved successfully!");
+      document.getElementById('annTitle').value = '';
+      document.getElementById('annBody').value = '';
     }
 
-    function saveMetrics() {
-      let subsVal = document.getElementById('edit-subs').value;
-      document.getElementById('subs-display').innerText = subsVal;
-      localStorage.setItem('obby_subs', subsVal);
-      alert("Metrics saved successfully!");
+    function addSpecialDay() {
+      const title = document.getElementById('eventTitle').value.trim();
+      const date = document.getElementById('eventDate').value;
+      const body = document.getElementById('eventBody').value.trim();
+      if (!title || !date || !body) return alert("Please fill in all fields!");
+
+      specialDays.unshift({ id: Date.now(), title, date, body });
+      saveAndRender();
+
+      document.getElementById('eventTitle').value = '';
+      document.getElementById('eventDate').value = '';
+      document.getElementById('eventBody').value = '';
     }
 
     function addSong() {
-      let title = document.getElementById('song-title').value.trim();
-      let artist = document.getElementById('song-artist').value.trim();
-      let link = document.getElementById('song-link').value.trim();
+      const title = document.getElementById('songTitle').value.trim();
+      const artist = document.getElementById('songArtist').value.trim();
+      const link = document.getElementById('songLink').value.trim();
 
-      if (!title) {
-        alert("Please enter a song title!");
-        return;
-      }
+      if (!title) return alert("Please enter at least a song title!");
 
-      songs.push({ title, artist, link });
-      localStorage.setItem('obby_songs', JSON.stringify(songs));
+      songs.unshift({ id: Date.now(), title, artist, link });
+      saveAndRender();
 
-      document.getElementById('song-title').value = '';
-      document.getElementById('song-artist').value = '';
-      document.getElementById('song-link').value = '';
-
-      renderSongs();
-      alert("Song recommendation added!");
+      document.getElementById('songTitle').value = '';
+      document.getElementById('songArtist').value = '';
+      document.getElementById('songLink').value = '';
     }
 
-    function deleteSong(index) {
-      songs.splice(index, 1);
-      localStorage.setItem('obby_songs', JSON.stringify(songs));
-      renderSongs();
+    function deleteItem(type, id) {
+      if (!isAdmin) return;
+      if (confirm("Are you sure you want to delete this post?")) {
+        if (type === 'announcement') {
+          announcements = announcements.filter(item => item.id !== id);
+        } else if (type === 'special') {
+          specialDays = specialDays.filter(item => item.id !== id);
+        } else if (type === 'song') {
+          songs = songs.filter(item => item.id !== id);
+        }
+        saveAndRender();
+      }
     }
 
-    function renderSongs() {
-      const container = document.getElementById('song-list');
-      if (songs.length === 0) {
-        container.innerHTML = '<p style="color: #94a3b8; margin-top: 1rem;">No song recommendations added yet.</p>';
-        return;
-      }
+    function saveAndRender() {
+      localStorage.setItem('obby_announcements', JSON.stringify(announcements));
+      localStorage.setItem('obby_special_days', JSON.stringify(specialDays));
+      localStorage.setItem('obby_songs', JSON.stringify(songs));
+      renderData();
+    }
 
-      let html = '';
-      songs.forEach((song, i) => {
-        html += `
-          <div class="song-item">
-            <div>
-              <strong style="color: #ffffff;">${song.title}</strong> 
-              ${song.artist ? `<span style="color: #94a3b8;"> - ${song.artist}</span>` : ''}
-              ${song.link ? `<br><a href="${song.link}" target="_blank" rel="noopener">Listen / View Link 🔗</a>` : ''}
+    function renderData() {
+      // Render Announcements
+      const annContainer = document.getElementById('announcementsList');
+      if (announcements.length === 0) {
+        annContainer.innerHTML = `<p style="color:var(--text-sub)">No announcements posted yet.</p>`;
+      } else {
+        annContainer.innerHTML = announcements.map(item => `
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">${escapeHtml(item.title)}</div>
+              <div class="card-date">${item.date}</div>
             </div>
-            ${isAdmin ? `<button class="btn" style="padding: 0.3rem 0.6rem; font-size: 0.8rem;" onclick="deleteSong(${i})">Delete</button>` : ''}
+            <div class="card-body">${escapeHtml(item.body)}</div>
+            ${isAdmin ? `<button class="delete-btn" onclick="deleteItem('announcement', ${item.id})">Delete</button>` : ''}
           </div>
-        `;
-      });
-      container.innerHTML = html;
+        `).join('');
+      }
+
+      // Render Special Days
+      const daysContainer = document.getElementById('specialDaysList');
+      if (specialDays.length === 0) {
+        daysContainer.innerHTML = `<p style="color:var(--text-sub)">No special days scheduled.</p>`;
+      } else {
+        daysContainer.innerHTML = specialDays.map(item => `
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">${escapeHtml(item.title)}</div>
+              <div class="card-date">🗓️ ${item.date}</div>
+            </div>
+            <div class="card-body">${escapeHtml(item.body)}</div>
+            ${isAdmin ? `<button class="delete-btn" onclick="deleteItem('special', ${item.id})">Delete</button>` : ''}
+          </div>
+        `).join('');
+      }
+
+      // Render Song Recommendations
+      const songsContainer = document.getElementById('songsList');
+      if (songs.length === 0) {
+        songsContainer.innerHTML = `<p style="color:var(--text-sub)">No song recommendations added yet.</p>`;
+      } else {
+        songsContainer.innerHTML = songs.map(item => `
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">🎵 ${escapeHtml(item.title)}</div>
+            </div>
+            <div class="card-body">
+              ${item.artist ? `<p style="color:var(--roblox-gold); font-weight:600;">Artist: ${escapeHtml(item.artist)}</p>` : ''}
+              ${item.link ? `<p style="margin-top:5px;"><a href="${escapeHtml(item.link)}" target="_blank" style="color:var(--roblox-accent); text-decoration:none;">Listen / View Link 🔗</a></p>` : ''}
+            </div>
+            ${isAdmin ? `<button class="delete-btn" onclick="deleteItem('song', ${item.id})">Delete</button>` : ''}
+          </div>
+        `).join('');
+      }
     }
 
-    function resetAll() {
-      localStorage.removeItem('obby_about');
-      localStorage.removeItem('obby_readme');
-      localStorage.removeItem('obby_subs');
-      localStorage.removeItem('obby_hype');
-      localStorage.removeItem('obby_songs');
-
-      location.reload();
+    // Helper function to prevent HTML injection
+    function escapeHtml(str) {
+      return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
     }
   </script>
-
 </body>
 </html>
