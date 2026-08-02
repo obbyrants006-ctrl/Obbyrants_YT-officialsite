@@ -3,18 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Obby Rants 30</title>
+  <title>Creator Dashboard</title>
   <style>
+    /* Global Styles */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
     html {
       scroll-behavior: smooth;
     }
 
     body {
-      font-family: Arial, sans-serif;
-      background-color: #121212;
-      color: #ffffff;
-      margin: 0;
-      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #0f172a;
+      color: #f8fafc;
+      line-height: 1.6;
     }
 
     /* Navigation Bar */
@@ -22,17 +28,18 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background-color: #1e1e1e;
+      background-color: #1e293b;
       padding: 1rem 2rem;
       position: sticky;
       top: 0;
       z-index: 1000;
+      border-bottom: 1px solid #334155;
     }
 
     .logo {
-      font-size: 1.5rem;
-      font-weight: bold;
-      color: #ff3333;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #38bdf8;
       cursor: pointer;
     }
 
@@ -40,67 +47,162 @@
       list-style: none;
       display: flex;
       gap: 1.2rem;
-      margin: 0;
-      padding: 0;
     }
 
     .nav-links a {
-      color: #cccccc;
+      color: #94a3b8;
       text-decoration: none;
       font-weight: 500;
+      font-size: 0.95rem;
+      transition: color 0.2s ease;
       cursor: pointer;
     }
 
     .nav-links a:hover,
     .nav-links a.active {
-      color: #ffffff;
+      color: #38bdf8;
     }
 
+    /* Layout Container */
     .container {
-      max-width: 900px;
+      max-width: 1100px;
       margin: 2rem auto;
       padding: 0 1rem;
     }
 
-    /* TAB DISPLAY LOGIC */
+    /* Tab Displays */
     .tab-content {
-      display: none; /* Hides all tabs by default */
+      display: none;
+      animation: fadeIn 0.25s ease-in-out;
     }
 
     .tab-content.active {
-      display: block; /* Shows only active tab */
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Homepage Elements */
+    .hero {
+      text-align: center;
+      padding: 3rem 1rem;
+      background: linear-gradient(135deg, #1e293b, #0f172a);
+      border-radius: 12px;
+      border: 1px solid #334155;
+      margin-bottom: 2rem;
+    }
+
+    .hero h1 {
+      font-size: 2.2rem;
+      color: #f8fafc;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero p {
+      color: #94a3b8;
+    }
+
+    .content-section {
+      background-color: #1e293b;
+      padding: 2.5rem;
+      border-radius: 12px;
+      border: 1px solid #334155;
+      margin-top: 2rem;
+    }
+
+    .content-section h2 {
+      font-size: 1.5rem;
+      color: #38bdf8;
+      margin-bottom: 1rem;
+      border-bottom: 1px solid #334155;
+      padding-bottom: 0.5rem;
+    }
+
+    .readme-box {
+      background-color: #0f172a;
+      border-left: 4px solid #38bdf8;
+      padding: 1.2rem;
+      border-radius: 4px;
+      margin-top: 1rem;
+    }
+
+    /* Card Grids for Separate Tabs */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .stat-card {
+      background-color: #1e293b;
+      padding: 1.5rem;
+      border-radius: 10px;
+      border: 1px solid #334155;
+      text-align: center;
+    }
+
+    .stat-card h3 {
+      font-size: 0.9rem;
+      color: #94a3b8;
+      text-transform: uppercase;
+    }
+
+    .stat-card .number {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #38bdf8;
+      margin-top: 0.5rem;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
     }
 
     .card {
-      background: #1e1e1e;
-      padding: 2rem;
+      background-color: #0f172a;
+      padding: 1.5rem;
       border-radius: 8px;
-      margin-bottom: 2rem;
-      border: 1px solid #333;
+      border: 1px solid #334155;
+    }
+
+    .card h3 {
+      color: #f8fafc;
+      margin-bottom: 0.5rem;
+    }
+
+    .card p {
+      color: #94a3b8;
     }
 
     /* Buttons */
     .btn {
-      background-color: #ff3333;
+      background-color: #0284c7;
       color: white;
       border: none;
       padding: 0.6rem 1.2rem;
-      border-radius: 5px;
+      border-radius: 6px;
       cursor: pointer;
-      font-weight: bold;
+      font-weight: 600;
+      margin-top: 1rem;
     }
 
-    .btn-back {
-      background-color: #333333;
-      color: #ffffff;
-      margin-bottom: 1.5rem;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
+    .btn:hover {
+      background-color: #0369a1;
     }
 
-    .btn-back:hover {
-      background-color: #444444;
+    .btn-danger {
+      background-color: #dc2626;
+    }
+
+    .btn-danger:hover {
+      background-color: #b91c1c;
     }
   </style>
 </head>
@@ -108,118 +210,175 @@
 
   <!-- Navigation Bar -->
   <nav class="navbar">
-    <div class="logo" onclick="switchTab('subscribers')">OR30 Obby Rants 30</div>
+    <div class="logo" onclick="switchTab('home')">Dashboard</div>
     <ul class="nav-links">
-      <!-- Homepage Button -->
-      <li><a class="nav-tab" onclick="switchTab('subscribers')">🏠 Home</a></li>
+      <!-- Scroll links on the same page -->
+      <li><a href="#about-section" onclick="navigateToHomeSection('about-section')">About</a></li>
+      <li><a href="#readme-section" onclick="navigateToHomeSection('readme-section')">Readme</a></li>
       
-      <!-- Category Tabs -->
+      <!-- SEPARATE TABS -->
+      <li><a class="nav-tab" onclick="switchTab('subscribers')">Subscribers</a></li>
       <li><a class="nav-tab" onclick="switchTab('analytics')">Analytics</a></li>
-      <li><a class="nav-tab" onclick="switchTab('songs')">🎵 Song Recs</a></li>
-      
-      <!-- Scroll down to sections on the Home view -->
-      <li><a onclick="navigateToHomeSection('about-section')">About Us</a></li>
-      <li><a onclick="navigateToHomeSection('readme-section')">README</a></li>
-      
+      <li><a class="nav-tab" onclick="switchTab('songs')">Songs</a></li>
       <li><a class="nav-tab" onclick="switchTab('announcements')">Announcements</a></li>
       <li><a class="nav-tab" onclick="switchTab('fanzone')">Fan Zone</a></li>
+      <li><a class="nav-tab" onclick="switchTab('admin')">Admin Controls</a></li>
     </ul>
   </nav>
 
+  <!-- Container -->
   <div class="container">
 
-    <!-- 1. HOMEPAGE / SUBSCRIBERS TAB -->
-    <div id="subscribers" class="tab-content active">
-      <div class="card">
-        <h1>Welcome to Obby Rants 30! 🎮🔥</h1>
-        <p>Active Subscribers: <strong>0</strong></p>
-      </div>
+    <!-- 1. HOMEPAGE TAB (Contains Hero + About + Readme) -->
+    <main id="home" class="tab-content active">
+      <header class="hero">
+        <h1>Welcome to the Channel Hub</h1>
+        <p>Select a category tab above or scroll down to view the README and About sections.</p>
+      </header>
 
-      <!-- About Us Section -->
-      <div id="about-section" class="card">
-        <h2>ℹ️ About Obby Rants (@Obbyrants30)</h2>
-        <p>Welcome to Obby Rants (@Obbyrants30)! This channel is focused on Roblox gameplay, obby speedruns, commentary, and community engagement.</p>
-      </div>
+      <!-- About Section -->
+      <section id="about-section" class="content-section">
+        <h2>About Us</h2>
+        <p>This channel platform provides an overview of content updates, community features, audio recommendations, and stats in one unified dashboard.</p>
+      </section>
 
-      <!-- README Section -->
-      <div id="readme-section" class="card">
-        <h2>📜 Official README Box</h2>
-        <p>Official README & Guidelines for the channel.</p>
+      <!-- Readme Section -->
+      <section id="readme-section" class="content-section">
+        <h2>README & Instructions</h2>
+        <div class="readme-box">
+          <h3>Quick Start Guide</h3>
+          <p>1. Click on any category tab in the navigation bar to open its specific page.</p>
+          <p>2. Clicking "About" or "Readme" from any tab brings you right back here and scrolls smoothly to the section.</p>
+        </div>
+      </section>
+    </main>
+
+    <!-- 2. SUBSCRIBERS TAB -->
+    <div id="subscribers" class="tab-content">
+      <div class="content-section">
+        <h2>Subscribers</h2>
+        <div class="stats-grid" style="margin-top: 1rem;">
+          <div class="stat-card">
+            <h3>Total Subscribers</h3>
+            <div class="number">12,450</div>
+          </div>
+          <div class="stat-card">
+            <h3>Monthly Growth</h3>
+            <div class="number">+1,200</div>
+          </div>
+        </div>
       </div>
     </div>
 
-    <!-- 2. ANALYTICS TAB -->
+    <!-- 3. ANALYTICS TAB -->
     <div id="analytics" class="tab-content">
-      <button class="btn btn-back" onclick="switchTab('subscribers')">← Back to Home</button>
-      <div class="card">
-        <h2>📊 Overall Channel Analytics</h2>
-        <p>Uploaded Videos: 0</p>
+      <div class="content-section">
+        <h2>Analytics</h2>
+        <div class="card-grid">
+          <div class="card">
+            <h3>Average Retention</h3>
+            <p>68% completion rate per video.</p>
+          </div>
+          <div class="card">
+            <h3>Total Impressions</h3>
+            <p>142,000 views across all content.</p>
+          </div>
+        </div>
       </div>
     </div>
 
-    <!-- 3. SONGS TAB -->
+    <!-- 4. SONGS TAB -->
     <div id="songs" class="tab-content">
-      <button class="btn btn-back" onclick="switchTab('subscribers')">← Back to Home</button>
-      <div class="card">
-        <h2>🎵 Song Recommendations</h2>
-        <p>Recommended tracks & background tunes picked by Obby Rants!</p>
+      <div class="content-section">
+        <h2>Song Recommendations</h2>
+        <div class="card-grid">
+          <div class="card">
+            <h3>Track 1: Synthwave Blast</h3>
+            <p>Genre: Electronic / Background Music</p>
+          </div>
+          <div class="card">
+            <h3>Track 2: Chill Lo-Fi Beat</h3>
+            <p>Genre: Lo-Fi / Instrumental</p>
+          </div>
+        </div>
       </div>
     </div>
 
-    <!-- 4. ANNOUNCEMENTS TAB -->
+    <!-- 5. ANNOUNCEMENTS TAB -->
     <div id="announcements" class="tab-content">
-      <button class="btn btn-back" onclick="switchTab('subscribers')">← Back to Home</button>
-      <div class="card">
-        <h2>📢 Channel Announcements</h2>
-        <p>No announcements posted yet.</p>
+      <div class="content-section">
+        <h2>Announcements</h2>
+        <div class="card-grid">
+          <div class="card">
+            <h3>New Video Project</h3>
+            <p>Currently in production. Scheduled release for next week!</p>
+          </div>
+        </div>
       </div>
     </div>
 
-    <!-- 5. FAN ZONE TAB -->
+    <!-- 6. FAN ZONE TAB -->
     <div id="fanzone" class="tab-content">
-      <button class="btn btn-back" onclick="switchTab('subscribers')">← Back to Home</button>
-      <div class="card">
-        <h2>🔥 Fan Zone</h2>
-        <p>Click to boost channel hype points!</p>
-        <button class="btn" onclick="boostHype()">Boost Hype (+10)</button>
-        <p style="margin-top: 1rem;">Hype Points: <span id="hype-count">0</span></p>
+      <div class="content-section">
+        <h2>Fan Zone</h2>
+        <p>Hype Points: <span id="hype-count" style="color: #38bdf8; font-weight: bold;">8,920</span></p>
+        <button class="btn" onclick="addHype()">Boost Hype (+10)</button>
+      </div>
+    </div>
+
+    <!-- 7. ADMIN CONTROLS TAB -->
+    <div id="admin" class="tab-content">
+      <div class="content-section">
+        <h2>Admin Controls</h2>
+        <p>Reset variables and manage page content settings.</p>
+        <button class="btn btn-danger" onclick="resetMetrics()">Reset Hype Points</button>
       </div>
     </div>
 
   </div>
 
   <script>
-    let hype = 0;
+    let hypePoints = 8920;
 
-    // Switches between completely separate tabs
+    // Handles switching between separate category tabs
     function switchTab(tabId) {
-      // Hide all tabs
       const tabs = document.querySelectorAll('.tab-content');
       tabs.forEach(tab => tab.classList.remove('active'));
 
-      // Show the selected tab
-      const targetTab = document.getElementById(tabId);
-      if (targetTab) {
-        targetTab.classList.add('active');
+      const navTabs = document.querySelectorAll('.nav-tab');
+      navTabs.forEach(link => link.classList.remove('active'));
+
+      const selectedTab = document.getElementById(tabId);
+      if (selectedTab) {
+        selectedTab.classList.add('active');
       }
 
       window.scrollTo(0, 0);
     }
 
-    // Navigates to About/Readme on the main tab and scrolls down
+    // Handles clicking About/Readme from any tab and smoothly scrolling to it
     function navigateToHomeSection(sectionId) {
-      switchTab('subscribers');
+      const homeTab = document.getElementById('home');
+      if (!homeTab.classList.contains('active')) {
+        switchTab('home');
+      }
       setTimeout(() => {
-        const section = document.getElementById(sectionId);
-        if (section) {
-          section.scrollIntoView({ behavior: 'smooth' });
+        const targetSection = document.getElementById(sectionId);
+        if (targetSection) {
+          targetSection.scrollIntoView({ behavior: 'smooth' });
         }
       }, 50);
     }
 
-    function boostHype() {
-      hype += 10;
-      document.getElementById('hype-count').innerText = hype;
+    // Fan Zone & Admin Actions
+    function addHype() {
+      hypePoints += 10;
+      document.getElementById('hype-count').innerText = hypePoints;
+    }
+
+    function resetMetrics() {
+      hypePoints = 0;
+      document.getElementById('hype-count').innerText = hypePoints;
     }
   </script>
 
