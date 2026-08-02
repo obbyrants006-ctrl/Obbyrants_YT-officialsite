@@ -275,14 +275,15 @@
       margin-bottom: 1rem;
     }
 
+    /* README BOX WITH BRIGHT WHITE TEXT */
     .readme-box {
-      background: #18191B;
-      border: 1px solid #3A3D42;
-      border-radius: 8px;
+      background: #111214;
+      border: 2px solid #3A3D42;
+      border-radius: 10px;
       padding: 1.5rem;
-      color: #FFFFFF;
+      color: #FFFFFF !important; /* Pure Bright White Text */
       font-family: 'Poppins', sans-serif;
-      font-size: 0.95rem;
+      font-size: 1rem;
       line-height: 1.8;
       white-space: pre-wrap;
     }
@@ -327,6 +328,7 @@
       display: block;
       margin-bottom: 5px;
       font-weight: 600;
+      color: var(--roblox-gold);
     }
 
     .form-control {
@@ -346,7 +348,7 @@
 
     textarea.form-control {
       resize: vertical;
-      min-height: 90px;
+      min-height: 100px;
     }
 
     .delete-btn {
@@ -387,7 +389,7 @@
     <nav>
       <a href="#subscribers" class="nav-link">Subscribers</a>
       <a href="#analytics" class="nav-link">Analytics</a>
-      <a href="#about" class="nav-link">About</a>
+      <a href="#about" class="nav-link">About Us</a>
       <a href="#readme" class="nav-link">README</a>
       <a href="#announcements" class="nav-link">Announcements</a>
       <a href="#fan-zone" class="nav-link">Fan Zone</a>
@@ -399,7 +401,7 @@
   <section class="hero">
     <h1>Welcome to Obby Rants 30! 🎮🔥</h1>
     <p>
-      Welcome to the official hub of <strong>Obby Rants (@Obbyrants30)</strong>! This is your front-row seat to all our Roblox speedruns, rage-inducing obbies, honest gaming commentary, fresh video updates, and live channel events. Explore our live analytics, check upcoming events, share fan messages, and don't forget to hit subscribe on YouTube!
+      Welcome to the official hub of <strong>Obby Rants (@Obbyrants30)</strong>! This is your front-row seat to all our Roblox speedruns, rage-inducing obbies, honest gaming commentary, fresh video updates, and live channel events.
     </p>
     <div class="hero-buttons">
       <a href="https://www.youtube.com/@Obbyrants30" target="_blank" class="btn-roblox">Subscribe @Obbyrants30</a>
@@ -412,7 +414,21 @@
     <!-- Admin Panel -->
     <div id="adminPanel" class="admin-panel">
       <h2>🛠️ Admin Master Control Panel</h2>
-      <p style="margin-bottom: 15px; color: var(--text-sub);">Welcome back, Admin! Update channel analytics, modify About/README content, and manage fan messages below.</p>
+      <p style="margin-bottom: 15px; color: var(--text-sub);">Log in as admin to update any text box below!</p>
+
+      <!-- Edit About Us & README -->
+      <h3 style="color:var(--roblox-accent); margin-bottom:10px;">✏️ Edit About Us & README Content</h3>
+      <div style="background:var(--roblox-card); padding:1rem; border-radius:8px; margin-bottom:1.5rem;">
+        <div class="form-group">
+          <label>About Channel Text:</label>
+          <textarea id="editAboutText" class="form-control"></textarea>
+        </div>
+        <div class="form-group">
+          <label>README Box Text (Appears in White Font Below):</label>
+          <textarea id="editReadmeText" class="form-control"></textarea>
+        </div>
+        <button class="btn-roblox btn-blue" onclick="updateCustomText()">Save About & README Text</button>
+      </div>
 
       <!-- Edit Analytics -->
       <h3 style="color:var(--roblox-gold); margin-bottom:10px;">📊 Update Channel Analytics</h3>
@@ -442,20 +458,6 @@
         <button class="btn-roblox" style="margin-top:10px;" onclick="updateAnalytics()">Save Analytics</button>
       </div>
 
-      <!-- Edit About Us & README -->
-      <h3 style="color:var(--roblox-accent); margin-bottom:10px;">✏️ Edit About & README Content</h3>
-      <div style="background:var(--roblox-card); padding:1rem; border-radius:8px; margin-bottom:1.5rem;">
-        <div class="form-group">
-          <label>About Channel Text:</label>
-          <textarea id="editAboutText" class="form-control"></textarea>
-        </div>
-        <div class="form-group">
-          <label>README Documentation Text:</label>
-          <textarea id="editReadmeText" class="form-control"></textarea>
-        </div>
-        <button class="btn-roblox btn-blue" onclick="updateCustomText()">Save Text Changes</button>
-      </div>
-
       <!-- Add Announcement & Special Day Forms -->
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-bottom: 1.5rem;">
         <div>
@@ -475,7 +477,7 @@
           <h3>⭐ Add Special Day / Event</h3>
           <div class="form-group">
             <label>Event Name</label>
-            <input type="text" id="eventTitle" class="form-control" placeholder="e.g. 500 Sub Stream" />
+            <input type="text" id="eventTitle" class="form-control" placeholder="e.g. Milestone Stream" />
           </div>
           <div class="form-group">
             <label>Date</label>
@@ -502,12 +504,12 @@
         <div id="displaySubCount" class="sub-number">0</div>
         <p style="color:var(--text-sub); margin-top:10px; font-size:1.1rem;">Active Subscribers on <strong>@Obbyrants30</strong>!</p>
         <div style="margin-top:15px;">
-          <a href="https://www.youtube.com/@Obbyrants30" target="_blank" class="btn-roblox btn-gold">Join the Squad & Subscribe!</a>
+          <a href="https://www.youtube.com/@Obbyrants30" target="_blank" class="btn-roblox btn-gold">Subscribe to Channel!</a>
         </div>
       </div>
     </section>
 
-    <!-- OVERALL ANALYTICS TAB (Public View) -->
+    <!-- OVERALL ANALYTICS TAB -->
     <section id="analytics">
       <h2 class="section-title">📊 Overall Channel Analytics</h2>
       <div class="stats-grid">
@@ -530,29 +532,22 @@
       </div>
     </section>
 
-    <!-- ABOUT SECTION -->
+    <!-- EDITABLE ABOUT SECTION -->
     <section id="about">
       <div class="content-box">
         <h3>ℹ️ About Obby Rants (@Obbyrants30)</h3>
-        <p id="aboutContentDisplay" style="color:var(--text-sub); font-size:1.05rem; line-height:1.8;">
-          Welcome to Obby Rants! Our channel is dedicated to bringing you high-energy Roblox obby completions, commentary on gaming news, rage moments, and community gameplay. We focus on non-stop entertainment and engaging with our viewers!
+        <p id="aboutContentDisplay" style="color:#FFFFFF; font-size:1.05rem; line-height:1.8;">
+          Loading channel description...
         </p>
       </div>
     </section>
 
-    <!-- README DOCUMENTATION SECTION -->
+    <!-- EDITABLE README SECTION (BRIGHT WHITE TEXT) -->
     <section id="readme">
       <div class="content-box">
-        <h3>📜 Official README Documentation</h3>
+        <h3>📜 Official README Box</h3>
         <div id="readmeContentDisplay" class="readme-box">
-# OBBY RANTS OFFICIAL WEBSITE
-Official Channel  : @Obbyrants30
-YouTube URL      : https://www.youtube.com/@Obbyrants30
-Roblox Profile   : Active
-Host Platform    : GitHub Pages
-
-OVERVIEW:
-This platform hosts channel news, upcoming stream events, real-time analytics, and fan feedback. Admin panel controls allow full customization of content.
+Loading README content...
         </div>
       </div>
     </section>
@@ -561,7 +556,7 @@ This platform hosts channel news, upcoming stream events, real-time analytics, a
     <section id="fan-zone">
       <div class="fun-section">
         <h2>🔥 Fan Hype Booster</h2>
-        <p style="color:var(--text-sub);">Click the button below to boost the channel hype meter!</p>
+        <p style="color:var(--text-sub);">Click to boost channel hype points!</p>
         <div id="hypeCount" class="hype-counter">0</div>
         <button class="btn-roblox btn-gold" onclick="boostHype()">⚡ Click to Boost Hype!</button>
       </div>
@@ -569,8 +564,8 @@ This platform hosts channel news, upcoming stream events, real-time analytics, a
       <div class="content-box">
         <h3>💬 Fan Message Board</h3>
         <div style="margin-bottom:20px;">
-          <input type="text" id="fanName" class="form-control" placeholder="Your Roblox / YouTube Name" style="margin-bottom:10px;" />
-          <textarea id="fanMsg" class="form-control" placeholder="Leave a comment for Obby Rants..."></textarea>
+          <input type="text" id="fanName" class="form-control" placeholder="Your Name" style="margin-bottom:10px;" />
+          <textarea id="fanMsg" class="form-control" placeholder="Leave a message..."></textarea>
           <button class="btn-roblox" style="margin-top:10px;" onclick="addFanComment()">Post Message</button>
         </div>
         <div id="fanCommentsList">
@@ -611,7 +606,7 @@ This platform hosts channel news, upcoming stream events, real-time analytics, a
     let isAdmin = false;
 
     // Analytics Data
-    let analytics = JSON.parse(localStorage.getItem('obby_analytics_v2')) || {
+    let analytics = JSON.parse(localStorage.getItem('obby_analytics_v3')) || {
       subs: "150",
       views: "5,400",
       likes: "850",
@@ -619,14 +614,14 @@ This platform hosts channel news, upcoming stream events, real-time analytics, a
       comments: "180"
     };
 
-    // Custom About & README Data
-    let customText = JSON.parse(localStorage.getItem('obby_custom_text')) || {
+    // Custom Editable About & README Data
+    let customText = JSON.parse(localStorage.getItem('obby_custom_text_v3')) || {
       about: "Welcome to Obby Rants! Our channel is dedicated to bringing you high-energy Roblox obby completions, commentary on gaming news, rage moments, and community gameplay. We focus on non-stop entertainment and engaging with our viewers!",
       readme: "# OBBY RANTS OFFICIAL WEBSITE\nOfficial Channel  : @Obbyrants30\nYouTube URL      : https://www.youtube.com/@Obbyrants30\nRoblox Profile   : Active\nHost Platform    : GitHub Pages\n\nOVERVIEW:\nThis platform hosts channel news, upcoming stream events, real-time analytics, and fan feedback. Admin panel controls allow full customization of content."
     };
 
     // Announcements
-    let announcements = JSON.parse(localStorage.getItem('obby_announcements_v2')) || [
+    let announcements = JSON.parse(localStorage.getItem('obby_announcements_v3')) || [
       {
         id: 1,
         title: "Welcome to @Obbyrants30 Official Hub!",
@@ -636,7 +631,7 @@ This platform hosts channel news, upcoming stream events, real-time analytics, a
     ];
 
     // Special Days
-    let specialDays = JSON.parse(localStorage.getItem('obby_special_days_v2')) || [
+    let specialDays = JSON.parse(localStorage.getItem('obby_special_days_v3')) || [
       {
         id: 1,
         title: "Community Obby Challenge Stream",
@@ -651,7 +646,7 @@ This platform hosts channel news, upcoming stream events, real-time analytics, a
       { id: 1, name: "RobloxPro_01", msg: "Love your videos @Obbyrants30! Keep grinding!" }
     ];
 
-    // Initial Load
+    // Initial Load & Render
     renderData();
 
     function boostHype() {
@@ -742,18 +737,21 @@ This platform hosts channel news, upcoming stream events, real-time analytics, a
       analytics.videos = document.getElementById('editVideos').value.trim() || analytics.videos;
       analytics.comments = document.getElementById('editComments').value.trim() || analytics.comments;
 
-      localStorage.setItem('obby_analytics_v2', JSON.stringify(analytics));
+      localStorage.setItem('obby_analytics_v3', JSON.stringify(analytics));
       renderData();
       alert("Analytics saved!");
     }
 
     function updateCustomText() {
-      customText.about = document.getElementById('editAboutText').value.trim() || customText.about;
-      customText.readme = document.getElementById('editReadmeText').value.trim() || customText.readme;
+      const newAbout = document.getElementById('editAboutText').value.trim();
+      const newReadme = document.getElementById('editReadmeText').value.trim();
 
-      localStorage.setItem('obby_custom_text', JSON.stringify(customText));
+      if (newAbout) customText.about = newAbout;
+      if (newReadme) customText.readme = newReadme;
+
+      localStorage.setItem('obby_custom_text_v3', JSON.stringify(customText));
       renderData();
-      alert("About & README updated!");
+      alert("About Us & README text updated successfully!");
     }
 
     function addAnnouncement() {
@@ -763,7 +761,7 @@ This platform hosts channel news, upcoming stream events, real-time analytics, a
 
       const today = new Date().toISOString().split('T')[0];
       announcements.unshift({ id: Date.now(), title, date: today, body });
-      localStorage.setItem('obby_announcements_v2', JSON.stringify(announcements));
+      localStorage.setItem('obby_announcements_v3', JSON.stringify(announcements));
       
       document.getElementById('annTitle').value = '';
       document.getElementById('annBody').value = '';
@@ -777,7 +775,7 @@ This platform hosts channel news, upcoming stream events, real-time analytics, a
       if (!title || !date || !body) return alert("Fill out all fields!");
 
       specialDays.unshift({ id: Date.now(), title, date, body });
-      localStorage.setItem('obby_special_days_v2', JSON.stringify(specialDays));
+      localStorage.setItem('obby_special_days_v3', JSON.stringify(specialDays));
 
       document.getElementById('eventTitle').value = '';
       document.getElementById('eventDate').value = '';
@@ -792,8 +790,8 @@ This platform hosts channel news, upcoming stream events, real-time analytics, a
         if (type === 'special') specialDays = specialDays.filter(i => i.id !== id);
         if (type === 'fan') fanComments = fanComments.filter(i => i.id !== id);
 
-        localStorage.setItem('obby_announcements_v2', JSON.stringify(announcements));
-        localStorage.setItem('obby_special_days_v2', JSON.stringify(specialDays));
+        localStorage.setItem('obby_announcements_v3', JSON.stringify(announcements));
+        localStorage.setItem('obby_special_days_v3', JSON.stringify(specialDays));
         localStorage.setItem('obby_fan_comments', JSON.stringify(fanComments));
         renderData();
       }
@@ -807,11 +805,11 @@ This platform hosts channel news, upcoming stream events, real-time analytics, a
       document.getElementById('displayVideos').innerText = analytics.videos;
       document.getElementById('displayComments').innerText = analytics.comments;
 
-      // Custom Content
+      // Custom Content (About Us & README)
       document.getElementById('aboutContentDisplay').innerText = customText.about;
       document.getElementById('readmeContentDisplay').innerText = customText.readme;
 
-      // Hype
+      // Hype Points
       document.getElementById('hypeCount').innerText = hypePoints;
 
       // Fan Comments
