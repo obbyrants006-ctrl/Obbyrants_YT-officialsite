@@ -79,6 +79,7 @@
       border: 1px solid #333;
     }
 
+    /* Buttons */
     .btn {
       background-color: #ff3333;
       color: white;
@@ -86,6 +87,20 @@
       padding: 0.6rem 1.2rem;
       border-radius: 5px;
       cursor: pointer;
+      font-weight: bold;
+    }
+
+    .btn-back {
+      background-color: #333333;
+      color: #ffffff;
+      margin-bottom: 1.5rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn-back:hover {
+      background-color: #444444;
     }
   </style>
 </head>
@@ -95,11 +110,14 @@
   <nav class="navbar">
     <div class="logo" onclick="switchTab('subscribers')">OR30 Obby Rants 30</div>
     <ul class="nav-links">
-      <li><a class="nav-tab" onclick="switchTab('subscribers')">Subscribers</a></li>
+      <!-- Homepage Button -->
+      <li><a class="nav-tab" onclick="switchTab('subscribers')">🏠 Home</a></li>
+      
+      <!-- Category Tabs -->
       <li><a class="nav-tab" onclick="switchTab('analytics')">Analytics</a></li>
       <li><a class="nav-tab" onclick="switchTab('songs')">🎵 Song Recs</a></li>
       
-      <!-- Scroll down to sections on the Subscribers/Home view -->
+      <!-- Scroll down to sections on the Home view -->
       <li><a onclick="navigateToHomeSection('about-section')">About Us</a></li>
       <li><a onclick="navigateToHomeSection('readme-section')">README</a></li>
       
@@ -110,7 +128,7 @@
 
   <div class="container">
 
-    <!-- 1. SUBSCRIBERS / HOME TAB -->
+    <!-- 1. HOMEPAGE / SUBSCRIBERS TAB -->
     <div id="subscribers" class="tab-content active">
       <div class="card">
         <h1>Welcome to Obby Rants 30! 🎮🔥</h1>
@@ -132,6 +150,7 @@
 
     <!-- 2. ANALYTICS TAB -->
     <div id="analytics" class="tab-content">
+      <button class="btn btn-back" onclick="switchTab('subscribers')">← Back to Home</button>
       <div class="card">
         <h2>📊 Overall Channel Analytics</h2>
         <p>Uploaded Videos: 0</p>
@@ -140,6 +159,7 @@
 
     <!-- 3. SONGS TAB -->
     <div id="songs" class="tab-content">
+      <button class="btn btn-back" onclick="switchTab('subscribers')">← Back to Home</button>
       <div class="card">
         <h2>🎵 Song Recommendations</h2>
         <p>Recommended tracks & background tunes picked by Obby Rants!</p>
@@ -148,6 +168,7 @@
 
     <!-- 4. ANNOUNCEMENTS TAB -->
     <div id="announcements" class="tab-content">
+      <button class="btn btn-back" onclick="switchTab('subscribers')">← Back to Home</button>
       <div class="card">
         <h2>📢 Channel Announcements</h2>
         <p>No announcements posted yet.</p>
@@ -156,11 +177,12 @@
 
     <!-- 5. FAN ZONE TAB -->
     <div id="fanzone" class="tab-content">
+      <button class="btn btn-back" onclick="switchTab('subscribers')">← Back to Home</button>
       <div class="card">
         <h2>🔥 Fan Zone</h2>
         <p>Click to boost channel hype points!</p>
         <button class="btn" onclick="boostHype()">Boost Hype (+10)</button>
-        <p>Hype Points: <span id="hype-count">0</span></p>
+        <p style="margin-top: 1rem;">Hype Points: <span id="hype-count">0</span></p>
       </div>
     </div>
 
