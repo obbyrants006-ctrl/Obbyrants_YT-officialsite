@@ -1,4 +1,4 @@
-html_content = """<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -33,7 +33,7 @@ html_content = """<!DOCTYPE html>
       line-height: 1.6;
     }
 
-    h1, h2, h3, .logo-text, .btn-roblox {
+    h1, h2, h3, .logo-text, .btn-roblox, .tab-btn {
       font-family: 'Fredoka', cursive, sans-serif;
       letter-spacing: 0.5px;
     }
@@ -75,22 +75,36 @@ html_content = """<!DOCTYPE html>
       color: var(--text-main);
     }
 
-    nav {
+    /* Tab Navigation Buttons */
+    .tab-nav {
       display: flex;
-      gap: 15px;
+      gap: 10px;
       align-items: center;
       flex-wrap: wrap;
     }
 
-    .nav-link {
+    .tab-btn {
+      background: transparent;
+      border: 2px solid transparent;
       color: var(--text-sub);
-      text-decoration: none;
+      font-size: 1rem;
       font-weight: 600;
-      transition: 0.2s;
+      padding: 8px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
     }
 
-    .nav-link:hover {
+    .tab-btn:hover {
       color: var(--roblox-accent);
+      background: rgba(0, 162, 255, 0.1);
+    }
+
+    .tab-btn.active {
+      color: #FFFFFF;
+      background: var(--roblox-red);
+      border-color: var(--roblox-red);
+      box-shadow: 0 4px 0 #9E130C;
     }
 
     /* Buttons */
@@ -139,22 +153,22 @@ html_content = """<!DOCTYPE html>
     /* Hero Section */
     .hero {
       text-align: center;
-      padding: 4.5rem 1.5rem;
+      padding: 3.5rem 1.5rem;
       background: linear-gradient(180deg, #232527 0%, #191B1D 100%);
       border-bottom: 2px solid #2C2F33;
     }
 
     .hero h1 {
-      font-size: 3.2rem;
+      font-size: 3rem;
       color: var(--text-main);
-      margin-bottom: 15px;
+      margin-bottom: 12px;
     }
 
     .hero p {
-      font-size: 1.15rem;
+      font-size: 1.1rem;
       color: var(--text-sub);
       max-width: 900px;
-      margin: 0 auto 25px auto;
+      margin: 0 auto 20px auto;
     }
 
     .hero-buttons {
@@ -169,6 +183,7 @@ html_content = """<!DOCTYPE html>
       max-width: 1050px;
       margin: 0 auto;
       padding: 2rem 1.5rem;
+      min-height: 50vh;
     }
 
     .section-title {
@@ -179,6 +194,21 @@ html_content = """<!DOCTYPE html>
       gap: 10px;
       border-left: 5px solid var(--roblox-red);
       padding-left: 10px;
+    }
+
+    /* Tab Content Hiding Switcher */
+    .tab-content {
+      display: none;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     /* Analytics Section */
@@ -207,13 +237,13 @@ html_content = """<!DOCTYPE html>
       background: linear-gradient(135deg, #2D1B1E 0%, var(--roblox-card) 100%);
       border: 2px solid var(--roblox-red);
       border-radius: 12px;
-      padding: 2rem;
+      padding: 2.5rem 2rem;
       text-align: center;
-      margin-bottom: 3rem;
+      margin-bottom: 2rem;
     }
 
     .sub-number {
-      font-size: 3.5rem;
+      font-size: 4rem;
       color: #FFFFFF;
       font-weight: 700;
       font-family: 'Fredoka', sans-serif;
@@ -266,7 +296,7 @@ html_content = """<!DOCTYPE html>
       border-radius: 12px;
       padding: 2rem;
       border: 1px solid #32353B;
-      margin-bottom: 3rem;
+      margin-bottom: 2rem;
     }
 
     .content-box h3 {
@@ -308,7 +338,7 @@ html_content = """<!DOCTYPE html>
       border: 1px solid var(--roblox-accent);
       border-radius: 12px;
       padding: 2rem;
-      margin-bottom: 3rem;
+      margin-bottom: 2rem;
       text-align: center;
     }
 
@@ -399,14 +429,16 @@ html_content = """<!DOCTYPE html>
       <div class="logo-badge">OR30</div>
       <div class="logo-text">Obby Rants 30</div>
     </div>
-    <nav>
-      <a href="#subscribers" class="nav-link">Subscribers</a>
-      <a href="#analytics" class="nav-link">Analytics</a>
-      <a href="#songs" class="nav-link">🎵 Song Recs</a>
-      <a href="#about" class="nav-link">About Us</a>
-      <a href="#readme" class="nav-link">README</a>
-      <a href="#announcements" class="nav-link">Announcements</a>
-      <a href="#fan-zone" class="nav-link">Fan Zone</a>
+    
+    <!-- Tab Navigation Buttons -->
+    <nav class="tab-nav">
+      <button class="tab-btn active" onclick="switchTab('subscribers')">Subscribers</button>
+      <button class="tab-btn" onclick="switchTab('analytics')">Analytics</button>
+      <button class="tab-btn" onclick="switchTab('songs')">🎵 Song Recs</button>
+      <button class="tab-btn" onclick="switchTab('about')">About Us</button>
+      <button class="tab-btn" onclick="switchTab('readme')">README</button>
+      <button class="tab-btn" onclick="switchTab('announcements')">Announcements</button>
+      <button class="tab-btn" onclick="switchTab('fan-zone')">Fan Zone</button>
       <button id="adminLoginBtn" class="btn-roblox btn-blue" onclick="toggleAdminLogin()">Admin Login</button>
     </nav>
   </header>
@@ -530,35 +562,35 @@ html_content = """<!DOCTYPE html>
       </div>
     </div>
 
-    <!-- DEDICATED SUBSCRIBERS TAB / CARD -->
-    <section id="subscribers">
+    <!-- TAB 1: SUBSCRIBERS -->
+    <div id="subscribers" class="tab-content active">
       <div class="sub-card">
-        <h2 style="font-size:2rem; color:var(--roblox-red); margin-bottom:10px;">🎯 Channel Subscriber Milestone</h2>
+        <h2 style="font-size:2.2rem; color:var(--roblox-red); margin-bottom:10px;">🎯 Channel Subscriber Milestone</h2>
         <div id="displaySubCount" class="sub-number">0</div>
-        <p style="color:var(--text-sub); margin-top:10px; font-size:1.1rem;">Active Subscribers on <strong>@Obbyrants30</strong>!</p>
-        <div style="margin-top:15px;">
-          <a href="https://www.youtube.com/@Obbyrants30" target="_blank" class="btn-roblox btn-gold">Subscribe to Channel!</a>
+        <p style="color:var(--text-sub); margin-top:10px; font-size:1.15rem;">Active Subscribers on <strong>@Obbyrants30</strong>!</p>
+        <div style="margin-top:20px;">
+          <a href="https://www.youtube.com/@Obbyrants30" target="_blank" class="btn-roblox btn-gold" style="font-size:1.1rem; padding:12px 24px;">Subscribe to Channel!</a>
         </div>
       </div>
-    </section>
+    </div>
 
-    <!-- OVERALL ANALYTICS TAB -->
-    <section id="analytics">
+    <!-- TAB 2: ANALYTICS -->
+    <div id="analytics" class="tab-content">
       <h2 class="section-title">📊 Overall Channel Analytics</h2>
       <div class="stats-grid">
         <div class="stat-box">
-          <div style="font-size:0.9rem; color:var(--text-sub);">Total Channel Views</div>
+          <div style="font-size:1rem; color:var(--text-sub);">Total Channel Views</div>
           <div id="displayViews" class="stat-number">0</div>
         </div>
         <div class="stat-box">
-          <div style="font-size:0.9rem; color:var(--text-sub);">Uploaded Videos</div>
+          <div style="font-size:1rem; color:var(--text-sub);">Uploaded Videos</div>
           <div id="displayVideos" class="stat-number">0</div>
         </div>
       </div>
-    </section>
+    </div>
 
-    <!-- SONG RECOMMENDATIONS TAB -->
-    <section id="songs">
+    <!-- TAB 3: SONG RECOMMENDATIONS -->
+    <div id="songs" class="tab-content">
       <div class="content-box">
         <h3>🎵 Song Recommendations</h3>
         <p style="color: var(--text-sub); margin-bottom: 15px;">Recommended tracks & background tunes picked by Obby Rants!</p>
@@ -566,26 +598,39 @@ html_content = """<!DOCTYPE html>
           <!-- Rendered dynamically -->
         </div>
       </div>
-    </section>
+    </div>
 
-    <!-- EDITABLE ABOUT SECTION -->
-    <section id="about">
+    <!-- TAB 4: ABOUT US -->
+    <div id="about" class="tab-content">
       <div class="content-box">
         <h3>ℹ️ About Obby Rants (@Obbyrants30)</h3>
         <p id="aboutContentDisplay" style="color:#FFFFFF; font-size:1.05rem; line-height:1.8;"></p>
       </div>
-    </section>
+    </div>
 
-    <!-- EDITABLE README SECTION (ONLY ADMIN CAN EDIT) -->
-    <section id="readme">
+    <!-- TAB 5: README -->
+    <div id="readme" class="tab-content">
       <div class="content-box">
         <h3>📜 Official README Box</h3>
         <div id="readmeContentDisplay" class="readme-box"></div>
       </div>
-    </section>
+    </div>
 
-    <!-- INTERACTIVE FAN ZONE -->
-    <section id="fan-zone">
+    <!-- TAB 6: ANNOUNCEMENTS -->
+    <div id="announcements" class="tab-content">
+      <h2 class="section-title">📢 Channel Announcements</h2>
+      <div id="announcementsList" class="grid-container">
+        <!-- Rendered dynamically -->
+      </div>
+
+      <h2 class="section-title" style="margin-top:2rem;">⭐ Special Days & Events</h2>
+      <div id="specialDaysList" class="grid-container">
+        <!-- Rendered dynamically -->
+      </div>
+    </div>
+
+    <!-- TAB 7: FAN ZONE -->
+    <div id="fan-zone" class="tab-content">
       <div class="fun-section">
         <h2>🔥 Fan Hype Booster</h2>
         <p style="color:var(--text-sub);">Click to boost channel hype points!</p>
@@ -604,23 +649,7 @@ html_content = """<!DOCTYPE html>
           <!-- Comments render dynamically -->
         </div>
       </div>
-    </section>
-
-    <!-- ANNOUNCEMENTS SECTION -->
-    <section id="announcements">
-      <h2 class="section-title">📢 Channel Announcements</h2>
-      <div id="announcementsList" class="grid-container">
-        <!-- Rendered dynamically -->
-      </div>
-    </section>
-
-    <!-- SPECIAL DAYS & EVENTS SECTION -->
-    <section id="special-days">
-      <h2 class="section-title">⭐ Special Days & Events</h2>
-      <div id="specialDaysList" class="grid-container">
-        <!-- Rendered dynamically -->
-      </div>
-    </section>
+    </div>
 
   </div>
 
@@ -637,33 +666,51 @@ html_content = """<!DOCTYPE html>
   <script>
     let isAdmin = false;
 
-    // Analytics without total likes or comments
-    let analytics = JSON.parse(localStorage.getItem('obby_analytics_v7')) || {
+    // Tab Switching Function
+    function switchTab(tabId) {
+      // Hide all tabs
+      const tabs = document.querySelectorAll('.tab-content');
+      tabs.forEach(tab => tab.classList.remove('active'));
+
+      // Deactivate all buttons
+      const buttons = document.querySelectorAll('.tab-btn');
+      buttons.forEach(btn => btn.classList.remove('active'));
+
+      // Show selected tab
+      const selectedTab = document.getElementById(tabId);
+      if (selectedTab) selectedTab.classList.add('active');
+
+      // Highlight active button
+      event.currentTarget.classList.add('active');
+    }
+
+    // Analytics state
+    let analytics = JSON.parse(localStorage.getItem('obby_analytics_v8')) || {
       subs: "0",
       views: "0",
       videos: "0"
     };
 
-    let hypePoints = parseInt(localStorage.getItem('obby_hype_points_v7')) || 0;
+    let hypePoints = parseInt(localStorage.getItem('obby_hype_points_v8')) || 0;
 
     // Preserved README and About Text
-    let customText = JSON.parse(localStorage.getItem('obby_custom_text_v7')) || {
+    let customText = JSON.parse(localStorage.getItem('obby_custom_text_v8')) || {
       about: "Welcome to Obby Rants (@Obbyrants30)! This channel is focused on Roblox gameplay, obby speedruns, commentary, and community engagement. Use the Admin Panel above to customize this description text anytime!",
-      readme: "# OBBY RANTS OFFICIAL WEBSITE README\\nChannel Handle : @Obbyrants30\\nOfficial Link  : https://www.youtube.com/@Obbyrants30\\n\\nADMIN EDITING:\\nThis README box can only be modified by logging into the Admin Control Panel. You can write custom notes, updates, or channel rules here."
+      readme: "# OBBY RANTS OFFICIAL WEBSITE README\nChannel Handle : @Obbyrants30\nOfficial Link  : https://www.youtube.com/@Obbyrants30\n\nADMIN EDITING:\nThis README box can only be modified by logging into the Admin Control Panel. You can write custom notes, updates, or channel rules here."
     };
 
-    // Song Recommendations Data
-    let songRecs = JSON.parse(localStorage.getItem('obby_song_recs_v7')) || [];
-    let announcements = JSON.parse(localStorage.getItem('obby_announcements_v7')) || [];
-    let specialDays = JSON.parse(localStorage.getItem('obby_special_days_v7')) || [];
-    let fanComments = JSON.parse(localStorage.getItem('obby_fan_comments_v7')) || [];
+    // Data structures
+    let songRecs = JSON.parse(localStorage.getItem('obby_song_recs_v8')) || [];
+    let announcements = JSON.parse(localStorage.getItem('obby_announcements_v8')) || [];
+    let specialDays = JSON.parse(localStorage.getItem('obby_special_days_v8')) || [];
+    let fanComments = JSON.parse(localStorage.getItem('obby_fan_comments_v8')) || [];
 
     // Initial Load & Render
     renderData();
 
     function boostHype() {
       hypePoints += 1;
-      localStorage.setItem('obby_hype_points_v7', hypePoints);
+      localStorage.setItem('obby_hype_points_v8', hypePoints);
       document.getElementById('hypeCount').innerText = hypePoints;
       if (isAdmin) {
         document.getElementById('editHype').value = hypePoints;
@@ -676,7 +723,7 @@ html_content = """<!DOCTYPE html>
       if (!name || !msg) return alert("Please enter your name and message!");
 
       fanComments.unshift({ id: Date.now(), name, msg });
-      localStorage.setItem('obby_fan_comments_v7', JSON.stringify(fanComments));
+      localStorage.setItem('obby_fan_comments_v8', JSON.stringify(fanComments));
       document.getElementById('fanName').value = '';
       document.getElementById('fanMsg').value = '';
       renderData();
@@ -752,8 +799,8 @@ html_content = """<!DOCTYPE html>
       let newHype = parseInt(document.getElementById('editHype').value.trim());
       hypePoints = isNaN(newHype) ? 0 : newHype;
 
-      localStorage.setItem('obby_analytics_v7', JSON.stringify(analytics));
-      localStorage.setItem('obby_hype_points_v7', hypePoints);
+      localStorage.setItem('obby_analytics_v8', JSON.stringify(analytics));
+      localStorage.setItem('obby_hype_points_v8', hypePoints);
       renderData();
       alert("Analytics & Hype Counter updated successfully!");
     }
@@ -762,8 +809,8 @@ html_content = """<!DOCTYPE html>
       if (confirm("Reset Subscribers, Views, Videos AND Hype Points to 0?")) {
         analytics = { subs: "0", views: "0", videos: "0" };
         hypePoints = 0;
-        localStorage.setItem('obby_analytics_v7', JSON.stringify(analytics));
-        localStorage.setItem('obby_hype_points_v7', hypePoints);
+        localStorage.setItem('obby_analytics_v8', JSON.stringify(analytics));
+        localStorage.setItem('obby_hype_points_v8', hypePoints);
         populateAdminInputs();
         renderData();
         alert("All stats and hype counter have been reset to zero!");
@@ -777,7 +824,7 @@ html_content = """<!DOCTYPE html>
       if (newAbout) customText.about = newAbout;
       if (newReadme) customText.readme = newReadme;
 
-      localStorage.setItem('obby_custom_text_v7', JSON.stringify(customText));
+      localStorage.setItem('obby_custom_text_v8', JSON.stringify(customText));
       renderData();
       alert("About Us & README text updated successfully!");
     }
@@ -790,7 +837,7 @@ html_content = """<!DOCTYPE html>
       if (!title || !artist) return alert("Please enter both song title and artist!");
 
       songRecs.unshift({ id: Date.now(), title, artist, link });
-      localStorage.setItem('obby_song_recs_v7', JSON.stringify(songRecs));
+      localStorage.setItem('obby_song_recs_v8', JSON.stringify(songRecs));
 
       document.getElementById('songTitle').value = '';
       document.getElementById('songArtist').value = '';
@@ -806,7 +853,7 @@ html_content = """<!DOCTYPE html>
 
       const today = new Date().toISOString().split('T')[0];
       announcements.unshift({ id: Date.now(), title, date: today, body });
-      localStorage.setItem('obby_announcements_v7', JSON.stringify(announcements));
+      localStorage.setItem('obby_announcements_v8', JSON.stringify(announcements));
       
       document.getElementById('annTitle').value = '';
       document.getElementById('annBody').value = '';
@@ -820,7 +867,7 @@ html_content = """<!DOCTYPE html>
       if (!title || !date || !body) return alert("Fill out all fields!");
 
       specialDays.unshift({ id: Date.now(), title, date, body });
-      localStorage.setItem('obby_special_days_v7', JSON.stringify(specialDays));
+      localStorage.setItem('obby_special_days_v8', JSON.stringify(specialDays));
 
       document.getElementById('eventTitle').value = '';
       document.getElementById('eventDate').value = '';
@@ -836,10 +883,10 @@ html_content = """<!DOCTYPE html>
         if (type === 'fan') fanComments = fanComments.filter(i => i.id !== id);
         if (type === 'song') songRecs = songRecs.filter(i => i.id !== id);
 
-        localStorage.setItem('obby_announcements_v7', JSON.stringify(announcements));
-        localStorage.setItem('obby_special_days_v7', JSON.stringify(specialDays));
-        localStorage.setItem('obby_fan_comments_v7', JSON.stringify(fanComments));
-        localStorage.setItem('obby_song_recs_v7', JSON.stringify(songRecs));
+        localStorage.setItem('obby_announcements_v8', JSON.stringify(announcements));
+        localStorage.setItem('obby_special_days_v8', JSON.stringify(specialDays));
+        localStorage.setItem('obby_fan_comments_v8', JSON.stringify(fanComments));
+        localStorage.setItem('obby_song_recs_v8', JSON.stringify(songRecs));
         renderData();
       }
     }
@@ -931,9 +978,3 @@ html_content = """<!DOCTYPE html>
   </script>
 </body>
 </html>
-"""
-
-with open("index.html", "w", encoding="utf-8") as f:
-    f.write(html_content)
-
-print("Removed Total Likes and Comments successfully!")
