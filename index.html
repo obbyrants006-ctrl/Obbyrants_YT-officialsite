@@ -42,44 +42,40 @@
 
     nav {
       display: flex;
-      gap: 1rem;
+      gap: 0.8rem;
       align-items: center;
+      flex-wrap: wrap;
     }
 
     .nav-btn {
       background: transparent;
       border: 1px solid transparent;
       color: #94a3b8;
-      padding: 0.5rem 1rem;
+      padding: 0.5rem 0.9rem;
       border-radius: 6px;
       font-weight: 600;
       cursor: pointer;
       transition: all 0.2s ease;
     }
 
-    /* Tab Distinct Colors */
+    /* Distinct Neon Hover & Active States Per Tab */
     .nav-btn[data-tab="subs"]:hover, .nav-btn[data-tab="subs"].active {
-      color: #00f0ff;
-      border-color: #00f0ff;
-      box-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
+      color: #00f0ff; border-color: #00f0ff; box-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
     }
-
     .nav-btn[data-tab="music"]:hover, .nav-btn[data-tab="music"].active {
-      color: #a855f7;
-      border-color: #a855f7;
-      box-shadow: 0 0 10px rgba(168, 85, 247, 0.5);
+      color: #a855f7; border-color: #a855f7; box-shadow: 0 0 10px rgba(168, 85, 247, 0.5);
     }
-
     .nav-btn[data-tab="analytics"]:hover, .nav-btn[data-tab="analytics"].active {
-      color: #ff2a5f;
-      border-color: #ff2a5f;
-      box-shadow: 0 0 10px rgba(255, 42, 95, 0.5);
+      color: #ff2a5f; border-color: #ff2a5f; box-shadow: 0 0 10px rgba(255, 42, 95, 0.5);
     }
-
     .nav-btn[data-tab="views"]:hover, .nav-btn[data-tab="views"].active {
-      color: #10b981;
-      border-color: #10b981;
-      box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+      color: #10b981; border-color: #10b981; box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+    }
+    .nav-btn[data-tab="hangout"]:hover, .nav-btn[data-tab="hangout"].active {
+      color: #f59e0b; border-color: #f59e0b; box-shadow: 0 0 10px rgba(245, 158, 11, 0.5);
+    }
+    .nav-btn[data-tab="comments"]:hover, .nav-btn[data-tab="comments"].active {
+      color: #ec4899; border-color: #ec4899; box-shadow: 0 0 10px rgba(236, 72, 153, 0.5);
     }
 
     /* Layout Containers */
@@ -110,11 +106,15 @@
     .theme-purple { border-color: #a855f7; box-shadow: 0 0 12px rgba(168, 85, 247, 0.2); }
     .theme-red { border-color: #ff2a5f; box-shadow: 0 0 12px rgba(255, 42, 95, 0.2); }
     .theme-green { border-color: #10b981; box-shadow: 0 0 12px rgba(16, 185, 129, 0.2); }
+    .theme-yellow { border-color: #f59e0b; box-shadow: 0 0 12px rgba(245, 158, 11, 0.2); }
+    .theme-pink { border-color: #ec4899; box-shadow: 0 0 12px rgba(236, 72, 153, 0.2); }
 
     .text-cyan { color: #00f0ff; text-shadow: 0 0 8px rgba(0, 240, 255, 0.6); }
     .text-purple { color: #a855f7; text-shadow: 0 0 8px rgba(168, 85, 247, 0.6); }
     .text-red { color: #ff2a5f; text-shadow: 0 0 8px rgba(255, 42, 95, 0.6); }
     .text-green { color: #10b981; text-shadow: 0 0 8px rgba(16, 185, 129, 0.6); }
+    .text-yellow { color: #f59e0b; text-shadow: 0 0 8px rgba(245, 158, 11, 0.6); }
+    .text-pink { color: #ec4899; text-shadow: 0 0 8px rgba(236, 72, 153, 0.6); }
 
     /* Action Buttons */
     .btn {
@@ -131,10 +131,24 @@
     .btn-red { background: linear-gradient(135deg, #ff2a5f, #9f1239); }
     .btn-purple { background: linear-gradient(135deg, #a855f7, #6b21a8); }
     .btn-cyan { background: linear-gradient(135deg, #00f0ff, #0284c7); color: #060911; }
+    .btn-yellow { background: linear-gradient(135deg, #f59e0b, #b45309); color: #060911; }
+    .btn-pink { background: linear-gradient(135deg, #ec4899, #be185d); }
+
+    .btn-back {
+      background: #060911;
+      border: 1px solid #334155;
+      color: #94a3b8;
+      margin-bottom: 1.2rem;
+    }
+    .btn-back:hover {
+      border-color: #00f0ff;
+      color: #00f0ff;
+      box-shadow: 0 0 8px rgba(0, 240, 255, 0.4);
+    }
 
     .btn:hover { opacity: 0.9; transform: translateY(-1px); }
 
-    /* Inputs */
+    /* Form Inputs */
     .form-control {
       width: 100%;
       padding: 0.7rem;
@@ -145,13 +159,15 @@
       border-radius: 6px;
     }
 
-    /* Music Item Grid */
-    .song-card {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+    textarea.form-control {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    /* List Cards */
+    .item-card {
       background: #060911;
-      border: 1px solid #a855f7;
+      border: 1px solid #334155;
       padding: 1rem;
       border-radius: 8px;
       margin-top: 0.8rem;
@@ -168,6 +184,8 @@
       <button class="nav-btn" data-tab="music" onclick="switchTab('music')">🎵 Music</button>
       <button class="nav-btn" data-tab="analytics" onclick="switchTab('analytics')">📊 Analytics</button>
       <button class="nav-btn" data-tab="views" onclick="switchTab('views')">👁️ Views</button>
+      <button class="nav-btn" data-tab="hangout" onclick="switchTab('hangout')">🎮 Hangout</button>
+      <button class="nav-btn" data-tab="comments" onclick="switchTab('comments')">💬 Comments</button>
       <button id="adminBtn" class="btn btn-red" onclick="toggleAdmin()">Admin Login</button>
     </nav>
   </header>
@@ -176,6 +194,7 @@
 
     <!-- ADMIN PANEL -->
     <div id="adminPanel" class="card theme-red" style="display:none;">
+      <button class="btn btn-back" onclick="switchTab('subs')">← Back to Home</button>
       <h2 class="text-red">🛠️ Admin Control Panel</h2>
       <p id="adminStatusText">Logged in as Owner.</p>
       
@@ -199,7 +218,7 @@
       <button class="btn btn-red" onclick="togglePublicAccessPreview()">Toggle Public Premium Access Preview</button>
     </div>
 
-    <!-- 1. SUBS TAB (Cyan Neon Theme) -->
+    <!-- 1. SUBS TAB (Cyan) -->
     <div id="subs" class="tab-content active">
       <div class="card theme-cyan">
         <h1 class="text-cyan">Subscribers Counter</h1>
@@ -208,20 +227,19 @@
       </div>
     </div>
 
-    <!-- 2. MUSIC TAB (Purple Neon Theme) -->
+    <!-- 2. MUSIC TAB (Purple) -->
     <div id="music" class="tab-content">
+      <button class="btn btn-back" onclick="switchTab('subs')">← Back to Home</button>
       <div class="card theme-purple">
         <h1 class="text-purple">🎵 Music & Song Recommendations</h1>
         <p>Vote for your favorite tracks below!</p>
-
-        <div id="songListContainer">
-          <!-- Songs rendered dynamically -->
-        </div>
+        <div id="songListContainer"></div>
       </div>
     </div>
 
-    <!-- 3. ANALYTICS TAB (Red Neon Theme) -->
+    <!-- 3. ANALYTICS TAB (Red) -->
     <div id="analytics" class="tab-content">
+      <button class="btn btn-back" onclick="switchTab('subs')">← Back to Home</button>
       <div class="card theme-red">
         <h1 class="text-red">📊 Performance Analytics</h1>
         <p>Channel health & engagement stats.</p>
@@ -231,12 +249,56 @@
       </div>
     </div>
 
-    <!-- 4. VIEWS TAB (Green Neon Theme) -->
+    <!-- 4. VIEWS TAB (Green) -->
     <div id="views" class="tab-content">
+      <button class="btn btn-back" onclick="switchTab('subs')">← Back to Home</button>
       <div class="card theme-green">
         <h1 class="text-green">👁️ Total Channel Views</h1>
         <p style="font-size: 2rem; font-weight: bold;" id="displayViews">0</p>
         <p>Total recorded views across videos!</p>
+      </div>
+    </div>
+
+    <!-- 5. HANGOUT PAGE TAB (Yellow/Orange) -->
+    <div id="hangout" class="tab-content">
+      <button class="btn btn-back" onclick="switchTab('subs')">← Back to Home</button>
+      <div class="card theme-yellow">
+        <h1 class="text-yellow">🎮 Community Hangout Zone</h1>
+        <p>Welcome to the fan lounge! Recommend games for the next video or chill with the community.</p>
+
+        <div class="item-card" style="border-color:#f59e0b; margin-top:1.5rem;">
+          <h3 class="text-yellow">🎯 Current Channel Goal</h3>
+          <p>Reaching the next subscriber milestone & making game rants!</p>
+        </div>
+
+        <div class="item-card" style="border-color:#f59e0b;">
+          <h3 class="text-yellow">🕹️ Favorite Games Played</h3>
+          <p>Minecraft, GTA V, Roblox Obbies, Valorant & CS2!</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6. COMMENT SECTION TAB (Pink) -->
+    <div id="comments" class="tab-content">
+      <button class="btn btn-back" onclick="switchTab('subs')">← Back to Home</button>
+      <div class="card theme-pink">
+        <h1 class="text-pink">💬 Public Comment Section</h1>
+        <p>Leave a comment or message for Obby Rants!</p>
+
+        <div style="margin-top: 1.5rem;">
+          <label>Your Username / Name:</label>
+          <input type="text" id="commentUser" class="form-control" placeholder="e.g. Gamer123" />
+
+          <label>Comment Message:</label>
+          <textarea id="commentText" class="form-control" placeholder="Type your comment here..."></textarea>
+
+          <button class="btn btn-pink" onclick="postComment()">Post Comment 🚀</button>
+        </div>
+
+        <hr style="border-color:#334155; margin:1.5rem 0;">
+
+        <h3>Recent Comments</h3>
+        <div id="commentListContainer"></div>
       </div>
     </div>
 
@@ -254,6 +316,9 @@
     let songs = JSON.parse(localStorage.getItem('or30_songs')) || [
       { id: 1, title: "Life is a Highway", artist: "Rascal Flatts", votes: 5 }
     ];
+    let comments = JSON.parse(localStorage.getItem('or30_comments')) || [
+      { id: 1, user: "RobloxFan", text: "Love the channel rants! Keep it up!", date: "2026-08-02" }
+    ];
 
     // Initialize UI
     document.addEventListener("DOMContentLoaded", () => {
@@ -262,6 +327,7 @@
       document.getElementById('editSubs').value = subs;
       document.getElementById('editViews').value = views;
       renderSongs();
+      renderComments();
     });
 
     // Navigation Switching
@@ -270,7 +336,10 @@
       document.querySelectorAll('.nav-btn').forEach(el => el.classList.remove('active'));
 
       document.getElementById(tabId).classList.add('active');
-      document.querySelector(`.nav-btn[data-tab="${tabId}"]`).classList.add('active');
+      const activeNavBtn = document.querySelector(`.nav-btn[data-tab="${tabId}"]`);
+      if (activeNavBtn) activeNavBtn.classList.add('active');
+
+      window.scrollTo(0, 0);
     }
 
     // Device-Locked Admin Security
@@ -280,10 +349,10 @@
         document.getElementById('adminPanel').style.display = 'none';
         document.getElementById('adminBtn').innerText = 'Admin Login';
         renderSongs();
+        renderComments();
         return;
       }
 
-      // First-time owner registration
       if (!adminPass) {
         let newPass = prompt("First Setup: Create your Admin Password:");
         if (newPass && newPass.trim() !== "") {
@@ -297,7 +366,6 @@
         return;
       }
 
-      // Public access check
       if (!isOwnerDevice && !publicPreviewEnabled) {
         alert("Access Denied: Admin panel is restricted to the registered owner device.");
         return;
@@ -316,16 +384,15 @@
       document.getElementById('adminPanel').style.display = 'block';
       document.getElementById('adminBtn').innerText = 'Logout Admin';
       renderSongs();
+      renderComments();
     }
 
-    // Toggle Public Preview Mode
     function togglePublicAccessPreview() {
       publicPreviewEnabled = !publicPreviewEnabled;
       localStorage.setItem('or30_public_preview', publicPreviewEnabled);
       alert("Public Admin Preview Mode is now " + (publicPreviewEnabled ? "ENABLED" : "DISABLED"));
     }
 
-    // Metrics Functions
     function saveMetrics() {
       subs = parseInt(document.getElementById('editSubs').value) || 0;
       views = parseInt(document.getElementById('editViews').value) || 0;
@@ -339,11 +406,10 @@
       alert("Metrics updated!");
     }
 
-    // Song Voting System
+    // Music Voting Logic
     function addSong() {
       let title = document.getElementById('newSongTitle').value.trim();
       let artist = document.getElementById('newSongArtist').value.trim();
-
       if (!title) return alert("Please enter a title!");
 
       songs.push({ id: Date.now(), title, artist, votes: 0 });
@@ -367,7 +433,6 @@
     }
 
     function saveAndRenderSongs() {
-      // Sort songs by vote count descending
       songs.sort((a, b) => b.votes - a.votes);
       localStorage.setItem('or30_songs', JSON.stringify(songs));
       renderSongs();
@@ -381,7 +446,7 @@
       }
 
       container.innerHTML = songs.map(s => `
-        <div class="song-card">
+        <div class="item-card" style="display:flex; justify-content:space-between; align-items:center; border-color:#a855f7;">
           <div>
             <strong class="text-purple">${escapeHtml(s.title)}</strong>
             ${s.artist ? `<span style="color:#94a3b8"> - ${escapeHtml(s.artist)}</span>` : ''}
@@ -392,6 +457,48 @@
             <button class="btn btn-purple" onclick="voteSong(${s.id})">👍 Vote</button>
             ${isAdmin ? `<button class="btn btn-red" style="padding:0.3rem 0.6rem; margin-left:5px;" onclick="deleteSong(${s.id})">Delete</button>` : ''}
           </div>
+        </div>
+      `).join('');
+    }
+
+    // Comment System Logic
+    function postComment() {
+      let user = document.getElementById('commentUser').value.trim();
+      let text = document.getElementById('commentText').value.trim();
+
+      if (!user || !text) return alert("Please fill in both your name and comment message!");
+
+      const today = new Date().toISOString().split('T')[0];
+      comments.unshift({ id: Date.now(), user, text, date: today });
+
+      localStorage.setItem('or30_comments', JSON.stringify(comments));
+      renderComments();
+
+      document.getElementById('commentUser').value = '';
+      document.getElementById('commentText').value = '';
+    }
+
+    function deleteComment(id) {
+      comments = comments.filter(c => c.id !== id);
+      localStorage.setItem('or30_comments', JSON.stringify(comments));
+      renderComments();
+    }
+
+    function renderComments() {
+      const container = document.getElementById('commentListContainer');
+      if (comments.length === 0) {
+        container.innerHTML = "<p>No comments posted yet. Be the first!</p>";
+        return;
+      }
+
+      container.innerHTML = comments.map(c => `
+        <div class="item-card" style="border-color:#ec4899;">
+          <div style="display:flex; justify-content:space-between; margin-bottom:5px;">
+            <strong class="text-pink">${escapeHtml(c.user)}</strong>
+            <span style="font-size:0.8rem; color:#94a3b8;">${c.date}</span>
+          </div>
+          <p style="color:#f8fafc;">${escapeHtml(c.text)}</p>
+          ${isAdmin ? `<button class="btn btn-red" style="padding:0.2rem 0.5rem; font-size:0.8rem; margin-top:8px;" onclick="deleteComment(${c.id})">Delete Comment</button>` : ''}
         </div>
       `).join('');
     }
