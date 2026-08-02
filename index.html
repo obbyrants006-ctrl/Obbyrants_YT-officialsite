@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Obby Rants 30</title>
   <style>
-    /* Global Reset & Styling */
     * {
       box-sizing: border-box;
       margin: 0;
@@ -67,7 +66,6 @@
       text-shadow: 0 0 8px rgba(0, 240, 255, 0.8);
     }
 
-    /* Layout Container */
     .container {
       max-width: 950px;
       margin: 2rem auto;
@@ -200,6 +198,23 @@
       border-radius: 8px;
       text-align: center;
     }
+
+    .song-item {
+      background: #080c14;
+      border: 1px solid #00f0ff;
+      padding: 1rem;
+      border-radius: 8px;
+      margin-top: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 0 8px rgba(0, 240, 255, 0.15);
+    }
+
+    .song-item a {
+      color: #00f0ff;
+      text-decoration: none;
+    }
   </style>
 </head>
 <body>
@@ -226,18 +241,32 @@
       <button class="btn btn-back" onclick="switchTab('subscribers')">← Back to Home</button>
       <div class="card card-neon-red">
         <h2 class="text-neon-red">🛠️ Admin Master Control Panel</h2>
-        <p>Edit site content, customize text, and control channel stats.</p>
+        <p>Edit site content, customize text, add song recs, and control channel stats.</p>
         
         <hr style="border-color: #334155; margin: 1.5rem 0;">
 
         <h3>Edit About & README Content</h3>
         <label>About Channel Text:</label>
-        <textarea id="edit-about" class="input-field">Welcome to Obby Rants (@Obbyrants30)! This channel is focused on Roblox gameplay, obby speedruns, commentary, and community engagement.</textarea>
+        <textarea id="edit-about" class="input-field"></textarea>
         
         <label>README Text:</label>
-        <textarea id="edit-readme" class="input-field">Official README & Guidelines for the channel.</textarea>
+        <textarea id="edit-readme" class="input-field"></textarea>
         
         <button class="btn btn-blue" onclick="saveText()">Save Text Updates</button>
+
+        <hr style="border-color: #334155; margin: 1.5rem 0;">
+
+        <h3>🎵 Customize Song Recommendations</h3>
+        <label>Song Title:</label>
+        <input type="text" id="song-title" class="input-field" placeholder="e.g. Life is a Highway">
+        
+        <label>Artist / Band:</label>
+        <input type="text" id="song-artist" class="input-field" placeholder="e.g. Rascal Flatts">
+        
+        <label>Link / Notes (Optional):</label>
+        <input type="text" id="song-link" class="input-field" placeholder="https://youtube.com/...">
+
+        <button class="btn btn-blue" onclick="addSong()">Add Song Recommendation</button>
 
         <hr style="border-color: #334155; margin: 1.5rem 0;">
 
@@ -265,13 +294,13 @@
       <!-- About Us Section -->
       <div id="about-section" class="card">
         <h2 class="text-neon-blue">ℹ️ About Obby Rants (@Obbyrants30)</h2>
-        <p id="about-display">Welcome to Obby Rants (@Obbyrants30)! This channel is focused on Roblox gameplay, obby speedruns, commentary, and community engagement.</p>
+        <p id="about-display"></p>
       </div>
 
       <!-- README Section -->
       <div id="readme-section" class="card">
         <h2 class="text-neon-blue">📜 Official README Box</h2>
-        <p id="readme-display">Official README & Guidelines for the channel.</p>
+        <p id="readme-display"></p>
       </div>
     </div>
 
@@ -299,6 +328,9 @@
       <div class="card card-neon-blue">
         <h2 class="text-neon-blue">🎵 Song Recommendations</h2>
         <p>Recommended tracks & background tunes picked by Obby Rants!</p>
+        <div id="song-list">
+          <p style="color: #94a3b8; margin-top: 1rem;">No song recommendations added yet.</p>
+        </div>
       </div>
     </div>
 
@@ -325,11 +357,36 @@
   </div>
 
   <script>
-    let hype = 0;
+    let hype = parseInt(localStorage.getItem('obby_hype')) || 0;
     let isAdmin = false;
 
-    // Password setup logic
+    // DEVICE LOCKING SYSTEM FOR OWNER ONLY
+    let isOwnerDevice = localStorage.getItem('obby_owner_device') === 'true';
     let adminPassword = localStorage.getItem('obby_admin_pass') || null;
+
+    // Saved content defaults
+    const defaultAbout = "Welcome to Obby Rants (@Obbyrants30)! This channel is focused on Roblox gameplay, obby speedruns, commentary, and community engagement.";
+    const defaultReadme = "Official README & Guidelines for the channel.";
+
+    let savedAbout = localStorage.getItem('obby_about') || defaultAbout;
+    let savedReadme = localStorage.getItem('obby_readme') || defaultReadme;
+    let savedSubs = localStorage.getItem('obby_subs') || "0";
+    let songs = JSON.parse(localStorage.getItem('obby_songs')) || [];
+
+    // Initialize UI on load
+    document.addEventListener("DOMContentLoaded", () => {
+      document.getElementById('about-display').innerText = savedAbout;
+      document.getElementById('readme-display').innerText = savedReadme;
+      document.getElementById('edit-about').value = savedAbout;
+      document.getElementById('edit-readme').value = savedReadme;
+
+      document.getElementById('subs-display').innerText = savedSubs;
+      document.getElementById('edit-subs').value = savedSubs;
+
+      document.getElementById('hype-count').innerText = hype;
+
+      renderSongs();
+    });
 
     function switchTab(tabId) {
       const tabs = document.querySelectorAll('.tab-content');
@@ -356,34 +413,42 @@
     function boostHype() {
       hype += 10;
       document.getElementById('hype-count').innerText = hype;
+      localStorage.setItem('obby_hype', hype);
     }
 
-    // Admin Toggle & Authentication
+    // Strictly locked Admin Login function
     function toggleAdmin() {
       if (!isAdmin) {
-        // If no password exists yet, force user to create one
+        // If password hasn't been set up yet on any device
         if (!adminPassword) {
-          let newPass = prompt("Create your new Admin Password:");
+          let newPass = prompt("First Time Setup: Create your Admin Password:");
           if (newPass && newPass.trim() !== "") {
             adminPassword = newPass.trim();
             localStorage.setItem('obby_admin_pass', adminPassword);
-            alert("Password set successfully! Logging you in...");
+            localStorage.setItem('obby_owner_device', 'true');
+            isOwnerDevice = true;
+            alert("Password set successfully! This device is now registered as the Admin device.");
             isAdmin = true;
             document.getElementById('admin-btn').innerText = "Logout Admin";
             switchTab('admin-panel');
-          } else {
-            alert("Password creation canceled.");
           }
-        } else {
-          // Verify existing password
-          let entered = prompt("Enter Admin Password:");
-          if (entered === adminPassword) {
-            isAdmin = true;
-            document.getElementById('admin-btn').innerText = "Logout Admin";
-            switchTab('admin-panel');
-          } else if (entered !== null) {
-            alert("Incorrect password!");
-          }
+          return;
+        }
+
+        // If another person tries to access from their device/browser
+        if (!isOwnerDevice) {
+          alert("Access Denied: Admin privileges are not authorized on this device.");
+          return;
+        }
+
+        // Prompt owner for password
+        let entered = prompt("Enter Admin Password:");
+        if (entered === adminPassword) {
+          isAdmin = true;
+          document.getElementById('admin-btn').innerText = "Logout Admin";
+          switchTab('admin-panel');
+        } else if (entered !== null) {
+          alert("Incorrect password!");
         }
       } else {
         isAdmin = false;
@@ -406,24 +471,85 @@
       }
     }
 
-    // Admin Actions
+    // Admin Content Editors
     function saveText() {
-      document.getElementById('about-display').innerText = document.getElementById('edit-about').value;
-      document.getElementById('readme-display').innerText = document.getElementById('edit-readme').value;
-      alert("Text updated!");
+      let aboutVal = document.getElementById('edit-about').value;
+      let readmeVal = document.getElementById('edit-readme').value;
+
+      document.getElementById('about-display').innerText = aboutVal;
+      document.getElementById('readme-display').innerText = readmeVal;
+
+      localStorage.setItem('obby_about', aboutVal);
+      localStorage.setItem('obby_readme', readmeVal);
+
+      alert("About and README saved successfully!");
     }
 
     function saveMetrics() {
-      document.getElementById('subs-display').innerText = document.getElementById('edit-subs').value;
-      alert("Metrics updated!");
+      let subsVal = document.getElementById('edit-subs').value;
+      document.getElementById('subs-display').innerText = subsVal;
+      localStorage.setItem('obby_subs', subsVal);
+      alert("Metrics saved successfully!");
+    }
+
+    function addSong() {
+      let title = document.getElementById('song-title').value.trim();
+      let artist = document.getElementById('song-artist').value.trim();
+      let link = document.getElementById('song-link').value.trim();
+
+      if (!title) {
+        alert("Please enter a song title!");
+        return;
+      }
+
+      songs.push({ title, artist, link });
+      localStorage.setItem('obby_songs', JSON.stringify(songs));
+
+      document.getElementById('song-title').value = '';
+      document.getElementById('song-artist').value = '';
+      document.getElementById('song-link').value = '';
+
+      renderSongs();
+      alert("Song recommendation added!");
+    }
+
+    function deleteSong(index) {
+      songs.splice(index, 1);
+      localStorage.setItem('obby_songs', JSON.stringify(songs));
+      renderSongs();
+    }
+
+    function renderSongs() {
+      const container = document.getElementById('song-list');
+      if (songs.length === 0) {
+        container.innerHTML = '<p style="color: #94a3b8; margin-top: 1rem;">No song recommendations added yet.</p>';
+        return;
+      }
+
+      let html = '';
+      songs.forEach((song, i) => {
+        html += `
+          <div class="song-item">
+            <div>
+              <strong style="color: #ffffff;">${song.title}</strong> 
+              ${song.artist ? `<span style="color: #94a3b8;"> - ${song.artist}</span>` : ''}
+              ${song.link ? `<br><a href="${song.link}" target="_blank" rel="noopener">Listen / View Link 🔗</a>` : ''}
+            </div>
+            ${isAdmin ? `<button class="btn" style="padding: 0.3rem 0.6rem; font-size: 0.8rem;" onclick="deleteSong(${i})">Delete</button>` : ''}
+          </div>
+        `;
+      });
+      container.innerHTML = html;
     }
 
     function resetAll() {
-      document.getElementById('edit-subs').value = 0;
-      document.getElementById('subs-display').innerText = 0;
-      hype = 0;
-      document.getElementById('hype-count').innerText = 0;
-      alert("Reset metrics to 0!");
+      localStorage.removeItem('obby_about');
+      localStorage.removeItem('obby_readme');
+      localStorage.removeItem('obby_subs');
+      localStorage.removeItem('obby_hype');
+      localStorage.removeItem('obby_songs');
+
+      location.reload();
     }
   </script>
 
