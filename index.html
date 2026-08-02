@@ -184,7 +184,7 @@ html_content = """<!DOCTYPE html>
     /* Analytics Section */
     .stats-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 15px;
       margin-bottom: 2rem;
     }
@@ -457,16 +457,8 @@ html_content = """<!DOCTYPE html>
             <input type="text" id="editViews" class="form-control" value="0" />
           </div>
           <div>
-            <label style="font-size:0.85rem;">Total Likes:</label>
-            <input type="text" id="editLikes" class="form-control" value="0" />
-          </div>
-          <div>
             <label style="font-size:0.85rem;">Videos Count:</label>
             <input type="text" id="editVideos" class="form-control" value="0" />
-          </div>
-          <div>
-            <label style="font-size:0.85rem;">Comments:</label>
-            <input type="text" id="editComments" class="form-control" value="0" />
           </div>
           <div>
             <label style="font-size:0.85rem;">Hype Points:</label>
@@ -475,7 +467,7 @@ html_content = """<!DOCTYPE html>
         </div>
         <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap;">
           <button class="btn-roblox" onclick="updateAnalytics()">Save Analytics & Hype</button>
-          <button class="btn-roblox btn-gold" onclick="resetAllToZero()">🔥 Reset EVERYTHING to 0</button>
+          <button class="btn-roblox btn-gold" onclick="resetAllToZero()">🔥 Reset All Stats to 0</button>
         </div>
       </div>
 
@@ -559,16 +551,8 @@ html_content = """<!DOCTYPE html>
           <div id="displayViews" class="stat-number">0</div>
         </div>
         <div class="stat-box">
-          <div style="font-size:0.9rem; color:var(--text-sub);">Total Likes</div>
-          <div id="displayLikes" class="stat-number">0</div>
-        </div>
-        <div class="stat-box">
           <div style="font-size:0.9rem; color:var(--text-sub);">Uploaded Videos</div>
           <div id="displayVideos" class="stat-number">0</div>
-        </div>
-        <div class="stat-box">
-          <div style="font-size:0.9rem; color:var(--text-sub);">Video Comments</div>
-          <div id="displayComments" class="stat-number">0</div>
         </div>
       </div>
     </section>
@@ -653,35 +637,33 @@ html_content = """<!DOCTYPE html>
   <script>
     let isAdmin = false;
 
-    // Hard reset ALL metrics to zero strictly inside code
-    let analytics = JSON.parse(localStorage.getItem('obby_analytics_v6')) || {
+    // Analytics without total likes or comments
+    let analytics = JSON.parse(localStorage.getItem('obby_analytics_v7')) || {
       subs: "0",
       views: "0",
-      likes: "0",
-      videos: "0",
-      comments: "0"
+      videos: "0"
     };
 
-    let hypePoints = parseInt(localStorage.getItem('obby_hype_points_v6')) || 0;
+    let hypePoints = parseInt(localStorage.getItem('obby_hype_points_v7')) || 0;
 
     // Preserved README and About Text
-    let customText = JSON.parse(localStorage.getItem('obby_custom_text_v6')) || {
+    let customText = JSON.parse(localStorage.getItem('obby_custom_text_v7')) || {
       about: "Welcome to Obby Rants (@Obbyrants30)! This channel is focused on Roblox gameplay, obby speedruns, commentary, and community engagement. Use the Admin Panel above to customize this description text anytime!",
       readme: "# OBBY RANTS OFFICIAL WEBSITE README\\nChannel Handle : @Obbyrants30\\nOfficial Link  : https://www.youtube.com/@Obbyrants30\\n\\nADMIN EDITING:\\nThis README box can only be modified by logging into the Admin Control Panel. You can write custom notes, updates, or channel rules here."
     };
 
     // Song Recommendations Data
-    let songRecs = JSON.parse(localStorage.getItem('obby_song_recs_v6')) || [];
-    let announcements = JSON.parse(localStorage.getItem('obby_announcements_v6')) || [];
-    let specialDays = JSON.parse(localStorage.getItem('obby_special_days_v6')) || [];
-    let fanComments = JSON.parse(localStorage.getItem('obby_fan_comments_v6')) || [];
+    let songRecs = JSON.parse(localStorage.getItem('obby_song_recs_v7')) || [];
+    let announcements = JSON.parse(localStorage.getItem('obby_announcements_v7')) || [];
+    let specialDays = JSON.parse(localStorage.getItem('obby_special_days_v7')) || [];
+    let fanComments = JSON.parse(localStorage.getItem('obby_fan_comments_v7')) || [];
 
     // Initial Load & Render
     renderData();
 
     function boostHype() {
       hypePoints += 1;
-      localStorage.setItem('obby_hype_points_v6', hypePoints);
+      localStorage.setItem('obby_hype_points_v7', hypePoints);
       document.getElementById('hypeCount').innerText = hypePoints;
       if (isAdmin) {
         document.getElementById('editHype').value = hypePoints;
@@ -694,7 +676,7 @@ html_content = """<!DOCTYPE html>
       if (!name || !msg) return alert("Please enter your name and message!");
 
       fanComments.unshift({ id: Date.now(), name, msg });
-      localStorage.setItem('obby_fan_comments_v6', JSON.stringify(fanComments));
+      localStorage.setItem('obby_fan_comments_v7', JSON.stringify(fanComments));
       document.getElementById('fanName').value = '';
       document.getElementById('fanMsg').value = '';
       renderData();
@@ -755,9 +737,7 @@ html_content = """<!DOCTYPE html>
     function populateAdminInputs() {
       document.getElementById('editSubs').value = analytics.subs;
       document.getElementById('editViews').value = analytics.views;
-      document.getElementById('editLikes').value = analytics.likes;
       document.getElementById('editVideos').value = analytics.videos;
-      document.getElementById('editComments').value = analytics.comments;
       document.getElementById('editHype').value = hypePoints;
 
       document.getElementById('editAboutText').value = customText.about;
@@ -767,25 +747,23 @@ html_content = """<!DOCTYPE html>
     function updateAnalytics() {
       analytics.subs = document.getElementById('editSubs').value.trim() || "0";
       analytics.views = document.getElementById('editViews').value.trim() || "0";
-      analytics.likes = document.getElementById('editLikes').value.trim() || "0";
       analytics.videos = document.getElementById('editVideos').value.trim() || "0";
-      analytics.comments = document.getElementById('editComments').value.trim() || "0";
       
       let newHype = parseInt(document.getElementById('editHype').value.trim());
       hypePoints = isNaN(newHype) ? 0 : newHype;
 
-      localStorage.setItem('obby_analytics_v6', JSON.stringify(analytics));
-      localStorage.setItem('obby_hype_points_v6', hypePoints);
+      localStorage.setItem('obby_analytics_v7', JSON.stringify(analytics));
+      localStorage.setItem('obby_hype_points_v7', hypePoints);
       renderData();
       alert("Analytics & Hype Counter updated successfully!");
     }
 
     function resetAllToZero() {
-      if (confirm("Reset Subscribers, Views, Likes, Videos, Comments AND Hype Points to 0?")) {
-        analytics = { subs: "0", views: "0", likes: "0", videos: "0", comments: "0" };
+      if (confirm("Reset Subscribers, Views, Videos AND Hype Points to 0?")) {
+        analytics = { subs: "0", views: "0", videos: "0" };
         hypePoints = 0;
-        localStorage.setItem('obby_analytics_v6', JSON.stringify(analytics));
-        localStorage.setItem('obby_hype_points_v6', hypePoints);
+        localStorage.setItem('obby_analytics_v7', JSON.stringify(analytics));
+        localStorage.setItem('obby_hype_points_v7', hypePoints);
         populateAdminInputs();
         renderData();
         alert("All stats and hype counter have been reset to zero!");
@@ -799,7 +777,7 @@ html_content = """<!DOCTYPE html>
       if (newAbout) customText.about = newAbout;
       if (newReadme) customText.readme = newReadme;
 
-      localStorage.setItem('obby_custom_text_v6', JSON.stringify(customText));
+      localStorage.setItem('obby_custom_text_v7', JSON.stringify(customText));
       renderData();
       alert("About Us & README text updated successfully!");
     }
@@ -812,7 +790,7 @@ html_content = """<!DOCTYPE html>
       if (!title || !artist) return alert("Please enter both song title and artist!");
 
       songRecs.unshift({ id: Date.now(), title, artist, link });
-      localStorage.setItem('obby_song_recs_v6', JSON.stringify(songRecs));
+      localStorage.setItem('obby_song_recs_v7', JSON.stringify(songRecs));
 
       document.getElementById('songTitle').value = '';
       document.getElementById('songArtist').value = '';
@@ -828,7 +806,7 @@ html_content = """<!DOCTYPE html>
 
       const today = new Date().toISOString().split('T')[0];
       announcements.unshift({ id: Date.now(), title, date: today, body });
-      localStorage.setItem('obby_announcements_v6', JSON.stringify(announcements));
+      localStorage.setItem('obby_announcements_v7', JSON.stringify(announcements));
       
       document.getElementById('annTitle').value = '';
       document.getElementById('annBody').value = '';
@@ -842,7 +820,7 @@ html_content = """<!DOCTYPE html>
       if (!title || !date || !body) return alert("Fill out all fields!");
 
       specialDays.unshift({ id: Date.now(), title, date, body });
-      localStorage.setItem('obby_special_days_v6', JSON.stringify(specialDays));
+      localStorage.setItem('obby_special_days_v7', JSON.stringify(specialDays));
 
       document.getElementById('eventTitle').value = '';
       document.getElementById('eventDate').value = '';
@@ -858,10 +836,10 @@ html_content = """<!DOCTYPE html>
         if (type === 'fan') fanComments = fanComments.filter(i => i.id !== id);
         if (type === 'song') songRecs = songRecs.filter(i => i.id !== id);
 
-        localStorage.setItem('obby_announcements_v6', JSON.stringify(announcements));
-        localStorage.setItem('obby_special_days_v6', JSON.stringify(specialDays));
-        localStorage.setItem('obby_fan_comments_v6', JSON.stringify(fanComments));
-        localStorage.setItem('obby_song_recs_v6', JSON.stringify(songRecs));
+        localStorage.setItem('obby_announcements_v7', JSON.stringify(announcements));
+        localStorage.setItem('obby_special_days_v7', JSON.stringify(specialDays));
+        localStorage.setItem('obby_fan_comments_v7', JSON.stringify(fanComments));
+        localStorage.setItem('obby_song_recs_v7', JSON.stringify(songRecs));
         renderData();
       }
     }
@@ -870,9 +848,7 @@ html_content = """<!DOCTYPE html>
       // Public Display Analytics
       document.getElementById('displaySubCount').innerText = analytics.subs;
       document.getElementById('displayViews').innerText = analytics.views;
-      document.getElementById('displayLikes').innerText = analytics.likes;
       document.getElementById('displayVideos').innerText = analytics.videos;
-      document.getElementById('displayComments').innerText = analytics.comments;
 
       // Custom Content (About Us & README)
       document.getElementById('aboutContentDisplay').innerText = customText.about;
@@ -960,4 +936,4 @@ html_content = """<!DOCTYPE html>
 with open("index.html", "w", encoding="utf-8") as f:
     f.write(html_content)
 
-print("File created successfully!")
+print("Removed Total Likes and Comments successfully!")
