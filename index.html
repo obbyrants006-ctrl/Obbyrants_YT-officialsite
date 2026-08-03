@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Obby Rants - Official Channel Hub</title>
   
-  <!-- Google Fonts: Fredoka for Roblox vibe & Poppins for legibility -->
+  <!-- Google Fonts: Fredoka, Poppins & Dancing Script for custom cursive -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Fredoka:wght@400;600;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   
   <style>
     :root {
@@ -37,6 +37,22 @@
     h1, h2, h3, .logo-text, .btn-roblox, .nav-btn {
       font-family: 'Fredoka', cursive, sans-serif;
       letter-spacing: 0.5px;
+    }
+
+    /* Cursive Handwriting Styling */
+    .cursive-prefix {
+      font-family: 'Dancing Script', cursive;
+      font-weight: 400;
+      color: #FFFFFF;
+      font-size: 2.2rem;
+    }
+
+    .cursive-bold-name {
+      font-family: 'Dancing Script', cursive;
+      font-weight: 700;
+      color: #FFFFFF;
+      font-size: 2.6rem;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
     }
 
     /* Header & Navigation */
@@ -102,6 +118,7 @@
     .nav-btn[data-tab="music"]:hover, .nav-btn[data-tab="music"].active { color: #a855f7; border-color: #a855f7; }
     .nav-btn[data-tab="views"]:hover, .nav-btn[data-tab="views"].active { color: #10b981; border-color: #10b981; }
     .nav-btn[data-tab="hangout"]:hover, .nav-btn[data-tab="hangout"].active { color: #f59e0b; border-color: #f59e0b; }
+    .nav-btn[data-tab="one-v-one"]:hover, .nav-btn[data-tab="one-v-one"].active { color: #ff5722; border-color: #ff5722; }
     .nav-btn[data-tab="comments"]:hover, .nav-btn[data-tab="comments"].active { color: #ec4899; border-color: #ec4899; }
 
     /* Roblox Style Buttons */
@@ -131,6 +148,8 @@
     .btn-pink:hover { box-shadow: 0 6px 0 #be185d; }
     .btn-green { background: #10b981; box-shadow: 0 4px 0 #047857; }
     .btn-green:hover { box-shadow: 0 6px 0 #047857; }
+    .btn-orange { background: #ff5722; box-shadow: 0 4px 0 #bf360c; }
+    .btn-orange:hover { box-shadow: 0 6px 0 #bf360c; }
 
     .btn-back {
       background: #191B1D;
@@ -214,6 +233,11 @@
       font-family: 'Poppins', sans-serif;
     }
 
+    select.form-control option {
+      background: #191B1D;
+      color: white;
+    }
+
     textarea.form-control { resize: vertical; min-height: 80px; }
 
     /* Footer */
@@ -245,6 +269,7 @@
       <button class="nav-btn" data-tab="music" onclick="switchTab('music')">🎵 Music</button>
       <button class="nav-btn" data-tab="views" onclick="switchTab('views')">👁️ Views</button>
       <button class="nav-btn" data-tab="hangout" onclick="switchTab('hangout')">🎮 Hangout</button>
+      <button class="nav-btn" data-tab="one-v-one" onclick="switchTab('one-v-one')">⚔️ 1v1 Battles</button>
       <button class="nav-btn" data-tab="comments" onclick="switchTab('comments')">💬 Comments</button>
       <button id="adminBtn" class="btn-roblox btn-blue" onclick="toggleAdmin()">Admin Login</button>
     </nav>
@@ -395,7 +420,50 @@
       </div>
     </div>
 
-    <!-- 7. COMMENTS TAB -->
+    <!-- 7. 1v1 BATTLES TAB -->
+    <div id="one-v-one" class="tab-content">
+      <button class="btn-roblox btn-back" onclick="switchTab('subs')">← Back to Home</button>
+      
+      <!-- Cursive Intro Banner -->
+      <div class="card" style="border-color: #ff5722; text-align: center; padding: 2rem 1rem;">
+        <p>
+          <span class="cursive-prefix">my name is- </span>
+          <span class="cursive-bold-name">Popsicost35</span>
+        </p>
+        <p style="color: var(--text-sub); margin-top: 10px;">Think you can beat me? Leave your Roblox username below to challenge me to a 1v1!</p>
+      </div>
+
+      <div class="card" style="border-color: #ff5722;">
+        <h1 style="color: #ff5722;">⚔️ Request a 1v1 Match</h1>
+        <p style="color: var(--text-sub); margin-bottom: 1.5rem;">Fill out the form below to challenge me in Roblox Rivals or BedWars!</p>
+
+        <div>
+          <div class="form-group">
+            <label>Your Roblox Username:</label>
+            <input type="text" id="onevOneUser" class="form-control" placeholder="e.g. GamerPro_99" />
+          </div>
+          <div class="form-group">
+            <label>Select Game Mode:</label>
+            <select id="onevOneGame" class="form-control">
+              <option value="Roblox Rivals">Roblox Rivals</option>
+              <option value="BedWars">BedWars</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Challenge Note / Message (Optional):</label>
+            <textarea id="onevOneNote" class="form-control" placeholder="e.g. Best of 3 matches!"></textarea>
+          </div>
+          <button class="btn-roblox btn-orange" onclick="post1v1Request()">Send 1v1 Challenge ⚔️</button>
+        </div>
+
+        <hr style="border-color:#334155; margin:2rem 0;">
+
+        <h3>🔥 Active 1v1 Challenge Queue</h3>
+        <div id="onevOneListContainer" style="margin-top:1rem;"></div>
+      </div>
+    </div>
+
+    <!-- 8. COMMENTS TAB -->
     <div id="comments" class="tab-content">
       <button class="btn-roblox btn-back" onclick="switchTab('subs')">← Back to Home</button>
       <div class="card">
@@ -435,7 +503,7 @@
   <script>
     // SECURITY KEYS
     const SECRET_DEVICE_KEY = "obby_owner_secret_9988"; 
-    const ADMIN_PASSWORD = "SuperSecretPassword123";
+    const ADMIN_PASSWORD = "mySuperSecretPassword123";
 
     // State Management (Saved across local sessions)
     let isAdmin = false;
@@ -456,6 +524,10 @@
 
     let comments = JSON.parse(localStorage.getItem('or30_comments')) || [
       { id: 1, user: "RobloxFan", text: "Love the channel rants! Keep it up!", date: "2026-08-03" }
+    ];
+
+    let onevOneRequests = JSON.parse(localStorage.getItem('or30_1v1_requests')) || [
+      { id: 1, user: "ProRival_99", game: "Roblox Rivals", note: "Let's 1v1 on Rivals!", status: "Pending", date: "2026-08-03" }
     ];
 
     // Initialize UI
@@ -613,6 +685,43 @@
       saveAndRender();
     }
 
+    // 1v1 Requests Logic
+    function post1v1Request() {
+      let user = document.getElementById('onevOneUser').value.trim();
+      let game = document.getElementById('onevOneGame').value;
+      let note = document.getElementById('onevOneNote').value.trim();
+      if (!user) return alert("Please enter your Roblox username!");
+
+      const today = new Date().toISOString().split('T')[0];
+      onevOneRequests.unshift({
+        id: Date.now(),
+        user,
+        game,
+        note: note || "Ready for a 1v1 match!",
+        status: "Pending",
+        date: today
+      });
+
+      saveAndRender();
+
+      document.getElementById('onevOneUser').value = '';
+      document.getElementById('onevOneNote').value = '';
+      alert("Challenge sent! Check the queue below.");
+    }
+
+    function set1v1Status(id, newStatus) {
+      let req = onevOneRequests.find(r => r.id === id);
+      if (req) {
+        req.status = newStatus;
+        saveAndRender();
+      }
+    }
+
+    function delete1v1Request(id) {
+      onevOneRequests = onevOneRequests.filter(r => r.id !== id);
+      saveAndRender();
+    }
+
     // Comment Logic
     function postComment() {
       let user = document.getElementById('commentUser').value.trim();
@@ -638,6 +747,7 @@
       localStorage.setItem('obby_special_days', JSON.stringify(specialDays));
       localStorage.setItem('or30_songs', JSON.stringify(songs));
       localStorage.setItem('or30_comments', JSON.stringify(comments));
+      localStorage.setItem('or30_1v1_requests', JSON.stringify(onevOneRequests));
       renderAllData();
     }
 
@@ -694,6 +804,37 @@
             </div>
           </div>
         `).join('');
+      }
+
+      // Render 1v1 Requests
+      const onevOneContainer = document.getElementById('onevOneListContainer');
+      if (onevOneRequests.length === 0) {
+        onevOneContainer.innerHTML = "<p style='color:var(--text-sub);'>No 1v1 requests submitted yet.</p>";
+      } else {
+        onevOneContainer.innerHTML = onevOneRequests.map(req => {
+          let badgeColor = req.status === 'Accepted' ? '#10b981' : (req.status === 'Declined' ? '#E2231A' : '#FFB800');
+          return `
+            <div class="item-card" style="border-color:#ff5722;">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:5px;">
+                <strong style="color:#ff5722; font-size:1.1rem;">👤 ${escapeHtml(req.user)}</strong>
+                <span style="background:${badgeColor}; color:white; font-size:0.75rem; padding:2px 8px; border-radius:4px; font-weight:bold;">
+                  ${req.status}
+                </span>
+              </div>
+              <p style="color:var(--roblox-accent); font-size:0.9rem; font-weight:600;">Game: ${escapeHtml(req.game)}</p>
+              <p style="color:var(--text-sub); margin-top:3px;">"${escapeHtml(req.note)}"</p>
+              <p style="font-size:0.75rem; color:#888; margin-top:5px;">Submitted: ${req.date}</p>
+              
+              ${isAdmin ? `
+                <div style="margin-top:10px; display:flex; gap:6px;">
+                  <button class="btn-roblox btn-green" style="padding:2px 8px; font-size:0.8rem;" onclick="set1v1Status(${req.id}, 'Accepted')">Accept</button>
+                  <button class="btn-roblox" style="padding:2px 8px; font-size:0.8rem;" onclick="set1v1Status(${req.id}, 'Declined')">Decline</button>
+                  <button class="btn-roblox btn-blue" style="padding:2px 8px; font-size:0.8rem;" onclick="delete1v1Request(${req.id})">Delete</button>
+                </div>
+              ` : ''}
+            </div>
+          `;
+        }).join('');
       }
 
       // Render Comments
