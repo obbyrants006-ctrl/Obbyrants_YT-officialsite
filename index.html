@@ -250,7 +250,7 @@
   <!-- Hero Banner -->
   <section class="hero">
     <h1>Welcome to Obby Rants! 🎮</h1>
-    <p>The official home for YouTube rants, Roblox adventures, community announcements, and special events!</p>
+    <p>The official home for YouTube rants, Roblox adventures, Fortnite clips, Counter-Strike highlights, and community hangouts!</p>
     <div class="hero-buttons">
       <a href="https://www.youtube.com/@Obbyrants30" target="_blank" class="btn-roblox">Subscribe on YouTube</a>
       <a href="https://roblox.com/share?code=c52e49aa93ccb841bf4ae7fb0a044796&type=Profile&s" target="_blank" class="btn-roblox btn-blue">My Roblox Profile</a>
@@ -319,6 +319,9 @@
         <h1 style="color: #00f0ff;">Subscribers Counter</h1>
         <p style="font-size: 3.5rem; font-weight: bold; font-family: 'Fredoka', cursive;" id="displaySubs">246</p>
         <p style="color: var(--text-sub);">Active subscribers supporting Obby Rants!</p>
+        <div style="margin-top: 15px;">
+          <a href="https://www.youtube.com/@Obbyrants30?sub_confirmation=1" target="_blank" class="btn-roblox">Click Here to Subscribe! 🔔</a>
+        </div>
       </div>
     </div>
 
@@ -345,8 +348,18 @@
       <button class="btn-roblox btn-back" onclick="switchTab('subs')">← Back to Home</button>
       <div class="card">
         <h1 style="color: #a855f7;">🎵 Music & Recommendations</h1>
-        <p style="color: var(--text-sub);">Vote for your favorite tracks below!</p>
-        <div id="songListContainer" style="margin-top:1rem;"></div>
+        <p style="color: var(--text-sub);">Vote for your favorite tracks below or suggest a new song!</p>
+        
+        <div style="margin-top: 1rem; margin-bottom: 1.5rem; background: #191B1D; padding: 1rem; border-radius: 8px;">
+          <h3>Suggest a Song</h3>
+          <div class="form-group" style="margin-top: 5px;">
+            <input type="text" id="publicSongTitle" class="form-control" placeholder="Song Title" />
+            <input type="text" id="publicSongArtist" class="form-control" placeholder="Artist Name" style="margin-top: 5px;" />
+          </div>
+          <button class="btn-roblox btn-purple" onclick="addPublicSong()">Add Song to Vote List 🎵</button>
+        </div>
+
+        <div id="songListContainer"></div>
       </div>
     </div>
 
@@ -355,7 +368,7 @@
       <button class="btn-roblox btn-back" onclick="switchTab('subs')">← Back to Home</button>
       <div class="card" style="border-color: #10b981; text-align: center;">
         <h1 style="color: #10b981;">👁️ Total Channel Views</h1>
-        <p style="font-size: 3.5rem; font-weight: bold; font-family: 'Fredoka', cursive;" id="displayViews">1000</p>
+        <p style="font-size: 3.5rem; font-weight: bold; font-family: 'Fredoka', cursive;" id="displayViews">2500</p>
         <p style="color: var(--text-sub);">Total views across all uploaded videos!</p>
       </div>
     </div>
@@ -368,13 +381,13 @@
         <p style="color: var(--text-sub);">Welcome to the fan lounge! Chill with the community or check current goals.</p>
 
         <div class="item-card" style="border-color:#f59e0b; margin-top:1.5rem;">
-          <h3 style="color:#f59e0b;">🎯 Current Goal</h3>
-          <p>Reaching the next subscriber milestone & posting hilarious rants!</p>
+          <h3 style="color:#f59e0b;">🎯 Current Channel Goals</h3>
+          <p>Next Major Milestone: 300 Subscribers! 🎉</p>
         </div>
 
         <div class="item-card" style="border-color:#f59e0b;">
-          <h3 style="color:#f59e0b;">🕹️ Featured Games</h3>
-          <p>Minecraft, GTA V, Roblox Obbies, Valorant & CS2!</p>
+          <h3 style="color:#f59e0b;">🕹️ Featured Games on Channel</h3>
+          <p>Roblox Obbies & Games, Fortnite, Counter-Strike, Minecraft, GTA V, Valorant & CS2!</p>
         </div>
       </div>
     </div>
@@ -411,7 +424,7 @@
   <footer>
     <p>© 2026 Obby Rants | Made for YouTube & Roblox Community</p>
     <p style="margin-top: 5px;">
-      <a href="https://youtube.com/@obbyrants" target="_blank">YouTube</a> • 
+      <a href="https://www.youtube.com/@Obbyrants30" target="_blank">YouTube Channel</a> • 
       <a href="https://roblox.com/share?code=c52e49aa93ccb841bf4ae7fb0a044796&type=Profile&s" target="_blank">Roblox Profile</a>
     </p>
   </footer>
@@ -419,19 +432,19 @@
   <script>
     // SECURITY SETTINGS
     const SECRET_DEVICE_KEY = "obby_owner_secret_9988"; 
-    const ADMIN_PASSWORD = "SuperSecretPassword123";
+    const ADMIN_PASSWORD = "mySuperSecretPassword123";
 
     // State Management
     let isAdmin = false;
     let subs = parseInt(localStorage.getItem('or30_subs')) || 246;
-    let views = parseInt(localStorage.getItem('or30_views')) || 1000;
+    let views = parseInt(localStorage.getItem('or30_views')) || 2500;
 
     let announcements = JSON.parse(localStorage.getItem('obby_announcements')) || [
-      { id: 1, title: "Welcome to the Official Hub!", date: "2026-08-02", body: "Check back here regularly for channel updates, music voting, and event schedules!" }
+      { id: 1, title: "Welcome to Obby Rants Official Hub!", date: "2026-08-03", body: "Check back here regularly for channel updates, Roblox streams, music voting, and event schedules!" }
     ];
 
     let specialDays = JSON.parse(localStorage.getItem('obby_special_days')) || [
-      { id: 1, title: "Weekly Stream & Roblox Obby Marathon", date: "2026-08-10", body: "Join the live stream where we play community created Roblox obbies together!" }
+      { id: 1, title: "Weekly Stream & Roblox Obby Marathon", date: "2026-08-10", body: "Join the live stream where we play community created Roblox obbies and Fortnite!" }
     ];
 
     let songs = JSON.parse(localStorage.getItem('or30_songs')) || [
@@ -439,7 +452,7 @@
     ];
 
     let comments = JSON.parse(localStorage.getItem('or30_comments')) || [
-      { id: 1, user: "RobloxFan", text: "Love the channel rants! Keep it up!", date: "2026-08-02" }
+      { id: 1, user: "RobloxFan", text: "Love the channel rants and Fortnite videos! Keep it up!", date: "2026-08-03" }
     ];
 
     // Initialize UI
@@ -465,7 +478,7 @@
       window.scrollTo(0, 0);
     }
 
-    // STRICT DEVICE-LOCKED ADMIN SYSTEM
+    // ADMIN SYSTEM
     function registerThisDevice() {
       let keyInput = prompt("Enter Master Device Key to pair this device:");
       if (keyInput === SECRET_DEVICE_KEY) {
@@ -564,11 +577,24 @@
       let artist = document.getElementById('newSongArtist').value.trim();
       if (!title) return alert("Please enter a title!");
 
-      songs.push({ id: Date.now(), title, artist, votes: 0 });
+      songs.push({ id: Date.now(), title, artist, votes: 1 });
       saveAndRender();
 
       document.getElementById('newSongTitle').value = '';
       document.getElementById('newSongArtist').value = '';
+    }
+
+    function addPublicSong() {
+      let title = document.getElementById('publicSongTitle').value.trim();
+      let artist = document.getElementById('publicSongArtist').value.trim();
+      if (!title) return alert("Please enter a song title!");
+
+      songs.push({ id: Date.now(), title, artist, votes: 1 });
+      saveAndRender();
+
+      document.getElementById('publicSongTitle').value = '';
+      document.getElementById('publicSongArtist').value = '';
+      alert("Song added to the voting list!");
     }
 
     function voteSong(id) {
