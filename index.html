@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Obby Rants - Official Channel Hub</title>
   
-  <!-- Google Fonts: Fredoka & Poppins -->
+  <!-- Google Fonts: Fredoka for Roblox vibe & Poppins for legibility -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
@@ -97,8 +97,8 @@
 
     /* Tab Hover & Active Styling */
     .nav-btn[data-tab="subs"]:hover, .nav-btn[data-tab="subs"].active { color: #00f0ff; border-color: #00f0ff; }
-    .nav-btn[data-tab="announcements"]:hover, .nav-btn[data-tab="announcements"].active { color: #ff2a5f; border-color: #ff2a5f; }
-    .nav-btn[data-tab="events"]:hover, .nav-btn[data-tab="events"].active { color: #FFB800; border-color: #FFB800; }
+    .nav-btn[data-tab="announcements"]:hover, .nav-btn[data-tab="announcements"].active { color: var(--roblox-red); border-color: var(--roblox-red); }
+    .nav-btn[data-tab="events"]:hover, .nav-btn[data-tab="events"].active { color: var(--roblox-gold); border-color: var(--roblox-gold); }
     .nav-btn[data-tab="music"]:hover, .nav-btn[data-tab="music"].active { color: #a855f7; border-color: #a855f7; }
     .nav-btn[data-tab="views"]:hover, .nav-btn[data-tab="views"].active { color: #10b981; border-color: #10b981; }
     .nav-btn[data-tab="hangout"]:hover, .nav-btn[data-tab="hangout"].active { color: #f59e0b; border-color: #f59e0b; }
@@ -126,8 +126,11 @@
     .btn-blue { background: var(--roblox-accent); box-shadow: 0 4px 0 #0076BA; }
     .btn-blue:hover { box-shadow: 0 6px 0 #0076BA; }
     .btn-purple { background: #a855f7; box-shadow: 0 4px 0 #6b21a8; }
+    .btn-purple:hover { box-shadow: 0 6px 0 #6b21a8; }
     .btn-pink { background: #ec4899; box-shadow: 0 4px 0 #be185d; }
+    .btn-pink:hover { box-shadow: 0 6px 0 #be185d; }
     .btn-green { background: #10b981; box-shadow: 0 4px 0 #047857; }
+    .btn-green:hover { box-shadow: 0 6px 0 #047857; }
 
     .btn-back {
       background: #191B1D;
@@ -243,14 +246,14 @@
       <button class="nav-btn" data-tab="views" onclick="switchTab('views')">👁️ Views</button>
       <button class="nav-btn" data-tab="hangout" onclick="switchTab('hangout')">🎮 Hangout</button>
       <button class="nav-btn" data-tab="comments" onclick="switchTab('comments')">💬 Comments</button>
-      <button id="adminBtn" class="btn-roblox" onclick="toggleAdmin()">Admin Login</button>
+      <button id="adminBtn" class="btn-roblox btn-blue" onclick="toggleAdmin()">Admin Login</button>
     </nav>
   </header>
 
   <!-- Hero Banner -->
   <section class="hero">
     <h1>Welcome to Obby Rants! 🎮</h1>
-    <p>The official home for YouTube rants, Roblox adventures, Fortnite clips, Counter-Strike highlights, and community hangouts!</p>
+    <p>The official home for YouTube rants, Roblox adventures, community announcements, music recommendations, and live events!</p>
     <div class="hero-buttons">
       <a href="https://www.youtube.com/@Obbyrants30" target="_blank" class="btn-roblox">Subscribe on YouTube</a>
       <a href="https://roblox.com/share?code=c52e49aa93ccb841bf4ae7fb0a044796&type=Profile&s" target="_blank" class="btn-roblox btn-blue">My Roblox Profile</a>
@@ -368,8 +371,8 @@
       <button class="btn-roblox btn-back" onclick="switchTab('subs')">← Back to Home</button>
       <div class="card" style="border-color: #10b981; text-align: center;">
         <h1 style="color: #10b981;">👁️ Total Channel Views</h1>
-        <p style="font-size: 3.5rem; font-weight: bold; font-family: 'Fredoka', cursive;" id="displayViews">2500</p>
-        <p style="color: var(--text-sub);">Total views across all uploaded videos!</p>
+        <p style="font-size: 3.5rem; font-weight: bold; font-family: 'Fredoka', cursive;" id="displayViews">1000</p>
+        <p style="color: var(--text-sub);">Total recorded views across videos!</p>
       </div>
     </div>
 
@@ -382,12 +385,12 @@
 
         <div class="item-card" style="border-color:#f59e0b; margin-top:1.5rem;">
           <h3 style="color:#f59e0b;">🎯 Current Channel Goals</h3>
-          <p>Next Major Milestone: 300 Subscribers! 🎉</p>
+          <p>Reaching the next subscriber milestone & making game rants!</p>
         </div>
 
         <div class="item-card" style="border-color:#f59e0b;">
-          <h3 style="color:#f59e0b;">🕹️ Featured Games on Channel</h3>
-          <p>Roblox Obbies & Games, Fortnite, Counter-Strike, Minecraft, GTA V, Valorant & CS2!</p>
+          <h3 style="color:#f59e0b;">🕹️ Featured Games Played</h3>
+          <p>Minecraft, GTA V, Roblox Obbies, Valorant & CS2!</p>
         </div>
       </div>
     </div>
@@ -430,21 +433,21 @@
   </footer>
 
   <script>
-    // SECURITY SETTINGS
+    // SECURITY KEYS
     const SECRET_DEVICE_KEY = "obby_owner_secret_9988"; 
     const ADMIN_PASSWORD = "mySuperSecretPassword123";
 
-    // State Management
+    // State Management (Saved across local sessions)
     let isAdmin = false;
     let subs = parseInt(localStorage.getItem('or30_subs')) || 246;
-    let views = parseInt(localStorage.getItem('or30_views')) || 2500;
+    let views = parseInt(localStorage.getItem('or30_views')) || 1000;
 
     let announcements = JSON.parse(localStorage.getItem('obby_announcements')) || [
       { id: 1, title: "Welcome to Obby Rants Official Hub!", date: "2026-08-03", body: "Check back here regularly for channel updates, Roblox streams, music voting, and event schedules!" }
     ];
 
     let specialDays = JSON.parse(localStorage.getItem('obby_special_days')) || [
-      { id: 1, title: "Weekly Stream & Roblox Obby Marathon", date: "2026-08-10", body: "Join the live stream where we play community created Roblox obbies and Fortnite!" }
+      { id: 1, title: "Weekly Stream & Roblox Obby Marathon", date: "2026-08-10", body: "Join the live stream where we play community created Roblox obbies!" }
     ];
 
     let songs = JSON.parse(localStorage.getItem('or30_songs')) || [
@@ -452,7 +455,7 @@
     ];
 
     let comments = JSON.parse(localStorage.getItem('or30_comments')) || [
-      { id: 1, user: "RobloxFan", text: "Love the channel rants and Fortnite videos! Keep it up!", date: "2026-08-03" }
+      { id: 1, user: "RobloxFan", text: "Love the channel rants! Keep it up!", date: "2026-08-03" }
     ];
 
     // Initialize UI
@@ -711,6 +714,7 @@
       }
     }
 
+    // Helper function to escape raw strings safely
     function escapeHtml(str) {
       return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
     }
